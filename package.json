@@ -1,0 +1,26 @@
+{
+  "name": "A1TI.COM",
+  "version": "0.1.0",
+  "description": "A monorepo containing both backend and frontend applications",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm run dev",
+    "backend-frontend": "concurrently --names \"BACKEND,FRONTEND\" --prefix-colors \"blue.bold,green.bold\" \"npm run backend\" \"npm run frontend\"",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:backend": "cd backend && npx eslint .",
+    "lint:frontend": "cd frontend && npx eslint .",
+    "knip": "npm run knip:backend && npm run knip:frontend",
+    "knip:backend": "cd backend && npx knip",
+    "knip:frontend": "cd frontend && npx knip"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5",
+    "eslint": "^9.0.0",
+    "knip": "^6.42.1",
+    "prettier": "^3.0.0"
+  }
+}

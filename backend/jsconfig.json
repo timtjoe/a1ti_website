@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES6",
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "#root/*": ["./*"],
+      "#routes/*": ["./routes/*"],
+      "#controllers/*": ["./controllers/*"],
+      "#middleware/*": ["./middleware/*"],
+      "#prisma/*": ["./prisma/*"],
+      "#libs/*": ["./libs/*"],
+      "#configs/*": ["./configs/*"],
+      "#services/*": ["./services/*"],
+      "#data/*": ["./data/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

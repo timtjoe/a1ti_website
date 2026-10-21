@@ -1,0 +1,74 @@
+{
+  "CORS_FORBIDDEN": {
+    "status": 403,
+    "type": "/errors/cors-forbidden",
+    "title": "Untrusted Domain",
+    "detail": "We blocked this request because it came from an unrecognized or untrusted domain."
+  },
+  "FORBIDDEN": {
+    "status": 403,
+    "type": "/errors/forbidden",
+    "title": "Permission Denied",
+    "detail": "You are not permitted to perform this action. Your account doesn't have the necessary access rights."
+  },
+  "ACCESS_DENIED": {
+    "status": 403,
+    "type": "/errors/access-denied",
+    "title": "Access Blocked",
+    "detail": "You don't have permission to view or modify this specific information."
+  },
+  "UNAUTHORIZED": {
+    "status": 401,
+    "type": "/errors/unauthorized",
+    "title": "Authentication Required",
+    "detail": "Your session has expired or you aren't signed in. Please log in to continue."
+  },
+  "NOT_FOUND": {
+    "status": 404,
+    "type": "/errors/not-found",
+    "title": "Not Found",
+    "detail": "We couldn't find what you were looking for. The item might have been deleted or the link is incorrect."
+  },
+  "CONFLICT": {
+    "status": 409,
+    "type": "/errors/conflict",
+    "title": "Data Conflict",
+    "detail": "This information already exists in our system, or someone else modified it while you were working."
+  },
+  "BAD_REQUEST": {
+    "status": 400,
+    "type": "/errors/bad-request",
+    "title": "Invalid Request",
+    "detail": "There was a problem with the information you submitted. Please check your details and try again."
+  },
+  "VALIDATION_ERROR": {
+    "status": 422,
+    "type": "/errors/validation-error",
+    "title": "Validation Failed",
+    "detail": "Some of the details you entered are invalid. Please review your inputs and correct any errors."
+  },
+  "TOO_MANY_REQUESTS": {
+    "status": 429,
+    "type": "/errors/too-many-requests",
+    "title": "Too Many Requests",
+    "detail": "You are doing that too fast. Please wait a moment before trying again."
+  },
+  "PAYLOAD_TOO_LARGE": {
+    "status": 413,
+    "type": "/errors/payload-too-large",
+    "title": "File Too Large",
+    "detail": "The file or data you are trying to upload exceeds our maximum size limit. Please try a smaller file."
+  },
+  "INTERNAL_ERROR": {
+    "status": 500,
+    "type": "/errors/internal-server-error",
+    "title": "System Error",
+    "detail": "Something went wrong on our end. Our team is looking into it."
+  },
+  "SERVICE_UNAVAILABLE": {
+    "status": 503,
+    "type": "/errors/service-unavailable",
+    "title": "Service Unavailable",
+    "detail": "Our service is temporarily down for maintenance or experiencing high traffic. Please try again later."
+  }
+}

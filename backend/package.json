@@ -1,0 +1,45 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "SET DEBUG=a1ti:server:*&& nodemon -e js,json,env,css,html,prisma ./bin/www",
+    "migration:prod": "npx prisma migrate deploy",
+    "prisma:seed": "npx prisma db seed",
+    "deploy:prod": "npm run migration:prod && npm run prisma:seed",
+    "migration:dev": "npx prisma migrate dev",
+    "migration:reset": "npx prisma migrate reset --force --skip-seed",
+    "migration:generate": "prisma generate",
+    "db:push": "npx prisma db push",
+    "db:reset": "npm run migration:reset",
+    "prisma:reset": "npm run db:reset && npm run prisma:seed",
+    "prisma:studio": "npx prisma studio"
+  },
+  "imports": {
+    "#src/*": "./src/*.js",
+    "#root/*.js": "./*.js",
+    "#routes/*": "./routes/*.js",
+    "#controllers/*.js": "./controllers/*.js",
+    "#configs/*.js": "./configs/*.js",
+    "#prisma/*.js": "./prisma/*.js",
+    "#libs/*.js": "./libs/*.js",
+    "#services/*.js": "./services/*.js",
+    "#middleware/*.js": "./middleware/*.js",
+    "#data/*.json": "./data/*.json"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.6",
+    "debug": "~2.6.9",
+    "dotenv": "^18.0.8",
+    "express": "^4.22.3",
+    "http-errors": "~1.6.3",
+    "morgan": "^1.12.1",
+    "nanoid": "^6.0.2",
+    "pug": "^3.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
