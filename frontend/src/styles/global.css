@@ -1,0 +1,143 @@
+/* src/styles/globals.css */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+:root {
+  /* Fonts */
+  --font-roboto: 'Roboto', sans-serif;
+  --font-open-sans: 'Open Sans', sans-serif;
+
+  /* Typography Scale */
+  --font-xs: 0.75rem;
+  --font-sm: 0.875rem;
+  --font-base: 1rem;
+  --font-lg: 1.125rem;
+  --font-xl: 1.25rem;
+  --font-2xl: 1.5rem;
+
+  /* Spacing Scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Padding Scale */
+  --padding-xs: 0.25rem 0.5rem;
+  --padding-sm: 0.5rem 0.75rem;
+  --padding-md: 0.75rem 1.25rem;
+  --padding-lg: 1rem 1.5rem;
+
+  /* Color Palette (Two-Word Naming) */
+  --navy-deep: #0D0460;
+  --blue-royal: #1B08C4;
+  --indigo-soft: #7A6CF9;
+  --lavender-light: #D3CEFD;
+
+  --amber-vibrant: #F29F05;
+  --gold-bright: #FCC55F;
+  --gold-light: #FDD791;
+  --honey-pale: #FEE9C3;
+
+  --black-jet: #0D0D0D;
+  --gray-charcoal: #404040;
+
+  /* Semantics & UI Tokens */
+  --bg-main: #F7F7F7;
+  --bg-surface: #FFFFFF;
+  --text-main: #0D0D0D;
+  --text-muted: #404040;
+  --border-color: #D3CEFD;
+
+  --color-success: #10B981;
+  --color-error: #DC2626;
+  --color-warning: #F29F05;
+  --color-info: #1B08C4;
+
+  font-family: var(--font-roboto);
+  color: var(--text-main);
+  background-color: var(--bg-main);
+}
+
+[data-theme="dark"] {
+  --bg-main: #0D0D0D;
+  --bg-surface: #161616;
+  --text-main: #F7F7F7;
+  --text-muted: #D3CEFD;
+  --border-color: #404040;
+
+  --color-success: #34D399;
+  --color-error: #F87171;
+  --color-warning: #FCC55F;
+  --color-info: #7A6CF9;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

@@ -1,0 +1,177 @@
+/* src/components/appbar/BottomBar.module.css */
+.bottomBar {
+  background-color: var(--navy-deep);
+  color: #FFFFFF;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoLink {
+  text-decoration: none;
+  font-family: var(--font-open-sans);
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.dot {
+  color: var(--amber-vibrant);
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.navItemWrapper {
+  position: relative;
+}
+
+/* Highly legible, bold white text for bottom menu */
+.navLinkButton {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-family: var(--font-roboto);
+  font-size: var(--font-base);
+  font-weight: 700;
+  /* Bold and highly legible */
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+  padding: var(--spacing-xs) 0;
+  transition: color 0.2s ease;
+}
+
+.directLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.navLinkButton:hover {
+  color: var(--gold-bright);
+}
+
+/* Bottom Bar Dropdown Panel with Navy Border, Light Shadow & Caret */
+.dropdownPanel {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  border: 1px solid var(--navy-deep);
+  border-radius: 4px;
+  box-shadow: 2px 4px 8px rgba(13, 4, 96, 0.08);
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 110;
+}
+
+.dropdownPanel::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--navy-deep);
+  border-left: 1px solid var(--navy-deep);
+  transform: rotate(45deg);
+  z-index: 111;
+}
+
+.dropdownSubItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: var(--font-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.15s ease;
+}
+
+/* Non-touching bottom border separator */
+.dropdownSubItem:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background-color: var(--border-color);
+  opacity: 0.5;
+}
+
+.dropdownSubItem i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.dropdownSubItem span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdownSubItem:hover {
+  background-color: var(--honey-pale);
+  color: var(--navy-deep);
+}
+
+.rightActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.downloadBtn {
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+}
+
+.downloadBtn:hover {
+  background-color: var(--gold-bright) !important;
+  color: var(--navy-deep) !important;
+  border-color: var(--gold-bright) !important;
+}
+
+/* Add inside src/components/appbar/BottomBar.module.css */
+.logoImage {
+  height: 49px;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .navLinks {
+    display: none;
+  }
+}

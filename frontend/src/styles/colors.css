@@ -1,0 +1,57 @@
+/* src/styles/globals.css */
+
+:root {
+  --bg-main: #F7F7F7;
+  --bg-surface: #FFFFFF;
+  --text-main: #0D0D0D;
+  --text-muted: #4B5563;
+  --border-color: #E5E7EB;
+
+  --navy-base: #0D0640;
+  --navy-light: #2A216C;
+  --navy-dark: #070326;
+
+  --gold-base: #F2B807;
+  --amber-base: #F29F05;
+  --gold-light: #FDF3C7;
+  --gold-dark: #B45309;
+
+  --neutral-black: #0D0D0D;
+  --neutral-white: #F7F7F7;
+
+  --color-success: #10B981;
+  --color-error: #DC2626;
+  --color-warning: #F2B807;
+  --color-info: #0D0640;
+}
+
+[data-theme="dark"] {
+  --bg-main: #0D0D0D;
+  --bg-surface: #161616;
+  --text-main: #F7F7F7;
+  --text-muted: #9CA3AF;
+  --border-color: #2A2A2A;
+
+  --navy-base: #2A216C;
+  --navy-light: #4A3E9D;
+  --navy-dark: #0D0640;
+
+  --gold-base: #F2B807;
+  --amber-base: #F29F05;
+  --gold-light: #382B02;
+  --gold-dark: #FCE89B;
+
+  --neutral-black: #0D0D0D;
+  --neutral-white: #F7F7F7;
+
+  --color-success: #34D399;
+  --color-error: #F87171;
+  --color-warning: #F2B807;
+  --color-info: #F7F7F7;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

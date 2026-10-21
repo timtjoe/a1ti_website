@@ -1,0 +1,140 @@
+/* src/components/common/Button.module.css */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-family: var(--font-roboto);
+  font-weight: 600;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.iconLeft,
+.iconRight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  overflow: hidden;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.iconLeft i,
+.iconRight i {
+  font-size: 1.25rem;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: clip;
+}
+
+.label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Sizes */
+.sm {
+  padding: var(--padding-xs);
+  font-size: var(--font-xs);
+}
+
+.md {
+  padding: var(--padding-sm);
+  font-size: var(--font-sm);
+}
+
+.lg {
+  padding: var(--padding-md);
+  font-size: var(--font-base);
+}
+
+.xl {
+  padding: var(--padding-lg);
+  font-size: var(--font-lg);
+}
+
+/* Variants */
+.primary {
+  background-color: var(--navy-deep);
+  color: var(--honey-pale);
+  border-color: var(--navy-deep);
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--blue-royal);
+}
+
+.secondary {
+  background-color: var(--gold-bright);
+  color: var(--navy-deep);
+  border-color: var(--gold-bright);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: var(--amber-vibrant);
+}
+
+.outline {
+  background-color: transparent;
+  color: var(--navy-deep);
+  border: 2px solid var(--navy-deep);
+}
+
+.outline:hover:not(:disabled) {
+  background-color: var(--gold-bright);
+  color: var(--navy-deep);
+  border-color: var(--gold-bright);
+}
+
+/* Light outline variant for dark backgrounds */
+.outline.light {
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+}
+
+.outline.light:hover:not(:disabled) {
+  background-color: var(--gold-bright);
+  color: var(--navy-deep);
+  border-color: var(--gold-bright);
+}
+
+.success {
+  background-color: var(--color-success);
+  color: var(--black-jet);
+  border-color: var(--color-success);
+}
+
+.warning {
+  background-color: var(--color-warning);
+  color: var(--black-jet);
+  border-color: var(--color-warning);
+}
+
+.error {
+  background-color: var(--color-error);
+  color: var(--black-jet);
+  border-color: var(--color-error);
+}
+
+.fullWidth {
+  width: 100%;
+}
