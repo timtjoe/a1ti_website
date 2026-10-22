@@ -1,0 +1,468 @@
+/* src/components/appbar/BottomBar.module.css */
+.bottomBar {
+  background-color: var(--navy-deep);
+  color: #FFFFFF;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoLink {
+  text-decoration: none;
+  font-family: var(--font-open-sans);
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.dot {
+  color: var(--amber-vibrant);
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.navItemWrapper {
+  position: relative;
+}
+
+/* Highly legible, bold white text for bottom menu */
+.navLinkButton {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-family: var(--font-roboto);
+  font-size: var(--font-base);
+  font-weight: 700;
+  /* Bold and highly legible */
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+  padding: var(--spacing-xs) 0;
+  transition: color 0.2s ease;
+}
+
+.directLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.navLinkButton:hover {
+  color: var(--gold-bright);
+}
+
+/* Bottom Bar Dropdown Panel with Navy Border, Light Shadow & Caret */
+.dropdownPanel {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 0;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  border: 1px solid var(--navy-deep);
+  border-radius: 4px;
+  box-shadow: 2px 4px 8px rgba(13, 4, 96, 0.08);
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 110;
+}
+
+.dropdownPanel::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--navy-deep);
+  border-left: 1px solid var(--navy-deep);
+  transform: rotate(45deg);
+  z-index: 111;
+}
+
+.dropdownSubItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: var(--font-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.15s ease;
+}
+
+/* Non-touching bottom border separator */
+.dropdownSubItem:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background-color: var(--border-color);
+  opacity: 0.5;
+}
+
+.dropdownSubItem i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.dropdownSubItem span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdownSubItem:hover {
+  background-color: var(--honey-pale);
+  color: var(--navy-deep);
+}
+
+.rightActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.downloadBtn {
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+}
+
+.downloadBtn:hover {
+  background-color: var(--gold-bright) !important;
+  color: var(--navy-deep) !important;
+  border-color: var(--gold-bright) !important;
+}
+
+/* Add inside src/components/appbar/BottomBar.module.css */
+.logoImage {
+  height: 49px;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .navLinks {
+    display: none;
+  }
+}/* src/components/appbar/AppBar.module.css */
+
+/* --- Shared Layout & Global Variables --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- TopBar Specific Styles --- */
+.topBar {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-sm);
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.logoLink {
+  text-decoration: none;
+  font-family: var(--font-open-sans);
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.logoImage {
+  height: 49px;
+  width: auto;
+  display: block;
+}
+
+.middleSection {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.hoursWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.statusBadge,
+.closedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-weight: 700;
+  font-size: var(--font-xs);
+}
+
+.statusBadge {
+  color: var(--navy-deep);
+}
+
+.closedBadge {
+  color: var(--color-error);
+}
+
+.statusBadge i,
+.closedBadge i {
+  font-size: 1.125rem;
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.socialBarRow {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--navy-deep);
+  border-radius: 2px;
+  overflow: hidden;
+  background-color: var(--bg-surface);
+}
+
+.socialCell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2rem;
+  color: var(--black-jet);
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.socialCell:not(:last-child) {
+  border-right: 2px solid var(--black-jet);
+}
+
+.socialCell svg {
+  display: block;
+}
+
+.socialCell:hover {
+  background-color: var(--gold-bright);
+}
+
+.actionsWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* --- BottomBar Specific Styles --- */
+.bottomBar {
+  background-color: var(--navy-deep);
+  color: #FFFFFF;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.navItemWrapper {
+  position: relative;
+}
+
+.navLinkButton {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-family: var(--font-roboto);
+  font-size: var(--font-base);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+  padding: var(--spacing-xs) 0;
+  transition: color 0.2s ease;
+}
+
+.directLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.navLinkButton:hover {
+  color: var(--gold-bright);
+}
+
+.rightActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.downloadBtn {
+  color: #FFFFFF !important;
+  border-color: #FFFFFF !important;
+  display: inline-flex;
+  align-items: center;
+}
+
+.downloadBtn:hover {
+  background-color: var(--gold-bright) !important;
+  color: var(--navy-deep) !important;
+  border-color: var(--gold-bright) !important;
+}
+
+/* --- Shared Dropdown Panels & Menus --- */
+.dropdownContainer {
+  position: relative;
+}
+
+.dropdownMenu,
+.dropdownPanel {
+  position: absolute;
+  top: calc(100% + 8px);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--navy-deep);
+  border-radius: 4px;
+  box-shadow: 2px 4px 12px rgba(13, 4, 96, 0.12);
+  min-width: 260px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.dropdownMenu {
+  right: 0;
+}
+
+.dropdownPanel {
+  left: 0;
+  min-width: 240px;
+}
+
+.dropdownMenu::before,
+.dropdownPanel::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--navy-deep);
+  border-left: 1px solid var(--navy-deep);
+  transform: rotate(45deg);
+  z-index: 1001;
+}
+
+.dropdownMenu::before {
+  right: 28px;
+}
+
+.dropdownPanel::before {
+  left: 20px;
+}
+
+.dropdownItem,
+.dropdownSubItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: var(--font-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.15s ease;
+}
+
+.dropdownItem:not(:last-child)::after,
+.dropdownSubItem:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background-color: var(--border-color);
+  opacity: 0.5;
+}
+
+.dropdownItem i,
+.dropdownSubItem i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  overflow: hidden;
+  line-height: 1;
+}
+
+.dropdownItem span,
+.dropdownSubItem span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdownItem:hover,
+.dropdownSubItem:hover {
+  background-color: var(--honey-pale);
+  color: var(--navy-deep);
+}
+
+/* --- Responsive Media Queries --- */
+@media (max-width: 900px) {
+  .navLinks {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .actionsWrapper {
+    display: none;
+  }
+}

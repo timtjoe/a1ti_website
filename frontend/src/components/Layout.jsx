@@ -6,7 +6,7 @@ export default function Layout() {
   return (
     <div>
       <AppBar />
-      <main style={{ padding: '1.5rem' }}>
+      <main>
         <Outlet />
       </main>
     </div>

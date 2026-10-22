@@ -1,8 +1,7 @@
 // src/components/appbar/BottomBar.jsx
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/common/Button';
-import logoSvg from '@/assets/logo.svg'; // Adjust path if your asset folder structure differs (e.g., '../../assets/logo.svg')
-import styles from './BottomBar.module.css';
+import styles from './AppBar.module.css';
 
 export function BottomBar() {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -61,14 +60,7 @@ export function BottomBar() {
   return (
     <nav className={styles.bottomBar} ref={navRef}>
       <div className={styles.container}>
-        {/* Left: SVG Logo from assets */}
-        <div className={styles.logoWrapper}>
-          <a href="/" className={styles.logoLink}>
-            <img src={logoSvg} alt="A1TI Logo" className={styles.logoImage} />
-          </a>
-        </div>
-
-        {/* Middle: Navigation Links & Dropdowns */}
+        {/* Left: Navigation Links & Dropdowns */}
         <div className={styles.navLinks}>
           {menuConfig.map((item, index) => {
             const hasDropdown = Boolean(item.dropdown);
@@ -106,7 +98,7 @@ export function BottomBar() {
           })}
         </div>
 
-        {/* Right: Registration & Get App Buttons */}
+        {/* Right: Registration & Download App Buttons */}
         <div className={styles.rightActions}>
           <Button
             variant="secondary"
@@ -121,10 +113,14 @@ export function BottomBar() {
             variant="outline"
             light={true}
             size="md"
-            leftIcon="download"
+            className={styles.downloadBtn}
             onClick={() => window.location.href = '/download'}
           >
-            Get App
+            {/* Google Play SVG Icon */}
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style={{ marginRight: '6px' }}>
+              <path d="M3.609 1.814L13.792 12 3.61 22.186a1.503 1.503 0 0 1-.36-.983V2.797c0-.373.13-.732.359-.983zm11.191 11.19l2.585 2.585-11.233 6.49a1.498 1.498 0 0 1-.689.167l9.337-9.242zm2.943-2.943l3.226 1.863a1.002 1.002 0 0 1 0 1.732l-3.226 1.863-2.92-2.92 2.92-2.938zM4.582 1.258l11.233 6.49-2.585 2.585L4.582 1.258z"/>
+            </svg>
+            Download App
           </Button>
         </div>
       </div>

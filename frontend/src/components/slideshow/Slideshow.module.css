@@ -1,0 +1,185 @@
+/* src/components/slideshow/Slideshow.module.css */
+
+.slideshowContainer {
+  background-color: var(--navy-deep);
+  color: #FFFFFF;
+  width: 100%;
+  /* margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%); */
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.slideContentWrapper {
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: flex-end;
+  height: clamp(480px, 68vh, 620px);
+  padding: 0 0 0 5vw;
+  will-change: transform, opacity;
+  box-sizing: border-box;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  z-index: 2;
+  padding-bottom: 2rem;
+}
+
+.headline {
+  font-family: var(--font-open-sans);
+  font-size: clamp(2.75rem, 4.8vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+  text-wrap: balance;
+}
+
+.headlineTop {
+  color: var(--gold-bright);
+}
+
+.headlineBottom {
+  color: transparent;
+  -webkit-text-stroke: 2px #FFFFFF;
+  text-stroke: 2px #FFFFFF;
+}
+
+.subtitle {
+  font-family: var(--font-roboto);
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 1.55;
+  max-width: 480px;
+  text-wrap: pretty;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.foregroundImage {
+  width: 100%;
+  height: 105%;
+  object-fit: cover;
+  object-position: top right;
+}
+
+/* Bottom Control Bar Container spanning width */
+.bottomControlBar {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 5vw;
+  right: 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+/* Centered Flat Indicators */
+.indicators {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.indicatorBar {
+  width: 32px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.25);
+  border: 1px solid #FFFFFF;
+  border-radius: 0 !important;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  transition: border-color 0.2s ease;
+}
+
+.activeBar {
+  border-color: #FFFFFF;
+}
+
+.activeProgressFill {
+  position: absolute;
+  inset: 0;
+  background-color: #FFFFFF;
+  border-radius: 0 !important;
+}
+
+/* Bottom Right Pause/Play Button */
+.pausePlayButton {
+  position: absolute;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.pausePlayButton:hover {
+  opacity: 1;
+}
+
+.pausePlayButton i {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .slideshowContainer {
+    padding-bottom: 3.5rem;
+  }
+
+  .slideContentWrapper {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding-top: 3rem;
+  }
+
+  .textContent {
+    padding-bottom: 1.5rem;
+  }
+
+  .buttonGroup {
+    flex-wrap: wrap;
+  }
+
+  .imageWrapper {
+    height: 300px;
+    align-items: center;
+  }
+
+  .bottomControlBar {
+    padding: 0 1rem;
+  }
+}
