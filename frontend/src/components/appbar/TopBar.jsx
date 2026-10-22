@@ -1,40 +1,37 @@
 // src/components/appbar/TopBar.jsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router';
 import { Button } from '@/components/common/Button';
+import { DropdownMenu } from '@/components/common/DropdownMenu';
 import logoSvg from '@/assets/logo_color.svg';
 import styles from './AppBar.module.css';
 
 export function TopBar() {
-  const [isOpen, setIsOpen] = useState(false);
   const [studentDropdownOpen, setStudentDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  const containerRef = useRef(null);
+  const [isFinanceOpen, setIsFinanceOpen] = useState(false);
 
   useEffect(() => {
-    const checkHours = () => {
+    const checkFinanceHours = () => {
       const now = new Date();
+      const day = now.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
       const hour = now.getHours();
-      setIsOpen(hour >= 9 && hour < 17);
-    };
-    checkHours();
-    const interval = setInterval(checkHours, 60000);
-    return () => clearInterval(interval);
-  }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setStudentDropdownOpen(false);
-      }
+      // Open Mon-Sat (1 to 6) between 9am (9) and 5pm (17)
+      const isOpenDay = day >= 1 && day <= 6;
+      const isOpenHour = hour >= 9 && hour < 17;
+      setIsFinanceOpen(isOpenDay && isOpenHour);
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+
+    checkFinanceHours();
+    const interval = setInterval(checkFinanceHours, 60000);
+    return () => clearInterval(interval);
   }, []);
 
   const studentMenuItems = [
     { icon: 'dashboard', text: 'Student Portal', link: '/student/portal' },
-    { icon: 'help', text: 'Portal FAQ', link: '/student/faq' },
-    { icon: 'school', text: 'Alumni', link: '/student/alumni' },
+    { icon: 'school', text: 'Alumni Program', link: '/student/alumni' },
+    { icon: 'help', text: 'How to use the Portal', link: '/student/faq' },
+    { icon: 'support', text: 'General Support', link: '/student/support' },
   ];
 
   return (
@@ -42,31 +39,27 @@ export function TopBar() {
       <div className={styles.container}>
         {/* Left: Logo */}
         <div className={styles.logoWrapper}>
-          <a href="/" className={styles.logoLink}>
+          <Link to="/" className={styles.logoLink}>
             <img src={logoSvg} alt="A1TI Logo" className={styles.logoImage} />
-          </a>
+          </Link>
         </div>
 
-        {/* Middle: Hours Badge & Social Bar */}
-        {/* <div className={styles.middleSection}>
-          
-          <div className={styles.socialBarRow}>
+        {/* Middle: Finance Office Open Hours */}
+        <div className={styles.middleSection}>
           <div className={styles.hoursWrapper}>
-            {isOpen ? (
+            {isFinanceOpen ? (
               <span className={styles.statusBadge}>
                 <i className="material-symbols-outlined">schedule</i>
-                We are open: 9am-5pm
+                Finance Office: Mon–Sat 9am–5pm (Open)
               </span>
             ) : (
               <span className={styles.closedBadge}>
                 <i className="material-symbols-outlined">clock_loader_60</i>
-                Closed
+                Finance Office: Mon–Sat 9am–5pm (Closed)
               </span>
             )}
           </div>
-          </div>
-
-        </div> */}
+        </div>
 
         {/* Right: Actions */}
         <div className={styles.actionsWrapper}>
@@ -77,7 +70,7 @@ export function TopBar() {
             Verify Certificate
           </Button>
 
-          <div className={styles.dropdownContainer} ref={containerRef}>
+          <div className={styles.dropdownContainer}>
             <Button
               variant="outline"
               size="sm"
@@ -88,16 +81,14 @@ export function TopBar() {
               For Student
             </Button>
 
-            {studentDropdownOpen && (
-              <div className={styles.dropdownMenu} ref={dropdownRef}>
-                {studentMenuItems.map((item, index) => (
-                  <a key={index} href={item.link} className={styles.dropdownItem}>
-                    <i className="material-symbols-outlined">{item.icon}</i>
-                    <span>{item.text}</span>
-                  </a>
-                ))}
-              </div>
-            )}
+            <DropdownMenu
+              isOpen={studentDropdownOpen}
+              onClose={() => setStudentDropdownOpen(false)}
+              items={studentMenuItems}
+              align="right"
+              className={styles.dropdownMenu}
+              itemClassName={styles.dropdownItem}
+            />
           </div>
         </div>
       </div>

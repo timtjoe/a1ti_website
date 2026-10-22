@@ -1,11 +1,18 @@
 // src/components/appbar/BottomBar.jsx
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { Link, useNavigate } from 'react-router';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/common/Button';
+import { DropdownMenu } from '@/components/common/DropdownMenu';
 import styles from './AppBar.module.css';
+
+const CARET_EASE_OUT = [0.0, 0.0, 0.2, 1];
+const CARET_EASE_IN = [0.4, 0.0, 1, 1];
 
 export function BottomBar() {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const navRef = useRef(null);
+  const navigate = useNavigate();
 
   const menuConfig = [
     { name: 'Home', path: '/', dropdown: null },
@@ -13,39 +20,51 @@ export function BottomBar() {
       name: 'About',
       path: '/about',
       dropdown: [
-        { icon: 'info', text: 'Overview', link: '/about/overview' },
-        { icon: 'visibility', text: 'Mission & Vision', link: '/about/mission' },
+        { icon: 'info', text: 'About Us', link: '/about/us' },
+        { icon: 'visibility', text: 'Mission', link: '/about/mission' },
         { icon: 'group', text: 'Leadership', link: '/about/leadership' },
+        { icon: 'history', text: 'History', link: '/about/history' },
+        { icon: 'school', text: 'Alumni', link: '/about/alumni' },
+        { icon: 'apartment', text: 'Campuses', link: '/about/campuses' },
       ],
     },
     {
       name: 'Academic',
       path: '/academic',
       dropdown: [
-        { icon: 'menu_book', text: 'Programs', link: '/academic/programs' },
-        { icon: 'apartment', text: 'Faculties', link: '/academic/faculties' },
-        { icon: 'calendar_month', text: 'Academic Calendar', link: '/academic/calendar' },
+        { icon: 'menu_book', text: 'All Courses', link: '/academic/courses' },
+        { icon: 'build', text: 'Technical Course', link: '/academic/technical' },
+        { icon: 'psychology', text: 'Advance Course', link: '/academic/advance' },
+        { icon: 'supervisor_account', text: 'Instructors', link: '/academic/instructors' },
       ],
     },
     {
       name: 'Admission',
       path: '/admission',
       dropdown: [
-        { icon: 'how_to_reg', text: 'Apply Now', link: '/admission/apply' },
-        { icon: 'payments', text: 'Tuition & Fees', link: '/admission/fees' },
-        { icon: 'help', text: 'Requirements', link: '/admission/requirements' },
+        { icon: 'how_to_reg', text: 'How to Apply', link: '/admission/apply' },
+        { icon: 'payments', text: 'Fees and Payments', link: '/admission/fees' },
+        { icon: 'help', text: 'FAQ', link: '/admission/faq' },
+        { icon: 'rule', text: 'Entry Requirement', link: '/admission/requirements' },
+        { icon: 'calendar_month', text: 'Intake Calendar', link: '/admission/calendar' },
+        { icon: 'app_registration', text: 'Register Online', link: '/admission/register' },
       ],
     },
     {
       name: 'Media',
       path: '/media',
       dropdown: [
-        { icon: 'newspaper', text: 'News & Announcements', link: '/media/news' },
-        { icon: 'photo_library', text: 'Photo Gallery', link: '/media/gallery' },
-        { icon: 'event', text: 'Events', link: '/media/events' },
+        { icon: 'newspaper', text: 'News', link: '/media/news' },
+        { icon: 'assessment', text: 'Reports', link: '/media/reports' },
+        { icon: 'photo_library', text: 'Gallery', link: '/media/gallery' },
       ],
     },
+    { name: 'Contact Us', path: '/contact', dropdown: null },
   ];
+
+  const handleCloseDropdown = useCallback(() => {
+    setActiveDropdown(null);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -60,7 +79,7 @@ export function BottomBar() {
   return (
     <nav className={styles.bottomBar} ref={navRef}>
       <div className={styles.container}>
-        {/* Left: Navigation Links & Dropdowns */}
+        {/* Left Navigation Links & Animated Carets */}
         <div className={styles.navLinks}>
           {menuConfig.map((item, index) => {
             const hasDropdown = Boolean(item.dropdown);
@@ -69,57 +88,58 @@ export function BottomBar() {
             return (
               <div key={index} className={styles.navItemWrapper}>
                 <button
-                  className={styles.navLinkButton}
-                  onClick={() => hasDropdown && setActiveDropdown(isExpanded ? null : index)}
+                  className={`${styles.navLinkButton} ${isExpanded ? styles.activeNavLink : ''}`}
+                  onClick={() => {
+                    if (hasDropdown) {
+                      setActiveDropdown(isExpanded ? null : index);
+                    } else {
+                      navigate(item.path);
+                    }
+                  }}
                   onMouseEnter={() => hasDropdown && setActiveDropdown(index)}
                 >
-                  <a href={item.path} className={styles.directLink} onClick={(e) => hasDropdown && e.preventDefault()}>
+                  <Link to={item.path} className={styles.directLink} onClick={(e) => hasDropdown && e.preventDefault()}>
                     {item.name}
-                  </a>
+                  </Link>
+
                   {hasDropdown && (
-                    <i className="material-symbols-outlined">
-                      {isExpanded ? 'expand_less' : 'expand_more'}
-                    </i>
+                    <motion.i
+                      className="material-symbols-outlined"
+                      initial={false}
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      transition={{
+                        duration: isExpanded ? 0.2 : 0.15,
+                        ease: isExpanded ? CARET_EASE_OUT : CARET_EASE_IN,
+                      }}
+                      style={{ display: 'inline-block', willChange: 'transform' }}
+                    >
+                      expand_more
+                    </motion.i>
                   )}
                 </button>
 
-                {hasDropdown && isExpanded && (
-                  <div className={styles.dropdownPanel}>
-                    {item.dropdown.map((subItem, subIdx) => (
-                      <a key={subIdx} href={subItem.link} className={styles.dropdownSubItem}>
-                        <i className="material-symbols-outlined">{subItem.icon}</i>
-                        <span>{subItem.text}</span>
-                      </a>
-                    ))}
-                  </div>
+                {hasDropdown && (
+                  <DropdownMenu
+                    isOpen={isExpanded}
+                    onClose={handleCloseDropdown}
+                    items={item.dropdown}
+                    align="left"
+                    className={styles.dropdownPanel}
+                    itemClassName={styles.dropdownSubItem}
+                    caretOffset="20px"
+                  />
                 )}
               </div>
             );
           })}
         </div>
 
-        {/* Right: Registration & Download App Buttons */}
+        {/* Right Actions */}
         <div className={styles.rightActions}>
-          <Button
-            variant="secondary"
-            size="md"
-            leftIcon="app_registration"
-            onClick={() => window.location.href = '/register'}
-          >
-            Registration
+          <Button variant="secondary" size="md" onClick={() => navigate('/register')}>
+            Register Now
           </Button>
-
-          <Button
-            variant="outline"
-            light={true}
-            size="md"
-            className={styles.downloadBtn}
-            onClick={() => window.location.href = '/download'}
-          >
-            {/* Google Play SVG Icon */}
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style={{ marginRight: '6px' }}>
-              <path d="M3.609 1.814L13.792 12 3.61 22.186a1.503 1.503 0 0 1-.36-.983V2.797c0-.373.13-.732.359-.983zm11.191 11.19l2.585 2.585-11.233 6.49a1.498 1.498 0 0 1-.689.167l9.337-9.242zm2.943-2.943l3.226 1.863a1.002 1.002 0 0 1 0 1.732l-3.226 1.863-2.92-2.92 2.92-2.938zM4.582 1.258l11.233 6.49-2.585 2.585L4.582 1.258z"/>
-            </svg>
+          <Button variant="outline" light={true} size="md" className={styles.downloadBtn} onClick={() => navigate('/download')}>
             Download App
           </Button>
         </div>
