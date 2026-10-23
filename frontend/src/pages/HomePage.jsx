@@ -2,6 +2,7 @@
 import React from 'react';
 import { Slideshow } from '@/components/slideshow/Slideshow';
 import { Accreditation } from '@/components/sections/Accreditation';
+import { Programs } from '@/components/sections/Programs';
 import { Mission } from '@/components/sections/Mission';
 import styles from './HomePage.module.css';
 
@@ -11,6 +12,7 @@ export function HomePage() {
       <Slideshow />
       <Accreditation />
       <Mission />
+      <Programs />
     </div>
   );
 }
