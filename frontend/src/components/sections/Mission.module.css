@@ -1,0 +1,358 @@
+/* src/components/sections/Mission.module.css */
+
+/* Full-Bleed Section Container */
+.sectionContainer {
+  width: 100%;
+  min-height: 600px;
+  background-color: var(--navy-deep);
+  color: #FFFFFF;
+  padding-top: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Three.js Background Canvas */
+.threeCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 1200px Max Width Inner Container */
+.innerContainer {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--spacing-lg);
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Top Header Section --- */
+.topHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.missionHeading {
+  font-family: var(--font-open-sans);
+  font-size: clamp(2.25rem, 3.8vw, 3.75rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.15;
+  max-width: 950px;
+  margin: 0 auto;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* 200px Yellow Divider Bar */
+.textDivider {
+  width: 200px;
+  height: 4px;
+  background-color: var(--gold-bright);
+  border-radius: 0;
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+/* --- Main Grid Layout --- */
+.mainGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  align-items: stretch;
+}
+
+/* --- Chart Cards --- */
+.chartCard {
+  background-color: #090342;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  will-change: transform, border-color;
+}
+
+.cardHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+}
+
+.cardTitle {
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: var(--spacing-xs);
+}
+
+.cardBadge {
+  font-size: var(--font-xs);
+  font-weight: 800;
+  color: var(--navy-deep);
+  background-color: var(--gold-bright);
+  padding: 3px 10px;
+  border-radius: 0;
+}
+
+/* --- Donut Overlay --- */
+.donutWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--spacing-xs) 0;
+}
+
+.donutHoleContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.donutHolePercent {
+  font-family: var(--font-open-sans);
+  font-size: clamp(3rem, 4.5vw, 4rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1;
+}
+
+.donutHoleLabel {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 6px;
+}
+
+/* Right Stack Column */
+.rightColumnStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  justify-content: space-between;
+}
+
+.barChartWrapper {
+  width: 100%;
+}
+
+/* --- Legend Styling --- */
+.legendContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid rgba(211, 206, 253, 0.15);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.legendBox {
+  width: 14px;
+  height: 14px;
+  border-radius: 0;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.legendText {
+  font-family: var(--font-roboto);
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+
+/* --- Tooltip Styling --- */
+.chartTooltip {
+  background-color: var(--black-jet);
+  border: 1px solid var(--gold-bright);
+  padding: var(--padding-sm);
+  border-radius: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.tooltipName {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+
+.tooltipValue {
+  font-size: var(--font-sm);
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+/* --- Report Info Section --- */
+.reportInfoWrapper {
+  margin-top: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-md);
+  max-width: 820px;
+}
+
+.ctaDivider {
+  width: 200px;
+  height: 4px;
+  background-color: var(--gold-bright);
+  border-radius: 0;
+  margin-bottom: var(--spacing-xs);
+}
+
+.taglineText {
+  font-family: var(--font-roboto);
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   FULL-BLEED ORANGE CTA BANNER (100% Clean Outer Width)
+   ========================================================================== */
+.orangeCtaBanner {
+  width: 100%;
+  min-height: clamp(250px, 28vh, 300px);
+  background-color: var(--amber-vibrant);
+  color: var(--black-jet);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.ctaInnerWrapper {
+  max-width: 1200px;
+  width: 100%;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xl);
+  box-sizing: border-box;
+}
+
+.ctaLeftContent {
+  flex: 1.2;
+}
+
+.ctaHeading {
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.85rem, 2.5vw, 2.5rem);
+  font-weight: 800;
+  color: var(--navy-deep);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.ctaRightButtons {
+  flex: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+/* High-Contrast Navy & Black Button Customization */
+.ctaPrimaryBtn {
+  background-color: var(--navy-deep) !important;
+  color: #FFFFFF !important;
+  border: 2px solid var(--navy-deep) !important;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease !important;
+}
+
+.ctaPrimaryBtn:hover {
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+.ctaOutlineBtn {
+  background-color: transparent !important;
+  color: var(--navy-deep) !important;
+  border: 2px solid var(--navy-deep) !important;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease !important;
+}
+
+.ctaOutlineBtn:hover {
+  background-color: var(--navy-deep) !important;
+  color: #FFFFFF !important;
+}
+
+/* --- Responsive Styles --- */
+@media (max-width: 900px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaInnerWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .ctaRightButtons {
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: var(--spacing-md);
+  }
+}
+
+@media (max-width: 600px) {
+  .legendContainer {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    align-items: flex-start;
+  }
+
+  .ctaRightButtons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .ctaRightButtons button {
+    width: 100%;
+  }
+}
