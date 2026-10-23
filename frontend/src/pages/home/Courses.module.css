@@ -1,0 +1,369 @@
+/* src/components/sections/Courses.module.css */
+
+.sectionContainer {
+  width: 100%;
+  background-color: var(--bg-surface);
+  padding: var(--spacing-2xl) 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.innerContainer {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Header Controls Layout */
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.headerLeft {
+  flex: 1;
+  min-width: 300px;
+}
+
+.sectionTitle {
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 900;
+  color: var(--navy-deep);
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.thickDivider {
+  width: 160px;
+  height: 6px;
+  background-color: var(--gold-bright);
+  border-radius: 0;
+  margin-top: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.sectionSubtitle {
+  font-family: var(--font-roboto);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* --- 2x4 Course Grid --- */
+.coursesGrid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
+}
+
+/* Individual Course Card */
+.courseCard {
+  position: relative;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.cardImageWrapper {
+  width: 100%;
+  height: 155px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.courseCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.badgeGroup {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  gap: 4px;
+}
+
+.levelBadge {
+  font-family: var(--font-roboto);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  background-color: rgba(13, 4, 96, 0.82);
+  padding: 3px 7px;
+  border-radius: 3px;
+}
+
+.categoryBadge {
+  font-family: var(--font-roboto);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--navy-deep);
+  background-color: rgba(252, 197, 95, 0.88);
+  padding: 3px 7px;
+  border-radius: 3px;
+}
+
+.cardBody {
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  flex: 1;
+}
+
+.courseTitle {
+  font-family: var(--font-open-sans);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--navy-deep);
+  line-height: 1.3;
+}
+
+.courseDescription {
+  font-family: var(--font-roboto);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.metaRow {
+  margin-top: auto;
+  padding-top: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+}
+
+.metaText {
+  font-family: var(--font-roboto);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--navy-deep);
+}
+
+.feeBadge {
+  font-family: var(--font-roboto);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--navy-deep);
+  background-color: rgba(241, 245, 249, 0.8);
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid var(--border-color);
+}
+
+/* Card Footer Area */
+.cardFooter {
+  padding: var(--spacing-md) var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(250, 250, 250, 0.85);
+  margin-top: auto;
+}
+
+.linkLabel {
+  font-family: var(--font-roboto);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--blue-royal);
+  transition: color 0.2s ease;
+}
+
+.linkIcon {
+  font-size: 1.1rem;
+  color: var(--blue-royal);
+  transition: transform 0.25s ease, color 0.2s ease;
+}
+
+.courseCard:hover .linkLabel,
+.courseCard:hover .linkIcon {
+  color: var(--navy-deep);
+}
+
+.courseCard:hover .linkIcon {
+  transform: translateX(4px);
+}
+
+/* --- Twitter-Style Hover Card Preview Overlay --- */
+.hoverCardPreview {
+  position: absolute;
+  inset: 0;
+  background-color: var(--navy-deep);
+  color: #FFFFFF;
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 10;
+  box-shadow: 0 12px 32px rgba(13, 4, 96, 0.35);
+  border-radius: 4px;
+}
+
+.previewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.previewLevel {
+  font-size: 0.65rem;
+  font-weight: 800;
+  background-color: var(--gold-bright);
+  color: var(--navy-deep);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.previewFee {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--gold-bright);
+}
+
+.previewTitle {
+  font-family: var(--font-open-sans);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.25;
+}
+
+/* Bulleted "What You Will Learn" List */
+.learningSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.learningHeading {
+  font-family: var(--font-open-sans);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.learningList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.learningItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-family: var(--font-roboto);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.35;
+}
+
+.learningItem i {
+  font-size: 0.9rem;
+  color: var(--gold-bright);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.previewMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.75rem;
+  color: var(--lavender-light);
+  border-top: 1px solid rgba(211, 206, 253, 0.2);
+  padding-top: var(--spacing-xs);
+}
+
+.previewActionPrompt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+  border-top: 1px solid rgba(211, 206, 253, 0.2);
+  padding-top: 6px;
+}
+
+/* --- Bottom Explore All CTA Banner Styles --- */
+.bottomCtaWrapper {
+  margin-top: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+}
+
+.ctaUpperDivider {
+  width: 180px;
+  height: 4px;
+  background-color: var(--gold-bright);
+  border-radius: 0;
+  margin-bottom: var(--spacing-xs);
+}
+
+.ctaCopyText {
+  font-family: var(--font-roboto);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  max-width: 620px;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.5;
+}
+
+/* Responsive Grid Columns */
+@media (max-width: 1024px) {
+  .coursesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .coursesGrid {
+    grid-template-columns: 1fr;
+  }
+}

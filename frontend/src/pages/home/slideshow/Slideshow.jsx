@@ -66,7 +66,7 @@ const HOME_SLIDES = [
         link: '/register',
       },
       {
-        text: 'ABOUT COHORT 53',
+        text: 'ABOUT COHORT 4',
         variant: 'outline',
         light: true,
         link: '/about/overview',
@@ -74,7 +74,7 @@ const HOME_SLIDES = [
     ],
     image: {
       src: img001 || '/assets/img_001.jpg',
-      alt: 'Cohort 53 Hands-on Practical Training',
+      alt: 'Cohort 4 Hands-on Practical Training',
     },
   },
   {
@@ -101,8 +101,8 @@ const HOME_SLIDES = [
     },
   },
   {
-    headlinePrimary: 'Instant Verification',
-    headlineOutlined: 'QR & Unique ID',
+    headlinePrimary: 'Verified Certificates',
+    // headlineOutlined: 'Accredited & Trusted',
     subtitle:
       'Certificates employers can check in seconds. Every A-1 certificate carries a unique ID and QR code to verify graduate records instantly.',
     ctaButtons: [
@@ -124,8 +124,8 @@ const HOME_SLIDES = [
     },
   },
   {
-    headlinePrimary: 'Accredited Programs',
-    headlineOutlined: 'MOE & AITB',
+    headlinePrimary: 'Accredited by MOE and AITB',
+    // headlineOutlined: 'MOE & AITB',
     subtitle:
       'Technical & professional courses across Liberia — Solar, Electrical, AutoCAD, CCTV, Web Development, M&E and more. Accredited by MOE and AITB.',
     ctaButtons: [

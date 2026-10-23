@@ -73,13 +73,14 @@
 /* Unified Centered Headline */
 .headline {
   font-family: var(--font-open-sans);
-  font-size: clamp(3rem, 5vw, 4.75rem);
+  font-size: clamp(3rem, 5.75vw, 4.75rem);
   font-weight: 800;
   line-height: 1.05;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   text-wrap: balance;
+  text-transform: uppercase;
 }
 
 .headlineTop {

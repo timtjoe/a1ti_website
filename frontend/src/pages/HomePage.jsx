@@ -1,9 +1,10 @@
 // src/pages/HomePage.jsx
 import React from 'react';
-import { Slideshow } from '@/components/slideshow/Slideshow';
-import { Accreditation } from '@/components/sections/Accreditation';
-import { Programs } from '@/components/sections/Programs';
-import { Mission } from '@/components/sections/Mission';
+import { Slideshow } from './home/slideshow/Slideshow';
+import { Accreditation } from './home/Accreditation';
+import { Programs } from './home/Programs';
+import { Mission } from './home/Mission';
+import { Courses } from './home/Courses';
 import styles from './HomePage.module.css';
 
 export function HomePage() {
@@ -13,6 +14,7 @@ export function HomePage() {
       <Accreditation />
       <Mission />
       <Programs />
+      <Courses /> 
     </div>
   );
 }

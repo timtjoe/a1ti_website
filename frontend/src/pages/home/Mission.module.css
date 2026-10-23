@@ -77,11 +77,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-xl);
+  /* Consistent gutter across grid columns */
   align-items: stretch;
 }
 
-/* --- Chart Cards --- */
-.chartCard {
+/* --- Left Chart Card --- */
+.chartCardLeft {
   background-color: #090342;
   border: 1px solid var(--border-color);
   border-radius: 0;
@@ -90,7 +91,52 @@
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
+  height: 100%;
   will-change: transform, border-color;
+}
+
+.cardTitleCentered {
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  text-align: center;
+  margin-bottom: var(--spacing-xs);
+}
+
+/* --- Right Stack Column with 30/70 Height Proportions --- */
+.rightColumnStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  /* Matches grid column gutter */
+  height: 100%;
+}
+
+/* 30% Height Progress Card */
+.progressCardCompact {
+  flex: 3;
+  background-color: #090342;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  padding: var(--spacing-md) var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+/* 70% Height Roadmap Card */
+.roadmapCardProportional {
+  flex: 7;
+  background-color: #090342;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .cardHeaderRow {
@@ -139,7 +185,7 @@
 
 .donutHolePercent {
   font-family: var(--font-open-sans);
-  font-size: clamp(3rem, 4.5vw, 4rem);
+  font-size: clamp(3rem, 4.2vw, 3.8rem);
   font-weight: 800;
   color: #FFFFFF;
   line-height: 1;
@@ -154,16 +200,14 @@
   margin-top: 6px;
 }
 
-/* Right Stack Column */
-.rightColumnStack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
-  justify-content: space-between;
-}
-
 .barChartWrapper {
   width: 100%;
+}
+
+.barChartWrapperFlex {
+  width: 100%;
+  flex: 1;
+  min-height: 160px;
 }
 
 /* --- Legend Styling --- */
@@ -174,6 +218,16 @@
   gap: var(--spacing-sm);
   margin-top: var(--spacing-sm);
   padding-top: var(--spacing-sm);
+  border-top: 1px solid rgba(211, 206, 253, 0.15);
+}
+
+.legendContainerCompact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+  padding-top: var(--spacing-xs);
   border-top: 1px solid rgba(211, 206, 253, 0.15);
 }
 
@@ -220,7 +274,7 @@
   color: #FFFFFF;
 }
 
-/* --- Report Info Section --- */
+/* --- Report Info Section & Dual Button Row --- */
 .reportInfoWrapper {
   margin-top: var(--spacing-2xl);
   margin-bottom: var(--spacing-2xl);
@@ -247,8 +301,17 @@
   line-height: 1.5;
 }
 
+.reportButtonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-xs);
+}
+
 /* ==========================================================================
-   FULL-BLEED ORANGE CTA BANNER (100% Clean Outer Width)
+   FULL-BLEED ORANGE CTA BANNER
    ========================================================================== */
 .orangeCtaBanner {
   width: 100%;
@@ -295,7 +358,6 @@
   flex-wrap: wrap;
 }
 
-/* High-Contrast Navy & Black Button Customization */
 .ctaPrimaryBtn {
   background-color: var(--navy-deep) !important;
   color: #FFFFFF !important;
@@ -341,10 +403,21 @@
 }
 
 @media (max-width: 600px) {
-  .legendContainer {
+
+  .legendContainer,
+  .legendContainerCompact {
     flex-direction: column;
     gap: var(--spacing-xs);
     align-items: flex-start;
+  }
+
+  .reportButtonGroup {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .reportButtonGroup button {
+    width: 100%;
   }
 
   .ctaRightButtons {
