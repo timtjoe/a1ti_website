@@ -4,7 +4,7 @@
 .sectionContainer {
   width: 100%;
   background-color: var(--bg-surface);
-  padding: var(--spacing-xl) 0 var(--spacing-2xl) 0;
+  padding: var(--spacing-2xl) 0;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -21,41 +21,60 @@
   box-sizing: border-box;
 }
 
-/* --- Centered Header Format Matching Mission Section --- */
-.topHeader {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: var(--spacing-xl);
-}
-
-.sectionTitle {
-  font-family: var(--font-open-sans);
-  font-size: clamp(2rem, 3.2vw, 3.25rem);
-  font-weight: 800;
-  color: var(--navy-deep);
-  line-height: 1.15;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-}
-
-.textDivider {
-  width: 200px;
-  height: 4px;
-  background-color: var(--gold-bright);
-  border-radius: 0;
-  margin-top: var(--spacing-lg);
-  margin-bottom: var(--spacing-xs);
-}
-
-/* --- 2x2 Grid Layout --- */
+/* --- 2x3 Grid Layout (6 Cells Total) --- */
 .programsGrid {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-md);
+}
+
+/* --- Cell 1: First Header Card (229px Height, White Surface) --- */
+.headerCard {
+  background-color: var(--bg-surface);
+  /* border: 1px solid var(--border-color); */
+  border-radius: 0;
+  height: 229px;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.headerCardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.sectionTitle {
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  font-weight: 900;
+  color: var(--navy-deep);
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+/* Thick Distinct Yellow Divider Bar */
+.thickDivider {
+  width: 160px;
+  height: 6px;
+  background-color: var(--gold-bright);
+  border-radius: 0;
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.headerSubtitle {
+  font-family: var(--font-roboto);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.45;
 }
 
 /* --- Media-Object Program Card (229px Height) --- */
@@ -181,6 +200,11 @@
 @media (max-width: 900px) {
   .programsGrid {
     grid-template-columns: 1fr;
+  }
+
+  .headerCard {
+    height: auto;
+    padding: var(--spacing-xl) var(--spacing-lg);
   }
 
   .programCard {

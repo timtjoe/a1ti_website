@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import styles from './Programs.module.css';
 
-// Modular Program Data matching your exact list
+// Modular Program Data (5 Categories)
 const PROGRAMS_DATA = [
   {
     id: 'foundation',
@@ -33,6 +33,15 @@ const PROGRAMS_DATA = [
     link: '/academic/courses/advanced',
   },
   {
+    id: 'specialist',
+    title: 'Specialist',
+    description: 'Stage-based trades with a certificate every three months. Basic, Intermediate, Advanced & Specialist.',
+    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80',
+    courseCount: '17 courses',
+    actionText: 'See specialist courses',
+    link: '/academic/courses/specialist',
+  },
+  {
     id: 'integrated',
     title: 'Integrated Programs',
     description: 'Two to five related courses as one career pathway, with no timetable clashes. Integrated Program Certificate.',
@@ -49,14 +58,20 @@ export function Programs() {
   return (
     <section className={styles.sectionContainer}>
       <div className={styles.innerContainer}>
-        {/* Centered Header Title matching Mission format */}
-        <div className={styles.topHeader}>
-          <h2 className={styles.sectionTitle}>OUR PROGRAM CATEGORIES</h2>
-          <div className={styles.textDivider} />
-        </div>
-
-        {/* 2x2 Grid Container with Media-Object Cards */}
+        {/* 2x3 Grid Container (1 Title Cell + 5 Program Media-Object Cards) */}
         <div className={styles.programsGrid}>
+          {/* Cell 1: Section Header Card (White Background with Thick Divider & Large Text) */}
+          <div className={styles.headerCard}>
+            <div className={styles.headerCardContent}>
+              <h2 className={styles.sectionTitle}>OUR PROGRAM CATEGORIES</h2>
+              <div className={styles.thickDivider} />
+              <p className={styles.headerSubtitle}>
+                Structured career pathways designed from foundational skills to specialist technical mastery.
+              </p>
+            </div>
+          </div>
+
+          {/* Cells 2 through 6: Program Cards */}
           {PROGRAMS_DATA.map((program) => (
             <article
               key={program.id}
