@@ -5,6 +5,12 @@ import { useNavigate } from 'react-router';
 import { Button } from '@/components/common/Button';
 import styles from './Slideshow.module.css';
 
+// Importing local asset images
+import img001 from '@/assets/img_005.jpeg';
+import img002 from '@/assets/img_007.jpeg';
+import img003 from '@/assets/img_003.jpeg';
+import img004 from '@/assets/img_004.jpeg';
+
 const slidePhysics = {
   type: 'spring',
   stiffness: 75,
@@ -46,117 +52,94 @@ const textItemVariants = {
   },
 };
 
-const imageVariants = {
-  hidden: { opacity: 0, x: 50, scale: 0.97 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    scale: 1,
-    transition: {
-      ...slidePhysics,
-      delay: 0.1,
-    },
-  },
-  exit: {
-    opacity: 0,
-    x: 30,
-    scale: 0.98,
-    transition: { duration: 0.38, ease: 'easeOut' },
-  },
-};
-
-// Self-contained slide configuration with refined copy and actions
+// Slide configuration using local asset images
 const HOME_SLIDES = [
   {
     headlinePrimary: 'Cohort 4',
     headlineOutlined: 'Enroll Today',
-    subtitle: 'Learn it with your hands. Prove it with a certificate anyone can check. Classes meet once a week for 3 hours in your chosen session.',
-  
+    subtitle:
+      'Learn it with your hands. Prove it with a certificate anyone can check. Classes meet once a week for 3 hours in your chosen session.',
     ctaButtons: [
-      { 
-        text: 'REGISTER NOW', 
-        variant: 'secondary', 
-        leftIcon: 'app_registration', 
-        link: '/register' 
+      {
+        text: 'REGISTER NOW',
+        variant: 'secondary',
+        link: '/register',
       },
-      { 
-        text: 'ABOUT COHORT 53', 
-        variant: 'outline', 
-        light: true, 
-        leftIcon: 'info', 
-        link: '/about/overview' 
-      }
+      {
+        text: 'ABOUT COHORT 53',
+        variant: 'outline',
+        light: true,
+        link: '/about/overview',
+      },
     ],
     image: {
-      src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1000&q=80',
-      alt: 'Cohort 53 Hands-on Practical Training'
-    }
+      src: img001 || '/assets/img_001.jpg',
+      alt: 'Cohort 53 Hands-on Practical Training',
+    },
   },
   {
     headlinePrimary: '1M Impacted',
     headlineOutlined: 'Target 2036',
-    subtitle: 'Follow our mission to train one million young people. Track projected vs. actual impact stats live from Smart School records or on our mobile app.',
+    subtitle:
+      'Follow our mission to train one million young people. Track projected vs. actual impact stats live from Smart School records or on our mobile app.',
     ctaButtons: [
-      { 
-        text: 'SEE PROGRESS', 
-        variant: 'secondary', 
-        leftIcon: 'analytics', 
-        link: '/media/reports' 
+      {
+        text: 'SEE PROGRESS',
+        variant: 'secondary',
+        link: '/media/reports',
       },
-      { 
-        text: 'OUR MISSION', 
-        variant: 'outline', 
-        light: true, 
-        leftIcon: 'visibility', 
-        link: '/about/mission' 
-      }
+      {
+        text: 'OUR MISSION',
+        variant: 'outline',
+        light: true,
+        link: '/about/mission',
+      },
     ],
     image: {
-      src: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=80',
-      alt: 'Hand holding Android phone displaying progress mobile app'
-    }
+      src: img002 || '/assets/img_002.jpg',
+      alt: 'Hand holding Android phone displaying progress mobile app',
+    },
   },
   {
     headlinePrimary: 'Instant Verification',
     headlineOutlined: 'QR & Unique ID',
-    subtitle: 'Certificates employers can check in seconds. Every A-1 certificate carries a unique ID and QR code to verify graduate records instantly.',
+    subtitle:
+      'Certificates employers can check in seconds. Every A-1 certificate carries a unique ID and QR code to verify graduate records instantly.',
     ctaButtons: [
-      { 
-        text: 'VERIFY CERTIFICATE', 
-        variant: 'secondary', 
-        leftIcon: 'verified', 
-        link: '/verify' 
+      {
+        text: 'VERIFY CERTIFICATE',
+        variant: 'secondary',
+        link: '/verify',
       },
-      { 
-        text: 'PARTNER WITH US', 
-        variant: 'outline', 
-        light: true, 
-        leftIcon: 'handshake', 
-        link: '/contact' 
-      }
+      {
+        text: 'PARTNER WITH US',
+        variant: 'outline',
+        light: true,
+        link: '/contact',
+      },
     ],
     image: {
-      src: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80',
-      alt: 'Student holding verified certificate'
-    }
+      src: img003 || '/assets/img_003.jpg',
+      alt: 'Student holding verified certificate',
+    },
   },
   {
     headlinePrimary: 'Accredited Programs',
     headlineOutlined: 'MOE & AITB',
-    subtitle: 'Technical & professional courses across Liberia — Solar, Electrical, AutoCAD, CCTV, Web Development, M&E and more. Accredited by MOE and AITB.',
+    subtitle:
+      'Technical & professional courses across Liberia — Solar, Electrical, AutoCAD, CCTV, Web Development, M&E and more. Accredited by MOE and AITB.',
     ctaButtons: [
-      { 
-        text: 'EXPLORE COURSES', 
-        variant: 'secondary', 
-        leftIcon: 'school', 
-        link: '/academic/courses' 
-      }
+      {
+        text: 'EXPLORE COURSES',
+        variant: 'secondary',
+        link: '/academic/courses',
+      },
     ],
     image: {
-      src: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1000&q=80',
-      alt: 'Accredited A1 Training Center Facilities'
-    }
-  }
+      src: img004 || '/assets/img_004.jpg',
+      alt: 'Accredited A1 Training Center Facilities',
+    },
+  },
 ];
 
 export function Slideshow({ autoPlayInterval = 6000 }) {
@@ -185,13 +168,31 @@ export function Slideshow({ autoPlayInterval = 6000 }) {
           animate="visible"
           exit="exit"
         >
-          {/* Left Side Content */}
+          {/* Full-Rectangular Background Image with Balanced Visibility */}
+          {currentSlide.image && (
+            <div className={styles.backgroundImageWrapper}>
+              <img
+                src={currentSlide.image.src}
+                alt=""
+                className={styles.backgroundImageBlur}
+              />
+              <div className={styles.backgroundOverlay} />
+            </div>
+          )}
+
+          {/* Centered Content Container */}
           <div className={styles.textContent}>
             <h1 className={styles.headline}>
-              <motion.span variants={textItemVariants} className={styles.headlineTop}>
+              <motion.span
+                variants={textItemVariants}
+                className={styles.headlineTop}
+              >
                 {currentSlide.headlinePrimary}
               </motion.span>
-              <motion.span variants={textItemVariants} className={styles.headlineBottom}>
+              <motion.span
+                variants={textItemVariants}
+                className={styles.headlineBottom}
+              >
                 {currentSlide.headlineOutlined}
               </motion.span>
             </h1>
@@ -200,21 +201,12 @@ export function Slideshow({ autoPlayInterval = 6000 }) {
               {currentSlide.subtitle}
             </motion.p>
 
-            {/* Optional Stats Badges (Cohort Slide) */}
-            {currentSlide.stats && (
-              <motion.div variants={textItemVariants} className={styles.statsContainer}>
-                {currentSlide.stats.map((stat, sIdx) => (
-                  <div key={sIdx} className={styles.statBox}>
-                    <span className={styles.statValue}>{stat.value}</span>
-                    <span className={styles.statLabel}>{stat.label}</span>
-                  </div>
-                ))}
-              </motion.div>
-            )}
-
             {/* CTA Button Group */}
             {currentSlide.ctaButtons && currentSlide.ctaButtons.length > 0 && (
-              <motion.div variants={textItemVariants} className={styles.buttonGroup}>
+              <motion.div
+                variants={textItemVariants}
+                className={styles.buttonGroup}
+              >
                 {currentSlide.ctaButtons.map((btn, idx) => (
                   <Button
                     key={idx}
@@ -232,18 +224,6 @@ export function Slideshow({ autoPlayInterval = 6000 }) {
               </motion.div>
             )}
           </div>
-
-          {/* Right Side Visual Image */}
-          {currentSlide.image && (
-            <div className={styles.imageWrapper}>
-              <motion.img
-                variants={imageVariants}
-                src={currentSlide.image.src}
-                alt={currentSlide.image.alt || 'Banner graphic'}
-                className={styles.foregroundImage}
-              />
-            </div>
-          )}
         </motion.div>
       </AnimatePresence>
 
@@ -253,7 +233,9 @@ export function Slideshow({ autoPlayInterval = 6000 }) {
           {HOME_SLIDES.map((_, index) => (
             <button
               key={index}
-              className={`${styles.indicatorBar} ${index === currentIndex ? styles.activeBar : ''}`}
+              className={`${styles.indicatorBar} ${
+                index === currentIndex ? styles.activeBar : ''
+              }`}
               onClick={() => setCurrentIndex(index)}
               aria-label={`Go to slide ${index + 1}`}
             >

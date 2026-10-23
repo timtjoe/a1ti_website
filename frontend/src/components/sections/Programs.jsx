@@ -3,13 +3,20 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import styles from './Programs.module.css';
 
-// Modular Program Data (5 Categories)
+// Importing local asset images
+import img001 from '@/assets/img_001.jpeg';
+import img002 from '@/assets/img_002.jpeg';
+import img003 from '@/assets/img_003.jpeg';
+import img004 from '@/assets/img_004.jpeg';
+import img005 from '@/assets/img_005.jpeg';
+
+// Modular Program Data (5 Categories mapped to local assets)
 const PROGRAMS_DATA = [
   {
     id: 'foundation',
     title: 'Foundation',
     description: 'Start here. No experience needed. Foundation / Professional Certificate.',
-    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80',
+    image: img001 || '/assets/img_001.jpg',
     courseCount: '14 courses',
     actionText: 'See foundation courses',
     link: '/academic/courses/foundation',
@@ -18,7 +25,7 @@ const PROGRAMS_DATA = [
     id: 'intermediate',
     title: 'Intermediate',
     description: 'Build on a foundation or work experience. Intermediate Certificate.',
-    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80',
+    image: img002 || '/assets/img_002.jpg',
     courseCount: '13 courses',
     actionText: 'See intermediate courses',
     link: '/academic/courses/intermediate',
@@ -27,7 +34,7 @@ const PROGRAMS_DATA = [
     id: 'advanced',
     title: 'Advanced',
     description: 'Design, lead and specialise. Advanced Certificate.',
-    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80',
+    image: img003 || '/assets/img_003.jpg',
     courseCount: '9 courses',
     actionText: 'See advanced courses',
     link: '/academic/courses/advanced',
@@ -36,7 +43,7 @@ const PROGRAMS_DATA = [
     id: 'specialist',
     title: 'Specialist',
     description: 'Stage-based trades with a certificate every three months. Basic, Intermediate, Advanced & Specialist.',
-    image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80',
+    image: img004 || '/assets/img_004.jpg',
     courseCount: '17 courses',
     actionText: 'See specialist courses',
     link: '/academic/courses/specialist',
@@ -45,7 +52,7 @@ const PROGRAMS_DATA = [
     id: 'integrated',
     title: 'Integrated Programs',
     description: 'Two to five related courses as one career pathway, with no timetable clashes. Integrated Program Certificate.',
-    image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80',
+    image: img005 || '/assets/img_005.jpg',
     courseCount: '12 programs',
     actionText: 'Explore integrated pathways',
     link: '/academic/programs/integrated',
@@ -60,7 +67,7 @@ export function Programs() {
       <div className={styles.innerContainer}>
         {/* 2x3 Grid Container (1 Title Cell + 5 Program Media-Object Cards) */}
         <div className={styles.programsGrid}>
-          {/* Cell 1: Section Header Card (White Background with Thick Divider & Large Text) */}
+          {/* Cell 1: Section Header Card */}
           <div className={styles.headerCard}>
             <div className={styles.headerCardContent}>
               <h2 className={styles.sectionTitle}>OUR PROGRAM CATEGORIES</h2>

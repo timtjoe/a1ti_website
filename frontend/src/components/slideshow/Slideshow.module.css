@@ -4,41 +4,81 @@
   background-color: var(--navy-deep);
   color: #FFFFFF;
   width: 100%;
-  /* margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%); */
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
 }
 
+/* Full-Bleed Rectangular Background Image (Crisp & Unblurred) */
+.backgroundImageWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.backgroundImageBlur {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: none;
+  /* Zero blur so images stay 100% sharp and alive */
+  transform: scale(1);
+}
+
+/* Radial Vignette Overlay: Darker/Opaque in center, clear/transparent on edges */
+.backgroundOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center,
+      rgba(13, 4, 96, 0.88) 0%,
+      rgba(13, 4, 96, 0.55) 45%,
+      rgba(13, 4, 96, 0.15) 75%,
+      transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
 .slideContentWrapper {
   width: 100%;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  height: clamp(480px, 80vh, 620px);
-  padding: 0 0 0 5vw;
+  justify-content: center;
+  text-align: center;
+  height: clamp(520px, 82vh, 660px);
+  padding: 0 var(--spacing-lg);
   will-change: transform, opacity;
   box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  /* Sits above background image and overlay */
 }
 
 .textContent {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: var(--spacing-md);
-  z-index: 2;
-  max-width: 85%;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  z-index: 3;
+  max-width: 850px;
+  margin: 0 auto;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
 }
 
+/* Unified Centered Headline */
 .headline {
   font-family: var(--font-open-sans);
-  font-size: clamp(2.75rem, 4.8vw, 4.25rem);
+  font-size: clamp(3rem, 5vw, 4.75rem);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.05;
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
   text-wrap: balance;
 }
 
@@ -54,43 +94,27 @@
 
 .subtitle {
   font-family: var(--font-roboto);
-  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
   font-weight: 400;
   color: #FFFFFF;
-  line-height: 1.55;
-  max-width: 480px;
+  line-height: 1.6;
+  max-width: 680px;
   text-wrap: pretty;
 }
 
 .buttonGroup {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-md);
-  margin-top: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+  flex-wrap: wrap;
 }
 
-.imageWrapper {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  height: 100%;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.foregroundImage {
-  width: 100%;
-  height: 105%;
-  object-fit: cover;
-  object-position: top right;
-}
-
-/* Bottom Control Bar Container spanning width */
+/* Bottom Control Bar Container */
 .bottomControlBar {
   position: absolute;
-  bottom: 1.25rem;
+  bottom: 1.5rem;
   left: 5vw;
   right: 5vw;
   display: flex;
@@ -109,7 +133,7 @@
 .indicatorBar {
   width: 32px;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(255, 255, 255, 0.35);
   border: 1px solid #FFFFFF;
   border-radius: 0 !important;
   cursor: pointer;
@@ -130,7 +154,7 @@
   border-radius: 0 !important;
 }
 
-/* Bottom Right Pause/Play Button */
+/* Pause/Play Button */
 .pausePlayButton {
   position: absolute;
   right: 0;
@@ -142,7 +166,7 @@
   align-items: center;
   justify-content: center;
   padding: 4px;
-  opacity: 0.7;
+  opacity: 0.8;
   transition: opacity 0.2s ease, transform 0.1s ease;
 }
 
@@ -161,22 +185,8 @@
   }
 
   .slideContentWrapper {
-    grid-template-columns: 1fr;
     height: auto;
-    padding-top: 3rem;
-  }
-
-  .textContent {
-    padding-bottom: 1.5rem;
-  }
-
-  .buttonGroup {
-    flex-wrap: wrap;
-  }
-
-  .imageWrapper {
-    height: 300px;
-    align-items: center;
+    padding: 4rem 1rem;
   }
 
   .bottomControlBar {

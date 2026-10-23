@@ -92,8 +92,8 @@
 }
 
 .programCard:hover {
-  border-color: var(--navy-deep);
-  box-shadow: 0 8px 24px rgba(13, 4, 96, 0.1);
+  /* border-color: var(--navy-deep); */
+  /* box-shadow: 0 8px 24px rgba(13, 4, 96, 0.1); */
 }
 
 /* Image on Left */
