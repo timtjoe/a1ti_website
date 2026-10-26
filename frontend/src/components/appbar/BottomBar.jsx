@@ -1,6 +1,6 @@
 // src/components/appbar/BottomBar.jsx
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/common/Button';
 import { DropdownMenu } from '@/components/common/DropdownMenu';
@@ -11,6 +11,7 @@ const CARET_EASE_IN = [0.4, 0.0, 1, 1];
 
 export function BottomBar() {
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef(null);
   const navigate = useNavigate();
 
@@ -33,8 +34,8 @@ export function BottomBar() {
       path: '/academic',
       dropdown: [
         { icon: 'menu_book', text: 'All Courses', link: '/academic/courses' },
-        { icon: 'build', text: 'Technical Course', link: '/academic/technical' },
-        { icon: 'psychology', text: 'Advance Course', link: '/academic/advance' },
+        { icon: 'build', text: 'Technical Course', link: '/academic/courses?category=Technical' },
+        { icon: 'psychology', text: 'Advanced Course', link: '/academic/courses?level=ADVANCED' },
         { icon: 'supervisor_account', text: 'Instructors', link: '/academic/instructors' },
       ],
     },
@@ -64,12 +65,14 @@ export function BottomBar() {
 
   const handleCloseDropdown = useCallback(() => {
     setActiveDropdown(null);
+    setIsMobileMenuOpen(false);
   }, []);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
         setActiveDropdown(null);
+        setIsMobileMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -79,69 +82,90 @@ export function BottomBar() {
   return (
     <nav className={styles.bottomBar} ref={navRef}>
       <div className={styles.container}>
-        {/* Left Navigation Links & Animated Carets */}
-        <div className={styles.navLinks}>
-          {menuConfig.map((item, index) => {
-            const hasDropdown = Boolean(item.dropdown);
-            const isExpanded = activeDropdown === index;
+        <button
+          type="button"
+          className={styles.mobileMenuButton}
+          aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="site-navigation-panel"
+          onClick={() => {
+            setIsMobileMenuOpen((open) => !open);
+            setActiveDropdown(null);
+          }}
+        >
+          <span className="material-symbols-outlined" aria-hidden="true">
+            {isMobileMenuOpen ? 'close' : 'menu'}
+          </span>
+          <span>{isMobileMenuOpen ? 'Close' : 'Menu'}</span>
+        </button>
 
-            return (
-              <div key={index} className={styles.navItemWrapper}>
-                <button
-                  className={`${styles.navLinkButton} ${isExpanded ? styles.activeNavLink : ''}`}
-                  onClick={() => {
-                    if (hasDropdown) {
-                      setActiveDropdown(isExpanded ? null : index);
-                    } else {
-                      navigate(item.path);
-                    }
-                  }}
-                  onMouseEnter={() => hasDropdown && setActiveDropdown(index)}
-                >
-                  <Link to={item.path} className={styles.directLink} onClick={(e) => hasDropdown && e.preventDefault()}>
-                    {item.name}
-                  </Link>
+        <div
+          id="site-navigation-panel"
+          className={`${styles.mobilePanel} ${isMobileMenuOpen ? styles.mobilePanelOpen : ''}`}
+        >
+          <nav className={styles.navLinks} aria-label="Main navigation">
+            {menuConfig.map((item, index) => {
+              const hasDropdown = Boolean(item.dropdown);
+              const isExpanded = activeDropdown === index;
+
+              return (
+                <div key={index} className={styles.navItemWrapper}>
+                  <button
+                    type="button"
+                    className={`${styles.navLinkButton} ${isExpanded ? styles.activeNavLink : ''}`}
+                    aria-expanded={hasDropdown ? isExpanded : undefined}
+                    onClick={() => {
+                      if (hasDropdown) {
+                        setActiveDropdown(isExpanded ? null : index);
+                      } else {
+                        navigate(item.path);
+                        handleCloseDropdown();
+                      }
+                    }}
+                    onMouseEnter={() => hasDropdown && setActiveDropdown(index)}
+                  >
+                    <span className={styles.directLink}>{item.name}</span>
+
+                    {hasDropdown && (
+                      <motion.i
+                        className="material-symbols-outlined"
+                        initial={false}
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{
+                          duration: isExpanded ? 0.2 : 0.15,
+                          ease: isExpanded ? CARET_EASE_OUT : CARET_EASE_IN,
+                        }}
+                        style={{ display: 'inline-block', willChange: 'transform' }}
+                      >
+                        expand_more
+                      </motion.i>
+                    )}
+                  </button>
 
                   {hasDropdown && (
-                    <motion.i
-                      className="material-symbols-outlined"
-                      initial={false}
-                      animate={{ rotate: isExpanded ? 180 : 0 }}
-                      transition={{
-                        duration: isExpanded ? 0.2 : 0.15,
-                        ease: isExpanded ? CARET_EASE_OUT : CARET_EASE_IN,
-                      }}
-                      style={{ display: 'inline-block', willChange: 'transform' }}
-                    >
-                      expand_more
-                    </motion.i>
+                    <DropdownMenu
+                      isOpen={isExpanded}
+                      onClose={handleCloseDropdown}
+                      items={item.dropdown}
+                      align="left"
+                      className={styles.dropdownPanel}
+                      itemClassName={styles.dropdownSubItem}
+                      caretOffset="20px"
+                    />
                   )}
-                </button>
+                </div>
+              );
+            })}
+          </nav>
 
-                {hasDropdown && (
-                  <DropdownMenu
-                    isOpen={isExpanded}
-                    onClose={handleCloseDropdown}
-                    items={item.dropdown}
-                    align="left"
-                    className={styles.dropdownPanel}
-                    itemClassName={styles.dropdownSubItem}
-                    caretOffset="20px"
-                  />
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Right Actions */}
-        <div className={styles.rightActions}>
-          <Button variant="secondary" size="md" onClick={() => navigate('/register')}>
-            Register Now
-          </Button>
-          <Button variant="outline" light={true} size="md" className={styles.downloadBtn} onClick={() => navigate('/download')}>
-            Download App
-          </Button>
+          <div className={styles.rightActions}>
+            <Button variant="secondary" size="md" onClick={() => { navigate('/register'); handleCloseDropdown(); }}>
+              Register Now
+            </Button>
+            <Button variant="outline" light={true} size="md" className={styles.downloadBtn} onClick={() => { navigate('/download'); handleCloseDropdown(); }}>
+              Download App
+            </Button>
+          </div>
         </div>
       </div>
     </nav>

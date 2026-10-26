@@ -25,7 +25,7 @@
 .programsGrid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-md);
 }
 
@@ -79,6 +79,8 @@
 
 /* --- Media-Object Program Card (229px Height) --- */
 .programCard {
+  color: inherit;
+  text-decoration: none;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: 0;
@@ -94,6 +96,11 @@
 .programCard:hover {
   /* border-color: var(--navy-deep); */
   /* box-shadow: 0 8px 24px rgba(13, 4, 96, 0.1); */
+}
+
+.programCard:focus-visible {
+  outline: 3px solid var(--blue-royal);
+  outline-offset: 3px;
 }
 
 /* Image on Left */
@@ -199,7 +206,7 @@
 /* --- Responsive Layout Adjustments --- */
 @media (max-width: 900px) {
   .programsGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .headerCard {
@@ -209,15 +216,32 @@
 
   .programCard {
     height: 195px;
+    flex-direction: column;
   }
 
   .imageWrapper {
-    width: 170px;
-    min-width: 170px;
+    width: 100%;
+    min-width: 0;
+    height: 110px;
+    min-height: 110px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .cardContent {
+    padding: var(--spacing-md);
+  }
+
+  .cardDescription {
+    -webkit-line-clamp: 2;
   }
 }
 
 @media (max-width: 480px) {
+  .programsGrid {
+    grid-template-columns: 1fr;
+  }
+
   .programCard {
     height: auto;
     flex-direction: column;
@@ -225,8 +249,13 @@
 
   .imageWrapper {
     width: 100%;
-    height: 150px;
+    height: 165px;
+    min-height: 165px;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
+  }
+
+  .cardDescription {
+    -webkit-line-clamp: 3;
   }
 }

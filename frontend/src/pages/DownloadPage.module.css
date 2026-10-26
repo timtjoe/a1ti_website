@@ -1,0 +1,41 @@
+.content {
+  display: flex;
+  width: min(720px, 100%);
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+  text-align: center;
+}
+
+.icon {
+  color: var(--blue-royal);
+  font-size: 3rem;
+}
+
+.content h2 {
+  margin-top: 0.8rem;
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: 1.8rem;
+}
+
+.content p {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.content a {
+  margin-top: 1.2rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background: var(--navy-deep);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.content a:hover {
+  background: var(--blue-royal);
+}

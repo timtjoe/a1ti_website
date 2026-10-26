@@ -1,0 +1,492 @@
+.content {
+  display: grid;
+  width: min(1040px, 100%);
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.missionStatement {
+  padding: clamp(2rem, 7vw, 5.5rem);
+  border-radius: 0.5rem;
+  background: #f0f2ff;
+}
+
+.missionLabel {
+  color: var(--blue-royal);
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.missionText {
+  max-width: 18ch;
+  margin-top: 0.8rem;
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: clamp(2.5rem, 7vw, 5.8rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+
+.missionTarget {
+  max-width: 60ch;
+  margin-top: 1.5rem;
+  color: #33334f;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.section {
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.4rem;
+  background: var(--bg-surface);
+}
+
+.section h2 {
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: 1.35rem;
+}
+
+.section p {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.section ul {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  padding-top: 0.5rem;
+}
+
+.actions a,
+.status a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.6rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--navy-deep);
+  border-radius: 0.3rem;
+  color: #fff;
+  background: var(--navy-deep);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.actions a:hover,
+.status a:hover {
+  background: var(--blue-royal);
+}
+
+.actions a:focus-visible,
+.status a:focus-visible {
+  outline: 3px solid var(--blue-royal);
+  outline-offset: 3px;
+}
+
+.status {
+  width: min(780px, 100%);
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  color: var(--text-main);
+}
+
+.status h1 {
+  color: var(--navy-deep);
+}
+
+.status p {
+  margin: 0.65rem 0 1rem;
+  color: var(--text-muted);
+}
+
+.disclaimer {
+  padding: 0.9rem 1rem;
+  border-left: 4px solid var(--gold-bright);
+  color: var(--text-main);
+  background: #fff8e8;
+  line-height: 1.55;
+}
+
+.reportGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.reportCard {
+  display: flex;
+  min-height: 260px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.45rem;
+  background: var(--bg-surface);
+  box-shadow: 0 0.5rem 1.5rem rgba(13, 4, 96, 0.06);
+}
+
+.reportIcon {
+  display: grid;
+  width: 2.8rem;
+  height: 2.8rem;
+  place-items: center;
+  border-radius: 0.4rem;
+  color: var(--navy-deep);
+  background: #eeecff;
+}
+
+.reportIcon span {
+  font-size: 1.5rem;
+}
+
+.reportPeriod {
+  margin-top: 1rem;
+  color: var(--blue-royal);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.reportCard h2 {
+  margin-top: 0.4rem;
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: 1.3rem;
+}
+
+.reportDescription {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.downloadLink {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto;
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  background: var(--navy-deep);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.downloadLink:hover {
+  background: var(--blue-royal);
+}
+
+.downloadStatus,
+.downloadError {
+  margin-top: auto;
+  padding-top: 0.8rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.downloadError {
+  color: #8b1d1d;
+}
+
+.downloadLink:focus-visible,
+.cohortButton:focus-visible,
+.photoCard:focus-visible,
+.lightbox button:focus-visible {
+  outline: 3px solid var(--blue-royal);
+  outline-offset: 3px;
+}
+
+.galleryLayout {
+  display: grid;
+  width: min(1200px, 100%);
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: start;
+  gap: 2rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.galleryFilters {
+  position: sticky;
+  top: 1rem;
+  padding: 1.1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.4rem;
+  background: var(--bg-surface);
+}
+
+.galleryFilters h2 {
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: 1.1rem;
+}
+
+.galleryFilters > p:not(.cohortNote) {
+  margin-top: 1rem;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.cohortOptions {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.cohortButton {
+  min-height: 2.4rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #a6a7b6;
+  border-radius: 999px;
+  color: #27263a;
+  background: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cohortButton[aria-pressed='true'] {
+  border-color: var(--navy-deep);
+  color: var(--navy-deep);
+  background: #eeecff;
+}
+
+.cohortNote {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.galleryHeading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.galleryHeading h2 {
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: 1.5rem;
+}
+
+.galleryHeading p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.photoGrid {
+  columns: 3 190px;
+  column-gap: 1rem;
+}
+
+.photoCard {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 0 1rem;
+  padding: 0;
+  overflow: hidden;
+  break-inside: avoid;
+  border: 0;
+  border-radius: 0.4rem;
+  background: #e8e9f1;
+  cursor: zoom-in;
+}
+
+.photoCard img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 250ms ease;
+}
+
+.photoCard:hover img {
+  transform: scale(1.035);
+}
+
+.photoCard span {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 2rem 0.8rem 0.7rem;
+  color: #fff;
+  background: linear-gradient(transparent, rgba(10, 10, 20, 0.78));
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-align: left;
+}
+
+.emptyGallery {
+  padding: 2rem;
+  border: 1px dashed #8c8fa2;
+  color: var(--text-muted);
+}
+
+.lightboxBackdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(8, 8, 18, 0.92);
+}
+
+.lightbox {
+  position: relative;
+  display: grid;
+  width: min(100%, 1080px);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.lightbox figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.lightbox figure img {
+  display: block;
+  width: 100%;
+  max-height: min(78vh, 900px);
+  object-fit: contain;
+}
+
+.lightbox figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0.25rem 0;
+  color: #fff;
+  font-weight: 700;
+}
+
+.lightbox figcaption span {
+  color: #deddf2;
+  white-space: nowrap;
+}
+
+.lightbox button {
+  display: grid;
+  width: 2.8rem;
+  height: 2.8rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(16, 16, 28, 0.8);
+  cursor: pointer;
+}
+
+.lightbox button:hover {
+  background: var(--blue-royal);
+}
+
+.lightbox .lightboxClose {
+  position: absolute;
+  z-index: 1;
+  top: -3.4rem;
+  right: 0;
+}
+
+.lightbox .lightboxArrow {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+@media (max-width: 800px) {
+  .galleryLayout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .galleryFilters {
+    position: static;
+  }
+
+  .cohortOptions {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .cohortButton {
+    min-height: 2.15rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .reportGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .photoGrid {
+    columns: 2 130px;
+    column-gap: 0.65rem;
+  }
+
+  .photoCard {
+    margin-bottom: 0.65rem;
+  }
+
+  .lightbox {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    padding-top: 0.5rem;
+  }
+
+  .lightbox figure {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .lightbox .lightboxPrevious {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+  }
+
+  .lightbox .lightboxNext {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+  }
+
+  .lightbox .lightboxClose {
+    top: -3.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoCard img {
+    transition: none;
+  }
+}

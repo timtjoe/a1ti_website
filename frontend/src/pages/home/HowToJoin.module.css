@@ -1,0 +1,400 @@
+/* --- Main Section Layout --- */
+.sectionContainer {
+  width: 100%;
+  background-color: var(--bg-main);
+  padding: var(--spacing-2xl) 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+}
+
+.innerContainer {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Header Section */
+.headerRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.sectionTitle {
+  font-family: var(--font-open-sans);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 900;
+  color: var(--navy-deep);
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.thickDivider {
+  width: 180px;
+  height: 6px;
+  background-color: var(--gold-bright);
+  border-radius: 0;
+  margin-top: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.sectionSubtitle {
+  font-family: var(--font-roboto);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  max-width: 650px;
+  line-height: 1.5;
+}
+
+/* --- Diagram Pipeline Outer Wrapper --- */
+.diagramPipelineWrapper {
+  position: relative;
+  width: 100%;
+  margin: var(--spacing-md) 0;
+}
+
+.continuousRailLine {
+  position: absolute;
+  top: 55px;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  background-color: var(--border-color);
+  z-index: 0;
+}
+
+.animatedParticleSvg {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.staticLineTrack {
+  stroke: rgba(211, 206, 253, 0.4);
+  stroke-width: 3;
+}
+
+.animatedFlowLine {
+  stroke: var(--gold-bright);
+  stroke-width: 3;
+  stroke-dasharray: 8 12;
+  stroke-linecap: round;
+}
+
+.trackArrow {
+  fill: var(--gold-bright);
+}
+
+/* --- Grid & Step Cards --- */
+.diagramPipeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.stepColumn {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.stepNodeContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.badgeAnchorWrapper {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+/* Circle Badge Node */
+.largeCircleBadge {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(13, 4, 96, 0.12);
+  cursor: pointer;
+  z-index: 3;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.circleNumber {
+  font-family: var(--font-open-sans);
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.circleLabel {
+  font-family: var(--font-open-sans);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+.stepCardContent {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 160px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.stepTitle {
+  font-family: var(--font-open-sans);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--navy-deep);
+}
+
+.stepSubtitle {
+  font-family: var(--font-roboto);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--blue-royal);
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stepSummary {
+  font-family: var(--font-roboto);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* --- Popover Overlay Styles --- */
+.popoverCard {
+  position: absolute;
+  width: 290px;
+  color: #FFFFFF;
+  padding: var(--spacing-md);
+  border-radius: 4px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.32);
+  z-index: 9999;
+  border: 1px solid var(--border-color);
+  text-align: left;
+  pointer-events: none;
+}
+
+/* Vertical Positioning */
+.popoverAbove {
+  bottom: calc(100% + 12px);
+}
+
+.popoverBelow {
+  top: calc(100% + 12px);
+}
+
+/* Horizontal Positioning */
+.popoverCenter {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.popoverAlignLeft {
+  left: 0;
+  transform: none;
+}
+
+.popoverAlignRight {
+  right: 0;
+  transform: none;
+}
+
+/* Popover Content Elements */
+.popoverHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.popoverBadge {
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: var(--navy-deep);
+  background-color: var(--gold-bright);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.popoverTitle {
+  font-family: var(--font-open-sans);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.popoverBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.popoverHeading {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+}
+
+.popoverList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.popoverListItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.popoverListItem i {
+  font-size: 0.9rem;
+  color: var(--gold-bright);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.popoverFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  padding-top: var(--spacing-xs);
+}
+
+/* --- Contrast Theme Overrides (Step 3 Amber) --- */
+.darkContrastTheme {
+  color: #0D0460 !important;
+}
+
+.darkContrastTheme .popoverTitle {
+  color: #0D0460 !important;
+}
+
+.darkContrastTheme .popoverBadge {
+  background-color: #0D0460 !important;
+  color: #FFFFFF !important;
+}
+
+.darkContrastTheme .popoverHeading {
+  color: #0D0460 !important;
+}
+
+.darkContrastTheme .popoverListItem {
+  color: #0D0460 !important;
+}
+
+.darkContrastTheme .popoverListItem i {
+  color: #0D0460 !important;
+}
+
+.darkContrastTheme .popoverFooter {
+  color: #0D0460 !important;
+  border-top-color: rgba(13, 4, 96, 0.25) !important;
+}
+
+/* --- Bottom CTA Section --- */
+.bottomCtaRow {
+  margin-top: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-md);
+  border-top: 2px dashed var(--border-color);
+  padding-top: var(--spacing-xl);
+}
+
+.ctaPrompt {
+  font-family: var(--font-roboto);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--navy-deep);
+  max-width: 600px;
+}
+
+.ctaButtonGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* --- Responsive Layout Adjustments --- */
+@media (max-width: 900px) {
+
+  .continuousRailLine,
+  .animatedParticleSvg {
+    display: none;
+  }
+
+  .diagramPipeline {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .popoverCard {
+    position: static;
+    transform: none !important;
+    width: 100%;
+    margin-top: var(--spacing-xs);
+  }
+}

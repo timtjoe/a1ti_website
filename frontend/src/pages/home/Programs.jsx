@@ -1,6 +1,5 @@
 // src/components/sections/Programs.jsx
-import React from 'react';
-import { useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import styles from './Programs.module.css';
 
 // Importing local asset images
@@ -19,7 +18,7 @@ const PROGRAMS_DATA = [
     image: img001 || '/assets/img_001.jpg',
     courseCount: '14 courses',
     actionText: 'See foundation courses',
-    link: '/academic/courses/foundation',
+    link: '/academic/courses?level=FOUNDATION',
   },
   {
     id: 'intermediate',
@@ -28,7 +27,7 @@ const PROGRAMS_DATA = [
     image: img002 || '/assets/img_002.jpg',
     courseCount: '13 courses',
     actionText: 'See intermediate courses',
-    link: '/academic/courses/intermediate',
+    link: '/academic/courses?level=INTERMEDIATE',
   },
   {
     id: 'advanced',
@@ -37,7 +36,7 @@ const PROGRAMS_DATA = [
     image: img003 || '/assets/img_003.jpg',
     courseCount: '9 courses',
     actionText: 'See advanced courses',
-    link: '/academic/courses/advanced',
+    link: '/academic/courses?level=ADVANCED',
   },
   {
     id: 'specialist',
@@ -46,7 +45,7 @@ const PROGRAMS_DATA = [
     image: img004 || '/assets/img_004.jpg',
     courseCount: '17 courses',
     actionText: 'See specialist courses',
-    link: '/academic/courses/specialist',
+    link: '/academic/courses?category=Technical',
   },
   {
     id: 'integrated',
@@ -55,13 +54,11 @@ const PROGRAMS_DATA = [
     image: img005 || '/assets/img_005.jpg',
     courseCount: '12 programs',
     actionText: 'Explore integrated pathways',
-    link: '/academic/programs/integrated',
+    link: '/academic/courses',
   },
 ];
 
 export function Programs() {
-  const navigate = useNavigate();
-
   return (
     <section className={styles.sectionContainer}>
       <div className={styles.innerContainer}>
@@ -80,10 +77,10 @@ export function Programs() {
 
           {/* Cells 2 through 6: Program Cards */}
           {PROGRAMS_DATA.map((program) => (
-            <article
+            <Link
               key={program.id}
+              to={program.link}
               className={styles.programCard}
-              onClick={() => navigate(program.link)}
             >
               {/* Left Side: Image matching card height */}
               <div className={styles.imageWrapper}>
@@ -111,7 +108,7 @@ export function Programs() {
                   </i>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
