@@ -1,0 +1,55 @@
+.content {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.notice {
+  margin-bottom: 2.5rem;
+  padding: 0.9rem 1rem;
+  border-left: 4px solid var(--gold-bright);
+  color: #363349;
+  background: #fff8eb;
+  line-height: 1.5;
+}
+
+.staffSection + .staffSection {
+  margin-top: 3rem;
+}
+
+.sectionHeader {
+  margin-bottom: 1.2rem;
+}
+
+.eyebrow {
+  color: var(--blue-royal);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sectionHeader h2 {
+  margin-top: 0.3rem;
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

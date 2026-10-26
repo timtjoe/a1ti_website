@@ -1,0 +1,135 @@
+.hero {
+  overflow: hidden;
+  background: var(--navy-deep);
+}
+
+.inner {
+  display: grid;
+  width: min(1200px, 100%);
+  min-height: 285px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 0;
+}
+
+.copy {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 1.5rem;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  padding: 0;
+  list-style: none;
+  color: #ecebff;
+  font-size: 0.9rem;
+}
+
+.breadcrumbs li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.breadcrumbs a {
+  color: #ffdb91;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.breadcrumbs a:focus-visible {
+  outline: 3px solid var(--blue-royal);
+  outline-offset: 3px;
+}
+
+.eyebrow {
+  margin-top: 1.35rem;
+  color: #ffdb91;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.title {
+  max-width: 780px;
+  margin-top: 0.4rem;
+  color: #fff;
+  font-family: var(--font-open-sans);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.08;
+}
+
+.description {
+  max-width: 650px;
+  margin-top: 1rem;
+  color: #f3f1ff;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.imageFrame {
+  display: flex;
+  align-self: stretch;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 220px;
+}
+
+.imageFrame img {
+  width: 100%;
+  max-width: 440px;
+  max-height: 245px;
+  object-fit: cover;
+  object-position: bottom;
+  filter: none;
+}
+
+@media (max-width: 700px) {
+  .inner {
+    min-height: auto;
+    grid-template-columns: minmax(0, 1fr) minmax(100px, 0.35fr);
+    gap: 0.5rem;
+    padding-top: 1rem;
+  }
+
+  .copy {
+    padding-bottom: 1rem;
+  }
+
+  .eyebrow {
+    margin-top: 0.9rem;
+  }
+
+  .imageFrame {
+    min-height: 140px;
+  }
+
+  .imageFrame img {
+    max-height: 160px;
+  }
+
+  .title {
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
+  }
+
+  .description {
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .inner {
+    display: block;
+  }
+
+  .imageFrame {
+    display: none;
+  }
+}

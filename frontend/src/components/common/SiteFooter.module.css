@@ -1,0 +1,165 @@
+.footer {
+  padding: 3.5rem 1.5rem 1.25rem;
+  color: #fff;
+  background: #0d0460;
+}
+
+.inner {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.35fr) repeat(4, minmax(120px, 1fr));
+  gap: 2rem;
+  padding-bottom: 2.3rem;
+}
+
+.brandLink {
+  color: #fff;
+  font-family: var(--font-open-sans);
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.brandLink:focus-visible,
+.linkGroup a:focus-visible,
+.bottom a:focus-visible,
+.appButton:focus-visible {
+  outline: 3px solid #fcc55f;
+  outline-offset: 3px;
+}
+
+.tagline {
+  margin-top: 0.2rem;
+  color: #ffdb91;
+  font-weight: 700;
+}
+
+.summary {
+  max-width: 280px;
+  margin-top: 1rem;
+  color: #ecebff;
+  line-height: 1.55;
+}
+
+.linkGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.linkGroup h2 {
+  margin-bottom: 0.35rem;
+  color: #ffdb91;
+  font-size: 1rem;
+}
+
+.linkGroup a,
+.bottom a {
+  color: #f2f0ff;
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.linkGroup a:hover,
+.bottom a:hover {
+  color: #ffdb91;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.accreditation {
+  padding: 1rem 0;
+  border-top: 1px solid rgb(255 255 255 / 24%);
+  color: #ecebff;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.appCta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 1rem 0 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: 0.45rem;
+  background: #1b126c;
+}
+
+.appEyebrow {
+  color: #ffdb91;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.appCta h2 {
+  margin-top: 0.2rem;
+  color: #fff;
+  font-family: var(--font-open-sans);
+  font-size: 1.35rem;
+}
+
+.appCta > div > p:last-child {
+  margin-top: 0.4rem;
+  color: #ecebff;
+}
+
+.appButton {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.3rem;
+  color: #0d0460;
+  background: #fcc55f;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.appButton:hover {
+  background: #ffdb91;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(255 255 255 / 24%);
+  color: #ecebff;
+  font-size: 0.85rem;
+}
+
+.bottom span {
+  margin-right: auto;
+}
+
+@media (max-width: 900px) {
+  .top {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .top {
+    gap: 1.5rem 1rem;
+  }
+
+  .appCta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

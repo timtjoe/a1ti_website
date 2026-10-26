@@ -1,10 +1,11 @@
 // src/pages/HomePage.jsx
-import React from 'react';
 import { Slideshow } from './home/slideshow/Slideshow';
 import { Accreditation } from './home/Accreditation';
 import { Programs } from './home/Programs';
 import { Mission } from './home/Mission';
 import { Courses } from './home/Courses';
+import { HowToJoin } from './home/HowToJoin';
+import { Testimonials } from './home/Testimonials';
 import styles from './HomePage.module.css';
 
 export function HomePage() {
@@ -14,7 +15,9 @@ export function HomePage() {
       <Accreditation />
       <Mission />
       <Programs />
-      <Courses /> 
+      <Courses />
+      <HowToJoin />
+      <Testimonials />
     </div>
   );
 }
