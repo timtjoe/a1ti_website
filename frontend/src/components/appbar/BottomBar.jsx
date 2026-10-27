@@ -8,6 +8,11 @@ import styles from './AppBar.module.css';
 
 const CARET_EASE_OUT = [0.0, 0.0, 0.2, 1];
 const CARET_EASE_IN = [0.4, 0.0, 1, 1];
+const MOBILE_QUICK_LINKS = [
+  { name: 'Home', path: '/' },
+  { name: 'Courses', path: '/academic/courses' },
+  { name: 'Contact', path: '/contact' },
+];
 
 export function BottomBar() {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -21,10 +26,9 @@ export function BottomBar() {
       name: 'About',
       path: '/about',
       dropdown: [
-        { icon: 'info', text: 'About Us', link: '/about/us' },
+        { icon: 'history', text: 'History', link: '/about/history' },
         { icon: 'visibility', text: 'Mission', link: '/about/mission' },
         { icon: 'group', text: 'Leadership', link: '/about/leadership' },
-        { icon: 'history', text: 'History', link: '/about/history' },
         { icon: 'school', text: 'Alumni', link: '/about/alumni' },
         { icon: 'apartment', text: 'Campuses', link: '/about/campuses' },
       ],
@@ -56,6 +60,7 @@ export function BottomBar() {
       path: '/media',
       dropdown: [
         { icon: 'newspaper', text: 'News', link: '/media/news' },
+        { icon: 'smart_display', text: 'Video examples', link: '/media/videos' },
         { icon: 'assessment', text: 'Reports', link: '/media/reports' },
         { icon: 'photo_library', text: 'Gallery', link: '/media/gallery' },
       ],
@@ -82,6 +87,20 @@ export function BottomBar() {
   return (
     <nav className={styles.bottomBar} ref={navRef}>
       <div className={styles.container}>
+        <div className={styles.mobileQuickLinks} role="group" aria-label="Quick links">
+          {MOBILE_QUICK_LINKS.map((item) => (
+            <button
+              key={item.name}
+              type="button"
+              onClick={() => {
+                navigate(item.path);
+                handleCloseDropdown();
+              }}
+            >
+              {item.name}
+            </button>
+          ))}
+        </div>
         <button
           type="button"
           className={styles.mobileMenuButton}
@@ -96,7 +115,6 @@ export function BottomBar() {
           <span className="material-symbols-outlined" aria-hidden="true">
             {isMobileMenuOpen ? 'close' : 'menu'}
           </span>
-          <span>{isMobileMenuOpen ? 'Close' : 'Menu'}</span>
         </button>
 
         <div

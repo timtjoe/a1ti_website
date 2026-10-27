@@ -1,6 +1,5 @@
 import { Link, useParams } from 'react-router';
 import { useCourseBySlug } from '@/hooks/useCourseCatalog';
-import { PageHero } from '@/components/common/PageHero';
 import styles from './CourseDetailPage.module.css';
 
 export default function CourseDetailPage() {
@@ -35,16 +34,16 @@ export default function CourseDetailPage() {
 
   return (
     <div>
-      <PageHero
-        breadcrumbs={[
-          { label: 'Home', to: '/' },
-          { label: 'Courses', to: '/academic/courses' },
-          { label: course.title },
-        ]}
-        eyebrow={`${course.category} · ${course.level.toLowerCase()}`}
-        title={course.title}
-        description={course.description}
-      />
+      <header className={styles.courseHeader}>
+        <nav aria-label="Breadcrumb">
+          <Link to="/">Home</Link><span className="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+          <Link to="/academic/courses">Courses</Link><span className="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+          <span aria-current="page">{course.title}</span>
+        </nav>
+        <p className={styles.eyebrow}>{course.category} · {course.level.toLowerCase()}</p>
+        <h1>{course.title}</h1>
+        <p>{course.description}</p>
+      </header>
       <section className={styles.content}>
         <div className={styles.mainColumn}>
           <p className={styles.eyebrow}>Course overview</p>
@@ -61,6 +60,20 @@ export default function CourseDetailPage() {
               </li>
             ))}
           </ul>
+          <section className={styles.detailSection}>
+            <h3>Entry requirements</h3>
+            <p><strong>Prerequisite:</strong> {course.prerequisites}</p>
+            <p>Bring valid identification and any academic documents requested by Admissions. Confirm course-specific requirements before applying.</p>
+          </section>
+          <section className={styles.detailSection}>
+            <h3>Equipment and materials</h3>
+            <p>Ask the department to confirm which tools, safety equipment, and materials are issued for this course and intake. The site does not yet have a verified equipment list.</p>
+          </section>
+          <section className={styles.detailSection}>
+            <h3>Payment details</h3>
+            <p>Fees and accepted payment methods must be confirmed with the Finance Office for the current intake. Request an official receipt for every payment.</p>
+            <Link to="/admission/fees">Fees and payment information</Link>
+          </section>
           <Link className={styles.backLink} to="/academic/courses">
             <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
             Browse all courses
@@ -76,7 +89,7 @@ export default function CourseDetailPage() {
             <div><dt>Sessions</dt><dd>{course.sessions}</dd></div>
             <div><dt>Prerequisites</dt><dd>{course.prerequisites}</dd></div>
           </dl>
-          <Link to="/#how-to-join" className={styles.registerLink}>Ask about registering</Link>
+          <Link to="/admission/apply" className={styles.registerLink}>How to apply</Link>
         </aside>
       </section>
     </div>

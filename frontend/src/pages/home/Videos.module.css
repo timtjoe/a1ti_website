@@ -1,0 +1,266 @@
+.section {
+  padding: 4rem 1.5rem;
+  background: #fff;
+}
+
+.inner {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.eyebrow {
+  color: var(--blue-royal);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.heading h2 {
+  margin-top: 0.35rem;
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+}
+
+.heading > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #716aaf;
+  border-radius: 3px;
+  color: var(--navy-deep);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.heading > a:focus-visible,
+.videoItem:focus-visible {
+  outline: 3px solid var(--blue-royal);
+  outline-offset: 2px;
+}
+
+.explorer {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.55fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.videoList {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.videoItem {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
+  padding: 0.55rem;
+  border: 1px solid #dedfee;
+  border-radius: 3px;
+  color: var(--text-main);
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.videoItem[aria-current='true'] {
+  border-color: #312783;
+  background: #f2f1ff;
+}
+
+.thumbnail {
+  position: relative;
+  display: block;
+  height: 70px;
+  overflow: hidden;
+  background: #e6e8f0;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #fff;
+  filter: drop-shadow(0 1px 4px rgb(0 0 0 / 50%));
+  font-size: 2rem;
+  transform: translate(-50%, -50%);
+}
+
+.videoDetails {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.videoDetails strong {
+  color: var(--navy-deep);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.videoDetails > span {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.viewer {
+  position: sticky;
+  top: 1rem;
+  min-width: 0;
+}
+
+.player {
+  position: relative;
+  display: flex;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  align-items: end;
+  background: #111;
+}
+
+.player > img,
+.player > iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}
+
+.playerCaption {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 2rem 1.2rem 1.1rem;
+  color: #fff;
+  background: linear-gradient(transparent, rgb(9 8 25 / 85%));
+  pointer-events: none;
+}
+
+.playerCaption p {
+  color: #ffdb91;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.playerCaption h3 {
+  margin-top: 0.35rem;
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.1rem, 2.8vw, 1.8rem);
+  line-height: 1.25;
+}
+
+.playIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 3.8rem;
+  height: 3.8rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 75%);
+  border-radius: 50%;
+  color: #fff;
+  background: rgb(13 4 96 / 85%);
+  transform: translate(-50%, -50%);
+}
+
+.playIcon span {
+  font-size: 2.4rem;
+}
+
+.compactLabel {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  padding: 0.3rem 0.5rem;
+  color: #fff;
+  background: rgb(13 4 96 / 85%);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.fullPage {
+  min-height: 65vh;
+  padding-top: 2rem;
+}
+
+.fullPage .explorer {
+  align-items: start;
+}
+
+.fullPage .viewer {
+  top: 5rem;
+}
+
+@media (max-width: 740px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .explorer {
+    grid-template-columns: 1fr;
+  }
+
+  .viewer,
+  .fullPage .viewer {
+    position: static;
+    order: 0;
+  }
+
+  .videoList,
+  .fullPage .videoList {
+    order: 1;
+  }
+
+  .videoList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .videoItem {
+    grid-template-columns: 1fr;
+  }
+
+  .thumbnail {
+    height: 100px;
+  }
+}
+
+@media (max-width: 440px) {
+  .heading {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .videoList {
+    grid-template-columns: 1fr;
+  }
+
+  .videoItem {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+
+  .thumbnail {
+    height: 68px;
+  }
+}

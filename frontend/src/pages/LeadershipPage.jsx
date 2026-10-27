@@ -1,36 +1,20 @@
+import { useState } from 'react';
 import { PageHero } from '@/components/common/PageHero';
 import { StaffCard } from '@/components/staff/StaffCard';
+import { MOCK_INSTRUCTORS, MOCK_STAFF } from '@/components/staff/staffData';
 import styles from './LeadershipPage.module.css';
 
-const LEADERSHIP_TEAM = Array.from({ length: 6 }, (_, index) => ({
-  id: `leader-${index + 1}`,
-  name: 'Name to be confirmed',
-  qualification: 'Qualification to be added',
-  phone: 'Phone number to be added',
-}));
-
-const INSTRUCTORS = Array.from({ length: 8 }, (_, index) => ({
-  id: `instructor-${index + 1}`,
-  name: 'Name to be confirmed',
-  qualification: 'Qualification to be added',
-  phone: 'Phone number to be added',
-}));
-
-function StaffSection({ title, people, id }) {
-  return (
-    <section className={styles.staffSection} id={id} aria-labelledby={`${id}-title`}>
-      <div className={styles.sectionHeader}>
-        <p className={styles.eyebrow}>A-1 Technical Institute</p>
-        <h2 id={`${id}-title`}>{title}</h2>
-      </div>
-      <div className={styles.grid}>
-        {people.map((person) => <StaffCard key={person.id} {...person} />)}
-      </div>
-    </section>
-  );
-}
+const STAFF_GROUPS = [
+  { id: 'staff', label: 'Staff', people: MOCK_STAFF },
+  { id: 'instructors', label: 'Instructors', people: MOCK_INSTRUCTORS },
+];
 
 export default function LeadershipPage() {
+  const [selectedGroup, setSelectedGroup] = useState('all');
+  const visibleGroups = selectedGroup === 'all'
+    ? STAFF_GROUPS
+    : STAFF_GROUPS.filter((group) => group.id === selectedGroup);
+
   return (
     <div>
       <PageHero
@@ -43,11 +27,39 @@ export default function LeadershipPage() {
         description="Meet the people supporting A-1 learners and practical training."
       />
       <div className={styles.content}>
-        <p className={styles.notice}>
-          Staff names, qualifications, and phone numbers are awaiting confirmation from the institute.
-        </p>
-        <StaffSection title="Leadership team" people={LEADERSHIP_TEAM} id="leadership-team" />
-        <StaffSection title="Instructors" people={INSTRUCTORS} id="instructors" />
+        <aside className={styles.filters} aria-labelledby="people-filter-title">
+          <h2 id="people-filter-title">Filter people</h2>
+          <div role="group" aria-label="Choose people to display">
+            {[
+              { id: 'all', label: 'All' },
+              ...STAFF_GROUPS,
+            ].map((group) => (
+              <button
+                type="button"
+                key={group.id}
+                aria-pressed={selectedGroup === group.id}
+                onClick={() => setSelectedGroup(group.id)}
+              >
+                {group.label}
+              </button>
+            ))}
+          </div>
+        </aside>
+        <div className={styles.results}>
+          {visibleGroups.map((group) => (
+            <section className={styles.staffSection} id={group.id} key={group.id}>
+              <div className={styles.sectionHeader}>
+                <p className={styles.eyebrow}>A-1 Technical Institute</p>
+                <h2>{group.label}</h2>
+              </div>
+              <div className={styles.grid}>
+                {group.people.map((person) => (
+                  <StaffCard key={person.id} {...person} />
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
       </div>
     </div>
   );

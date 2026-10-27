@@ -43,7 +43,9 @@ export function PageHero({
                       visible: { opacity: 1, y: 0, transition: entrySpring },
                     }}
                   >
-                    {index > 0 && <span aria-hidden="true">/</span>}
+                    {index > 0 && (
+                      <span className="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                    )}
                     {isCurrent ? (
                       <span aria-current="page">{item.label}</span>
                     ) : (

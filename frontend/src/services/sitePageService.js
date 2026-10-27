@@ -5,6 +5,87 @@ import galleryPhoto04 from '@/assets/img_010.jpeg';
 import galleryPhoto05 from '@/assets/img_011.jpeg';
 import galleryPhoto06 from '@/assets/img_012.jpeg';
 
+export const newsStories = [
+  {
+    slug: 'january-2027-intake',
+    category: 'Admissions',
+    title: 'Registration opens for the January 2027 intake',
+    date: '',
+    author: '',
+    image: galleryPhoto02,
+    summary: 'Learn how to explore current course openings, requirements, and registration steps.',
+    paragraphs: [
+      'Course availability and schedules vary by intake. Contact Admissions to confirm the latest registration dates and available courses.',
+      'Applicants should review the course prerequisites and confirm current fees and payment instructions before registering.',
+    ],
+  },
+  {
+    slug: 'class-meet-and-greet',
+    category: 'Events',
+    title: 'Class meet & greet at the Main Campus',
+    date: '',
+    author: '',
+    image: galleryPhoto06,
+    summary: 'Information for learners and families attending the A-1 community event.',
+    paragraphs: [
+      'Meet fellow learners, instructors, and members of the A-1 community.',
+      'Contact the Institute for current event details and attendance information.',
+    ],
+  },
+  {
+    slug: 'graduation-and-class-night',
+    category: 'Events',
+    title: 'Graduation ceremony and class night',
+    date: '',
+    author: '',
+    image: galleryPhoto03,
+    summary: 'Celebrate the achievements of A-1 learners and graduates.',
+    paragraphs: [
+      'A graduation ceremony recognizes learners who have completed their course of study.',
+      'Contact the Institute for details about the next ceremony and participation.',
+    ],
+  },
+  {
+    slug: 'planned-campus-expansion',
+    category: 'Campus',
+    title: 'Planned campus expansion',
+    date: '',
+    author: '',
+    image: galleryPhoto04,
+    summary: 'Learn about A-1 campus locations and how to get directions.',
+    paragraphs: [
+      'Find campus address information and map directions on the campuses page.',
+      'Contact A-1 to ask about current campus services and visiting hours.',
+    ],
+  },
+  {
+    slug: 'integrated-programs',
+    category: 'Academics',
+    title: 'Integrated programs',
+    date: '',
+    author: '',
+    image: galleryPhoto01,
+    summary: 'Explore how related courses can build a connected career pathway.',
+    paragraphs: [
+      'Integrated programs combine related courses into a career pathway.',
+      'Browse the current course catalogue or contact Admissions for course availability and details.',
+    ],
+  },
+  {
+    slug: 'certificate-verification',
+    category: 'Certificates',
+    title: 'Certificate verification',
+    date: '',
+    author: '',
+    image: galleryPhoto05,
+    summary: 'Learn how employers can request information about certificate verification.',
+    paragraphs: [
+      'Employers seeking to verify a certificate can contact A-1 for assistance.',
+      'Share the certificate details with the Institute to ask about verification.',
+    ],
+  },
+];
+
 const sitePages = {
   '/about': {
     title: 'About A-1',
@@ -41,6 +122,7 @@ const sitePages = {
     eyebrow: 'Mission 2036',
     description: 'A-1’s mission is to equip young people with practical skills that can support a livelihood.',
     missionStatement: 'Equip young people with practical skills that can support a livelihood.',
+    missionRequest: true,
     sections: [
       { title: 'Mission 2036', body: 'The Institute’s long-term ambition is to expand access to skills training and reach one million young people by 2036.' },
       { title: 'Progress and reporting', body: 'Impact figures and projections should be read alongside the Institute’s published reports and their reporting dates.' },
@@ -48,12 +130,22 @@ const sitePages = {
     links: [{ label: 'Read impact reports', to: '/media/reports' }, { label: 'Explore training', to: '/academic/courses' }],
   },
   '/about/history': {
-    title: 'Our story',
+    title: 'History of A-1 Technical Institute',
     eyebrow: 'History',
-    description: 'A-1 Technical Institute grew from A-1 Technical Engineering Solutions’ practical experience in technical work.',
+    description: 'The Institute’s background, development, and current profile.',
+    historyProfile: true,
     sections: [
-      { title: 'From practice to teaching', body: 'The Institute brings technical experience into structured training, so students can learn through guided, hands-on work.' },
-      { title: 'Growing access', body: 'Training opportunities and campus locations continue to develop. Check the campuses page for current location information.' },
+      { id: 'origins', title: 'Origins', body: 'A-1 Technical Institute grew from A-1 Technical Engineering Solutions, a Liberian engineering company working in solar systems, electrical installation, CCTV, and biodigester septic tanks. Practical experience in these fields informed the Institute’s hands-on approach to learning.' },
+      { id: 'training', title: 'Technical and professional training', body: 'The Institute offers technical and professional courses with guided practical work. Students can explore course levels, learning outcomes, duration, and prerequisites in the current course catalogue.' },
+      { id: 'recognition', title: 'Recognition', body: 'A-1 Technical Institute is accredited by Liberia’s Ministry of Education (MOE) and Agricultural and Industrial Training Bureau (AITB).' },
+      { id: 'mission', title: 'Mission and future', body: 'The Institute’s stated long-term ambition is to expand access to practical skills training and reach one million young people by 2036. Progress figures should be interpreted alongside confirmed reporting and dates.' },
+    ],
+    historyFacts: [
+      { label: 'Founded from', value: 'A-1 Technical Engineering Solutions' },
+      { label: 'Headquarters', value: 'Nagbe’s Town Junction, ELWA Road, Paynesville, Liberia' },
+      { label: 'Accreditation', value: 'MOE and AITB' },
+      { label: 'Chief Executive', value: 'Name awaiting confirmation' },
+      { label: 'Contact', value: 'Contact details awaiting confirmation' },
     ],
     links: [{ label: 'Our campuses', to: '/about/campuses' }, { label: 'Meet the team', to: '/about/leadership' }],
   },
@@ -82,6 +174,7 @@ const sitePages = {
     title: 'Alumni',
     eyebrow: 'Graduate network',
     description: 'A place for A-1 graduates to share their progress, stay connected, and hear about Institute updates.',
+    alumniPage: true,
     sections: [
       { title: 'Graduate stories', body: 'Graduate profiles will be added as alumni approve their stories and contact details for publication.' },
       { title: 'Stay connected', body: 'Contact the Institute to share an alumni update or ask about joining the alumni network.' },
@@ -101,6 +194,14 @@ const sitePages = {
     title: 'Our campuses',
     eyebrow: 'Locations',
     description: 'Find current campus information and check with Admissions before travelling.',
+    campuses: [
+      {
+        name: 'Main Campus',
+        address: 'Nagbe’s Town Junction, ELWA Road, Paynesville, Liberia',
+        phone: 'Contact number awaiting confirmation',
+        hours: 'Contact the Institute to confirm office and class hours.',
+      },
+    ],
     sections: [
       { title: 'Main Campus', body: 'The Main Campus is the Institute’s current training and administrative location. Contact Admissions for directions and current office hours.' },
       { title: 'Additional campuses', body: 'Information about additional campus openings and course availability will be published as it is confirmed.' },
@@ -195,6 +296,7 @@ const sitePages = {
     title: 'How to apply',
     eyebrow: 'Admissions',
     description: 'Follow the steps below to prepare for registration and your first class.',
+    applyPage: true,
     sections: [
       { title: '1. Choose your course', body: 'Review course details, prerequisites, duration, and session options.' },
       { title: '2. Prepare your documents', body: 'Bring valid identification and any academic documents required for your course level.' },
@@ -228,6 +330,7 @@ const sitePages = {
     title: 'Intake calendar',
     eyebrow: 'Admissions',
     description: 'Intake dates and course schedules are confirmed by Admissions as they become available.',
+    intakeCalendar: true,
     sections: [
       { title: 'Confirm the next intake', body: 'Contact the Admissions Office for current registration dates, course start dates, and available sessions.' },
       { title: 'Plan your weekly schedule', body: 'Ask about morning, afternoon, and evening session availability for your selected course.' },
@@ -238,6 +341,7 @@ const sitePages = {
     title: 'Register online',
     eyebrow: 'Admissions',
     description: 'Start registration by selecting your course, then confirm your application details with Admissions.',
+    registrationPage: true,
     sections: [
       { title: 'Before you begin', body: 'Choose a course and prepare your contact details and relevant identification or academic records.' },
       { title: 'Get registration assistance', body: 'Contact Admissions if you need help completing registration or confirming the current intake.' },
@@ -248,6 +352,7 @@ const sitePages = {
     title: 'Register with A-1',
     eyebrow: 'Admissions',
     description: 'Choose a course and contact Admissions to confirm current registration steps.',
+    registrationPage: true,
     sections: [
       { title: 'Get started', body: 'Review course prerequisites and confirm availability, fees, and class sessions before completing registration.' },
     ],
@@ -257,6 +362,7 @@ const sitePages = {
     title: 'Frequently asked questions',
     eyebrow: 'Admissions',
     description: 'Find answers to common questions about choosing a course, registration, and student life.',
+    faqPage: true,
     sections: [
       { title: 'Course and registration questions', body: 'Review the frequently asked questions below or contact Admissions for course-specific guidance.' },
     ],
@@ -283,6 +389,8 @@ const sitePages = {
     title: 'News',
     eyebrow: 'Latest updates',
     description: 'Announcements and stories from A-1 Technical Institute.',
+    newsPage: true,
+    newsStories,
     sections: [
       { title: 'Institute updates', body: 'News and announcements will be published here as they are confirmed by A-1.' },
       { title: 'Admissions updates', body: 'For current registration dates and course availability, contact Admissions directly.' },
@@ -396,6 +504,7 @@ const sitePages = {
     title: 'Contact A-1',
     eyebrow: 'We’re here to help',
     description: 'Questions about courses, fees, registration, or campus visits? Contact the Institute for current information.',
+    contactPage: true,
     sections: [
       { title: 'Admissions and course questions', body: 'Contact Admissions to confirm course availability, entry requirements, intake dates, and registration steps.' },
       { title: 'Finance questions', body: 'Contact the Finance Office to confirm fees, payment channels, and official receipts before making a payment.' },
@@ -407,6 +516,7 @@ const sitePages = {
     title: 'Track registration',
     eyebrow: 'Applicant services',
     description: 'Check the status of a registration with the reference details issued by Admissions.',
+    loginRequired: true,
     sections: [
       { title: 'Need your reference?', body: 'If you do not have a registration reference or cannot find a status update, contact Admissions for help.' },
     ],
@@ -431,6 +541,12 @@ const sitePages = {
       { title: 'Portal availability', body: 'The portal will open here when the Institute provides the active sign-in address.' },
     ],
     links: [{ label: 'Student support', to: '/student/support' }, { label: 'How to use the portal', to: '/student/faq' }],
+  },
+  '/login': {
+    title: 'Sign in',
+    eyebrow: 'Applicant services',
+    description: 'Sign in to access registration and applicant services.',
+    loginPage: true,
   },
   '/student/faq': {
     title: 'Student portal help',
@@ -463,6 +579,9 @@ const sitePages = {
 };
 
 const pageAliases = {
+  '/about': '/about/history',
+  '/about/us': '/about/history',
+  '/about/overview': '/about/history',
   '/partners': '/about/partners',
   '/about/accreditation': '/about/partners',
   '/admission/requirements': '/admission/requirements',
@@ -485,6 +604,7 @@ const pageAliases = {
   '/news': '/media/news',
   '/reports': '/media/reports',
   '/gallery': '/media/gallery',
+  '/videos': '/media/videos',
   '/events': '/media/events',
   '/resources': '/media/resources',
   '/contact-us': '/contact',
@@ -506,6 +626,29 @@ function titleFromPath(pathname) {
 export const sitePageService = {
   async getByPath(pathname) {
     const normalizedPath = pathname.replace(/\/+$/, '') || '/';
+    if (normalizedPath.startsWith('/media/news/')) {
+      const storySlug = normalizedPath.slice('/media/news/'.length);
+      const story = newsStories.find((item) => item.slug === storySlug);
+      if (story) {
+        return {
+          path: normalizedPath,
+          title: story.title,
+          eyebrow: story.category,
+          description: story.summary,
+          newsArticle: story,
+          newsStories,
+        };
+      }
+    }
+    if (normalizedPath === '/media/videos') {
+      return {
+        path: normalizedPath,
+        title: 'YouTube Shorts ad examples',
+        eyebrow: 'Watch',
+        description: 'Browse short-form video advertisements and campaign examples.',
+        videoPage: true,
+      };
+    }
     const canonicalPath = pageAliases[normalizedPath] || normalizedPath;
     const page = sitePages[canonicalPath];
     if (page) return { ...page, path: normalizedPath };

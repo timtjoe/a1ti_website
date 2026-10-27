@@ -5,7 +5,7 @@ const FOOTER_GROUPS = [
   {
     title: 'About',
     links: [
-      { label: 'About A-1', to: '/' },
+      { label: 'History', to: '/about/history' },
       { label: 'Leadership & staff', to: '/about/leadership' },
       { label: 'Mission 2036', to: '/about/mission' },
       { label: 'Our campuses', to: '/about/campuses' },
@@ -36,6 +36,7 @@ const FOOTER_GROUPS = [
     links: [
       { label: 'Student voices', to: '/#testimonials-title' },
       { label: 'News', to: '/media/news' },
+      { label: 'Video examples', to: '/media/videos' },
       { label: 'Reports', to: '/media/reports' },
       { label: 'Gallery', to: '/media/gallery' },
       { label: 'Contact', to: '/contact' },
