@@ -1,0 +1,42 @@
+export const VIDEO_STORIES = [
+  {
+    id: 'product-ad-campaign',
+    title: 'One Product, Many Styles | Product Ad Campaigns',
+    category: 'Product advertisement',
+    author: 'VANTROX MEDIA',
+    youtubeUrl: 'https://www.youtube.com/shorts/0BIKzFUH0DQ',
+    image: 'https://i.ytimg.com/vi/0BIKzFUH0DQ/hqdefault.jpg',
+  },
+  {
+    id: 'shorts-ads-guide',
+    title: 'YouTube Shorts Ads: How to Run Ads TODAY',
+    category: 'YouTube Shorts Ads',
+    author: 'HubSpot Marketing',
+    youtubeUrl: 'https://www.youtube.com/shorts/HRPJCzeDXZA',
+    image: 'https://i.ytimg.com/vi/HRPJCzeDXZA/hqdefault.jpg',
+  },
+  {
+    id: 'nutella-campaign',
+    title: 'Nutella Let People Customize Jars… Then It Backfired!',
+    category: 'Brand campaign',
+    author: 'BehindItAll',
+    youtubeUrl: 'https://www.youtube.com/shorts/wwcgAgRWEAM',
+    image: 'https://i.ytimg.com/vi/wwcgAgRWEAM/hqdefault.jpg',
+  },
+  {
+    id: 'product-shot-campaign',
+    title: 'How I Turned 1 Product Shot Into a Full Ad Campaign',
+    category: 'Ad creative',
+    author: '1min AI',
+    youtubeUrl: 'https://www.youtube.com/shorts/HBr-Ep_kheQ',
+    image: 'https://i.ytimg.com/vi/HBr-Ep_kheQ/hqdefault.jpg',
+  },
+  {
+    id: 'shorts-ad-results',
+    title: 'Do YouTube Shorts Ads actually work?',
+    category: 'Advertising',
+    author: 'Ben Heath - Google Ads',
+    youtubeUrl: 'https://www.youtube.com/shorts/OWw-8iYbNgM',
+    image: 'https://i.ytimg.com/vi/OWw-8iYbNgM/hqdefault.jpg',
+  },
+];

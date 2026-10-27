@@ -1,5 +1,5 @@
 // src/components/appbar/TopBar.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import { Button } from '@/components/common/Button';
 import { DropdownMenu } from '@/components/common/DropdownMenu';
@@ -63,7 +63,7 @@ export function TopBar() {
 
         {/* Right: Actions */}
         <div className={styles.actionsWrapper}>
-          <Button variant="outline" size="sm" leftIcon="track_changes" onClick={() => window.location.href = '/track'}>
+          <Button variant="outline" size="sm" leftIcon="track_changes" onClick={() => window.location.href = '/login?next=%2Ftrack'}>
             Track Registration
           </Button>
           <Button variant="outline" size="sm" leftIcon="verified" onClick={() => window.location.href = '/verify'}>

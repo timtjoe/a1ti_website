@@ -1,21 +1,27 @@
 import { useState } from 'react';
+import portrait01 from '@/assets/img_001.jpeg';
+import portrait02 from '@/assets/img_002.jpeg';
+import portrait03 from '@/assets/img_003.jpeg';
 import styles from './Testimonials.module.css';
 
 const TESTIMONIALS = [
   {
     quote: 'The hands-on practice helped me understand how these tools are used on the job.',
-    attribution: 'Sample graduate feedback',
+    attribution: 'Sample Graduate 01',
     course: 'Technical training',
+    image: portrait01,
   },
   {
     quote: 'I learned new skills by working through real tasks with guidance from my instructors.',
-    attribution: 'Sample student feedback',
+    attribution: 'Sample Graduate 02',
     course: 'Practical learning',
+    image: portrait02,
   },
   {
     quote: 'The course gave me a clear place to start and a pathway to keep improving.',
-    attribution: 'Sample graduate feedback',
+    attribution: 'Sample Graduate 03',
     course: 'Career pathway',
+    image: portrait03,
   },
 ];
 
@@ -26,16 +32,26 @@ function TestimonialTrack({ reverse, paused }) {
         <article className={styles.quoteCard} key={item.quote}>
           <span className={styles.quoteMark} aria-hidden="true">“</span>
           <blockquote>{item.quote}</blockquote>
-          <p className={styles.attribution}>{item.attribution}</p>
-          <p className={styles.course}>{item.course}</p>
+          <div className={styles.person}>
+            <img src={item.image} alt="" loading="lazy" />
+            <div>
+              <p className={styles.attribution}>{item.attribution}</p>
+              <p className={styles.course}>{item.course}</p>
+            </div>
+          </div>
         </article>
       ))}
       {TESTIMONIALS.map((item) => (
         <article className={styles.quoteCard} key={`copy-${item.quote}`} aria-hidden="true">
           <span className={styles.quoteMark} aria-hidden="true">“</span>
           <blockquote>{item.quote}</blockquote>
-          <p className={styles.attribution}>{item.attribution}</p>
-          <p className={styles.course}>{item.course}</p>
+          <div className={styles.person}>
+            <img src={item.image} alt="" loading="lazy" />
+            <div>
+              <p className={styles.attribution}>{item.attribution}</p>
+              <p className={styles.course}>{item.course}</p>
+            </div>
+          </div>
         </article>
       ))}
     </div>
