@@ -1,72 +1,75 @@
 .content {
   display: grid;
-  width: min(1200px, 100%);
-  grid-template-columns: 190px minmax(0, 1fr);
+  width: min(1280px, 100%);
+  grid-template-columns: 220px minmax(0, 1fr);
   align-items: start;
-  gap: clamp(2.5rem, 7vw, 6rem);
+  gap: clamp(2rem, 5vw, 4rem);
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 3rem;
+  padding: 3rem 1.5rem 4rem;
+  box-sizing: border-box;
 }
 
 .filters {
   position: sticky;
-  top: 1rem;
-  padding: 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background: var(--bg-surface);
+  top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color, #d9dbea);
+  border-radius: 6px;
+  background: var(--bg-surface, #fff);
 }
 
 .filters h2 {
-  color: var(--navy-deep);
+  color: var(--navy-deep, #0d0460);
   font-family: var(--font-open-sans);
   font-size: 1.05rem;
+  font-weight: 800;
 }
 
-.filters > div {
+.filters>div {
   display: grid;
-  gap: 0.35rem;
+  gap: 0.4rem;
   margin-top: 0.8rem;
 }
 
 .filters button {
   min-height: 2.4rem;
-  padding: 0.5rem 0.7rem;
+  padding: 0.5rem 0.75rem;
   border: 1px solid transparent;
-  border-radius: 3px;
-  color: var(--text-main);
+  border-radius: 4px;
+  color: var(--text-main, #333);
   background: transparent;
   font-weight: 700;
   text-align: left;
   cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .filters button[aria-pressed='true'] {
   border-color: #c7c2f2;
-  color: var(--navy-deep);
+  color: var(--navy-deep, #0d0460);
   background: #eeecff;
 }
 
 .filters button:focus-visible {
-  outline: 3px solid var(--blue-royal);
+  outline: 3px solid var(--blue-royal, #2563eb);
   outline-offset: 2px;
 }
 
 .results {
-  width: min(680px, 100%);
-  margin: 0 auto;
+  width: 100%;
 }
 
-.staffSection + .staffSection {
-  margin-top: 2.5rem;
+.staffSection+.staffSection {
+  margin-top: 3.5rem;
 }
 
 .sectionHeader {
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
 }
 
 .eyebrow {
-  color: var(--blue-royal);
+  color: var(--blue-royal, #2563eb);
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -75,29 +78,30 @@
 
 .sectionHeader h2 {
   margin-top: 0.3rem;
-  color: var(--navy-deep);
+  color: var(--navy-deep, #0d0460);
   font-family: var(--font-open-sans);
-  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  font-weight: 900;
 }
 
+/* 3-Column Grid for Apple-Style Profile Cards */
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.8rem;
-  margin-top: 0.8rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem 1.5rem;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 960px) {
   .content {
     grid-template-columns: 1fr;
-    gap: 1.2rem;
+    gap: 2rem;
   }
 
   .filters {
     position: static;
   }
 
-  .filters > div {
+  .filters>div {
     display: flex;
     flex-wrap: wrap;
   }
@@ -107,7 +111,7 @@
   }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 540px) {
   .grid {
     grid-template-columns: 1fr;
   }

@@ -122,12 +122,7 @@ const sitePages = {
     eyebrow: 'Mission 2036',
     description: 'A-1’s mission is to equip young people with practical skills that can support a livelihood.',
     missionStatement: 'Equip young people with practical skills that can support a livelihood.',
-    missionRequest: true,
-    sections: [
-      { title: 'Mission 2036', body: 'The Institute’s long-term ambition is to expand access to skills training and reach one million young people by 2036.' },
-      { title: 'Progress and reporting', body: 'Impact figures and projections should be read alongside the Institute’s published reports and their reporting dates.' },
-    ],
-    links: [{ label: 'Read impact reports', to: '/media/reports' }, { label: 'Explore training', to: '/academic/courses' }],
+    visionStatement: 'A Liberia where every young person can learn a trade close to home.',
   },
   '/about/history': {
     title: 'History of A-1 Technical Institute',
@@ -295,25 +290,14 @@ const sitePages = {
   '/admission/apply': {
     title: 'How to apply',
     eyebrow: 'Admissions',
-    description: 'Follow the steps below to prepare for registration and your first class.',
+    description: 'Register online from your phone, or come to the Admissions Office at an A-1 campus.',
     applyPage: true,
-    sections: [
-      { title: '1. Choose your course', body: 'Review course details, prerequisites, duration, and session options.' },
-      { title: '2. Prepare your documents', body: 'Bring valid identification and any academic documents required for your course level.' },
-      { title: '3. Register and confirm', body: 'Complete registration with Admissions and confirm fees, payment steps, and your class schedule.' },
-    ],
-    links: [{ label: 'Course catalogue', to: '/academic/courses' }, { label: 'Entry requirements', to: '/admission/requirements' }, { label: 'Register online', to: '/admission/register' }],
   },
   '/admission/fees': {
     title: 'Fees and payment',
     eyebrow: 'Admissions',
-    description: 'Fees depend on the course and current intake. Confirm the applicable fee and payment terms with Finance before paying.',
-    sections: [
-      { title: 'Payment options', body: 'Ask the Finance Office which cash, bank, or mobile-money payment options are available for your intake. Always request an official receipt.' },
-      { title: 'Installment plans', body: 'Installment availability and deadlines may depend on the course. Confirm your plan in writing with Finance before registration.' },
-      { title: 'Fee confirmation', body: 'Do not rely on old fee information. The amount and terms in force at registration apply.' },
-    ],
-    links: [{ label: 'Course catalogue', to: '/academic/courses' }, { label: 'Contact Finance', to: '/contact' }, { label: 'Intake calendar', to: '/admission/calendar' }],
+    description: 'Search for a course fee, confirm current payment instructions, and keep your official receipt.',
+    feesPage: true,
   },
   '/admission/requirements': {
     title: 'Entry requirements',
@@ -515,32 +499,22 @@ const sitePages = {
   '/track': {
     title: 'Track registration',
     eyebrow: 'Applicant services',
-    description: 'Check the status of a registration with the reference details issued by Admissions.',
+    description: 'Sign in to review your submitted course applications and their status.',
+    trackingPage: true,
     loginRequired: true,
-    sections: [
-      { title: 'Need your reference?', body: 'If you do not have a registration reference or cannot find a status update, contact Admissions for help.' },
-    ],
-    links: [{ label: 'Contact Admissions', to: '/contact' }, { label: 'Registration information', to: '/admission/register' }],
   },
   '/verify': {
     title: 'Verify a certificate',
     eyebrow: 'For employers',
-    description: 'Use the certificate ID or QR code to request verification of an A-1 certificate.',
-    sections: [
-      { title: 'Certificate verification', body: 'Enter the certificate ID printed on the document or scan its QR code. Verification results are only available when the Institute’s certificate verification service is connected.' },
-      { title: 'Need assistance?', body: 'Contact the Institute and include the certificate ID so staff can assist with verification.' },
-    ],
-    links: [{ label: 'Contact A-1', to: '/contact' }],
+    description: 'Scan a certificate barcode or enter its certificate number to view its record.',
+    certificateVerificationPage: true,
   },
   '/student/portal': {
     title: 'Student portal',
-    eyebrow: 'Student services',
-    description: 'The student portal is provided through the Institute’s student information system.',
-    sections: [
-      { title: 'Sign-in access', body: 'Use the login details issued by the Institute. Contact student support if you need access help.' },
-      { title: 'Portal availability', body: 'The portal will open here when the Institute provides the active sign-in address.' },
-    ],
-    links: [{ label: 'Student support', to: '/student/support' }, { label: 'How to use the portal', to: '/student/faq' }],
+    eyebrow: 'Applicant portal · Demo',
+    description: 'Submit a course application and track its progress.',
+    studentPortalPage: true,
+    loginRequired: true,
   },
   '/login': {
     title: 'Sign in',

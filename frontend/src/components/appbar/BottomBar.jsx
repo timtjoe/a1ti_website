@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/common/Button';
 import { DropdownMenu } from '@/components/common/DropdownMenu';
+import { RegisterButton } from '@/components/common/RegisterButton';
 import styles from './AppBar.module.css';
 
 const CARET_EASE_OUT = [0.0, 0.0, 0.2, 1];
@@ -177,9 +178,9 @@ export function BottomBar() {
           </nav>
 
           <div className={styles.rightActions}>
-            <Button variant="secondary" size="md" onClick={() => { navigate('/register'); handleCloseDropdown(); }}>
+            <RegisterButton variant="secondary" size="md" onChoose={handleCloseDropdown}>
               Register Now
-            </Button>
+            </RegisterButton>
             <Button variant="outline" light={true} size="md" className={styles.downloadBtn} onClick={() => { navigate('/download'); handleCloseDropdown(); }}>
               Download App
             </Button>

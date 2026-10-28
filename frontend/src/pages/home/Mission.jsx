@@ -1,5 +1,5 @@
 // src/components/sections/Mission.jsx
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
@@ -15,6 +15,7 @@ import {
   Tooltip,
 } from 'recharts';
 import { Button } from '@/components/common/Button';
+import { RegisterButton } from '@/components/common/RegisterButton';
 import styles from './Mission.module.css';
 
 // Modular Data Configuration
@@ -423,14 +424,13 @@ export function Mission() {
             </h3>
           </div>
           <div className={styles.ctaRightButtons}>
-            <Button
+            <RegisterButton
               variant="primary"
               size="lg"
               className={styles.ctaPrimaryBtn}
-              onClick={() => navigate('/register')}
             >
               REGISTER ONLINE
-            </Button>
+            </RegisterButton>
             <Button
               variant="outline"
               size="lg"

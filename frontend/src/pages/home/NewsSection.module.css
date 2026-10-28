@@ -1,23 +1,25 @@
 .section {
-  padding: 4rem 1.5rem;
+  padding: 4rem 1.25rem;
   background: #f4f5fb;
+  box-sizing: border-box;
 }
 
 .inner {
-  width: min(1180px, 100%);
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
 }
 
 .heading {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 2rem;
 }
 
 .eyebrow {
-  color: var(--blue-royal);
+  color: var(--blue-royal, #2563eb);
   font-size: 0.85rem;
   font-weight: 800;
   letter-spacing: 0.09em;
@@ -26,31 +28,87 @@
 
 .heading h2 {
   margin-top: 0.35rem;
-  color: var(--navy-deep);
+  color: var(--navy-deep, #0d0460);
   font-family: var(--font-open-sans);
   font-size: clamp(1.8rem, 4vw, 2.7rem);
+  line-height: 1.2;
 }
 
-.heading > a {
-  padding: 0.65rem 0.8rem;
-  border: 1px solid #716aaf;
-  border-radius: 3px;
-  color: var(--navy-deep);
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.scrollButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.scrollBtn {
+  background: #fff;
+  border: 1px solid var(--border-color, #d9dbea);
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--navy-deep, #0d0460);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.scrollBtn:hover {
+  background-color: var(--blue-royal, #2563eb);
+  color: #fff;
+  border-color: var(--blue-royal, #2563eb);
+}
+
+.allNewsLink {
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--border-color, #d9dbea);
+  background: #fff;
+  border-radius: 4px;
+  color: var(--navy-deep, #0d0460);
   font-weight: 800;
   text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.heading > a:focus-visible {
-  outline: 3px solid var(--blue-royal);
+.allNewsLink:hover {
+  border-color: var(--blue-royal, #2563eb);
+  background-color: rgba(37, 99, 235, 0.04);
+}
+
+.allNewsLink:focus-visible,
+.scrollBtn:focus-visible {
+  outline: 3px solid var(--blue-royal, #2563eb);
   outline-offset: 2px;
 }
 
-@media (max-width: 520px) {
-  .section {
-    padding: 3rem 1rem;
+.sliderContainer {
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  /* Hide scrollbar for clean look */
+  padding-bottom: 0.5rem;
+}
+
+.sliderContainer::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .heading {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .heading {
-    align-items: start;
+  .headerControls {
+    width: 100%;
+    justify-content: space-between;
   }
 }

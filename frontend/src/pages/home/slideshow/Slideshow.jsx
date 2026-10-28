@@ -1,8 +1,9 @@
 // src/components/slideshow/Slideshow.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router';
 import { Button } from '@/components/common/Button';
+import { RegisterButton } from '@/components/common/RegisterButton';
 import styles from './Slideshow.module.css';
 
 // Importing local asset images
@@ -207,7 +208,16 @@ export function Slideshow({ autoPlayInterval = 6000 }) {
                 variants={textItemVariants}
                 className={styles.buttonGroup}
               >
-                {currentSlide.ctaButtons.map((btn, idx) => (
+                {currentSlide.ctaButtons.map((btn, idx) => btn.link === '/register' ? (
+                  <RegisterButton
+                    key={idx}
+                    variant={btn.variant || 'secondary'}
+                    size="lg"
+                    leftIcon={btn.leftIcon}
+                  >
+                    {btn.text}
+                  </RegisterButton>
+                ) : (
                   <Button
                     key={idx}
                     variant={btn.variant || 'secondary'}

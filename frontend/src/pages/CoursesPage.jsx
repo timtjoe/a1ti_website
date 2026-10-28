@@ -67,7 +67,7 @@ export default function CoursesPage() {
       />
       <section className={styles.catalog} aria-label="Course catalogue">
         <div className={styles.searchBox}>
-          <label htmlFor="course-search">Search courses</label>
+          {/* <label htmlFor="course-search">Search courses</label> */}
           <div className={styles.searchControl}>
             <span className="material-symbols-outlined" aria-hidden="true">search</span>
             <input

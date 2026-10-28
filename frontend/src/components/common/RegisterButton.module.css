@@ -1,0 +1,116 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(12 10 33 / 68%);
+}
+
+.dialog {
+  position: relative;
+  width: min(520px, 100%);
+  padding: clamp(1.4rem, 5vw, 2rem);
+  border: 1px solid var(--border-color);
+  border-radius: 0.8rem;
+  background: #fff;
+  box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 24%);
+}
+
+.close {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  display: grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: var(--navy-deep);
+  background: #f1f2f8;
+  cursor: pointer;
+}
+
+.close:focus-visible,
+.options button:focus-visible,
+.options a:focus-visible {
+  outline: 3px solid var(--blue-royal);
+  outline-offset: 3px;
+}
+
+.eyebrow {
+  color: var(--blue-royal);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dialog h2 {
+  margin-top: 0.4rem;
+  padding-right: 2rem;
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.45rem, 4vw, 1.9rem);
+}
+
+.dialog > p:not(.eyebrow) {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.options {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 1.25rem;
+}
+
+.options button,
+.options a {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) 1.3rem;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.9rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.55rem;
+  color: var(--navy-deep);
+  background: #fff;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.options button:hover,
+.options a:hover {
+  border-color: var(--blue-royal);
+  background: #f7f6ff;
+}
+
+.options button > span:first-child,
+.options a > span:first-child {
+  color: var(--blue-royal);
+  font-size: 1.45rem;
+}
+
+.options button > span:nth-child(2),
+.options a > span:nth-child(2) {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.options small {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.options button > span:last-child,
+.options a > span:last-child {
+  color: var(--text-muted);
+}

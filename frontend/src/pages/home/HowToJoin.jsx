@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/common/Button';
+import { RegisterButton } from '@/components/common/RegisterButton';
 import styles from './HowToJoin.module.css';
 
 // Step Configuration Data with Contrast Theme Flags
@@ -268,13 +269,12 @@ export function HowToJoin() {
             Ready to gain hands-on technical skills? Admissions for the upcoming intake are currently open.
           </p>
           <div className={styles.ctaButtonGroup}>
-            <Button
+            <RegisterButton
               variant="secondary"
               size="lg"
-              onClick={() => navigate('/register')}
             >
               REGISTER ONLINE NOW
-            </Button>
+            </RegisterButton>
             <Button
               variant="outline"
               size="lg"

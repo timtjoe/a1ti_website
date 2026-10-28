@@ -11,6 +11,7 @@ export const COURSES = [
     title: 'Basic Solar System Installation',
     level: 'FOUNDATION',
     category: 'Technical',
+    fee: 230,
     description:
       'How solar power works: panels, charge controllers, batteries and inverters. Learn tools, materials and safety for solar work.',
     learningPoints: [
@@ -30,6 +31,7 @@ export const COURSES = [
     title: 'Electricity',
     level: 'FOUNDATION',
     category: 'Technical',
+    fee: 250,
     description:
       'Learn electrical safety, personal protective equipment, safe isolation, and the fundamentals of circuits.',
     learningPoints: [
@@ -49,6 +51,7 @@ export const COURSES = [
     title: 'Introduction to Computer',
     level: 'FOUNDATION',
     category: 'Technical',
+    fee: 110,
     description:
       'Understand computer parts and learn Windows basics, file management, Microsoft Office, and safe internet use.',
     learningPoints: [
@@ -68,6 +71,7 @@ export const COURSES = [
     title: 'Biometric & CCTV Installation',
     level: 'INTERMEDIATE',
     category: 'Technical',
+    fee: 175,
     description:
       'Install CCTV cameras, DVRs and NVRs, plan camera coverage, and configure biometric access controls.',
     learningPoints: [
@@ -87,6 +91,7 @@ export const COURSES = [
     title: 'AI & Prompt Engineering',
     level: 'FOUNDATION',
     category: 'Professional',
+    fee: 150,
     description:
       'Explore AI tools and write clear prompts that produce accurate, useful results for everyday work.',
     learningPoints: [
@@ -106,6 +111,7 @@ export const COURSES = [
     title: 'Website Development',
     level: 'ADVANCED',
     category: 'Technical',
+    fee: 600,
     description:
       'Learn HTML, CSS, JavaScript, and modern frontend development to build responsive websites.',
     learningPoints: [
@@ -125,6 +131,7 @@ export const COURSES = [
     title: 'AutoCAD & Technical Drawing',
     level: 'INTERMEDIATE',
     category: 'Technical',
+    fee: null,
     description:
       'Develop 2D drafting skills, create architectural plans, and apply standard engineering design workflows.',
     learningPoints: [
@@ -144,6 +151,7 @@ export const COURSES = [
     title: 'Monitoring & Evaluation (M&E)',
     level: 'ADVANCED',
     category: 'Professional',
+    fee: null,
     description:
       'Learn project tracking frameworks, indicator development, and data collection for development initiatives.',
     learningPoints: [

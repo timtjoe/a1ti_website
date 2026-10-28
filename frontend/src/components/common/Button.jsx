@@ -2,17 +2,17 @@
 import React from 'react';
 import styles from './Button.module.css';
 
-export function Button({
+export const Button = React.forwardRef(function Button({
   children,
   variant = 'primary', // primary, secondary, outline, success, error, warning
   size = 'md',         // sm, md, lg, xl
   light = false,       // boolean for outline buttons on dark backgrounds
-  leftIcon,            
-  rightIcon,           
+  leftIcon,
+  rightIcon,
   fullWidth = false,
   className = '',
   ...props
-}) {
+}, ref) {
   const renderIcon = (icon) => {
     if (!icon) return null;
     if (typeof icon === 'string') {
@@ -31,6 +31,7 @@ export function Button({
         ${fullWidth ? styles.fullWidth : ''} 
         ${className}
       `}
+      ref={ref}
       {...props}
     >
       {leftIcon && <span className={styles.iconLeft}>{renderIcon(leftIcon)}</span>}
@@ -38,6 +39,6 @@ export function Button({
       {rightIcon && <span className={styles.iconRight}>{renderIcon(rightIcon)}</span>}
     </button>
   );
-}
+});
 
 export default Button;

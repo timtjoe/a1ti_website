@@ -1,123 +1,145 @@
 .section {
-  padding: 4.5rem 1.5rem;
-  background: #f4f5fb;
+  width: 100%;
+  padding: 5rem 1.25rem;
+  background-color: var(--bg-surface, #f4f5fb);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 }
 
 .inner {
-  width: min(1120px, 100%);
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .heading {
-  max-width: 760px;
-  margin: 0 auto 2.4rem;
+  max-width: 720px;
+  margin: 0 auto 3rem;
   text-align: center;
 }
 
 .eyebrow {
-  color: var(--blue-royal);
+  color: var(--blue-royal, #2563eb);
   font-size: 0.85rem;
   font-weight: 800;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .heading h2 {
   margin-top: 0.4rem;
-  color: var(--navy-deep);
+  color: var(--navy-deep, #0d0460);
   font-family: var(--font-open-sans);
-  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  font-size: clamp(1.75rem, 3.5vw, 2.6rem);
   line-height: 1.2;
 }
 
-.benefits {
+/* 3-Column Dynamic Grid Layout */
+.benefitsGrid {
   display: grid;
-  gap: 1.1rem;
-}
-
-.benefit {
-  display: grid;
-  min-height: 230px;
-  grid-template-columns: minmax(240px, 0.9fr) minmax(0, 1fr);
-  overflow: hidden;
-  border: 1px solid #d9dbea;
-  border-radius: 4px;
-  background: #fff;
-}
-
-.benefit.reverse {
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.9fr);
-}
-
-.benefit.reverse img {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.benefit img {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
   width: 100%;
-  height: 100%;
-  min-height: 230px;
-  object-fit: cover;
 }
 
-.copy {
+/* Feature Card */
+.benefitCard {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color, #d9dbea);
+  border-radius: 8px;
+  padding: 2.25rem 2rem;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  cursor: pointer;
+  will-change: transform;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefitCard:hover {
+  border-color: var(--blue-royal, #2563eb);
+  box-shadow: 0 16px 36px rgba(13, 4, 96, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+/* Icon Container with subtle accent background */
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  background-color: rgba(37, 99, 235, 0.08);
+  color: var(--blue-royal, #2563eb);
+  display: flex;
+  align-items: center;
   justify-content: center;
-  padding: clamp(1.4rem, 4vw, 3rem);
+  font-size: 1.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.benefitCard:hover .iconWrapper {
+  background-color: var(--blue-royal, #2563eb);
+  color: #ffffff;
 }
 
 .number {
   color: #645bc7;
+  font-family: var(--font-roboto);
   font-size: 0.85rem;
   font-weight: 900;
   letter-spacing: 0.1em;
+  opacity: 0.6;
 }
 
-.copy h3 {
-  margin-top: 0.5rem;
-  color: var(--navy-deep);
+.cardTitle {
+  color: var(--navy-deep, #0d0460);
   font-family: var(--font-open-sans);
-  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
-  line-height: 1.2;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+  transition: color 0.2s ease;
 }
 
-.copy p {
-  max-width: 540px;
-  margin-top: 0.65rem;
-  color: #424258;
+.benefitCard:hover .cardTitle {
+  color: var(--blue-royal, #2563eb);
+}
+
+.cardDescription {
+  color: var(--text-muted, #424258);
+  font-family: var(--font-roboto);
   font-size: 1rem;
   line-height: 1.6;
+  margin: 0;
 }
 
-@media (max-width: 620px) {
+/* Responsive Breakpoints */
+@media (max-width: 960px) {
+  .benefitsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 600px) {
   .section {
     padding: 3rem 1rem;
   }
 
-  .benefit,
-  .benefit.reverse {
-    grid-template-columns: minmax(0, 1fr);
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
-  .benefit.reverse img {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .benefit img {
-    min-height: 0;
-    height: 190px;
-  }
-
-  .copy {
-    padding: 1.2rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .benefit {
-    scroll-behavior: auto;
+  .benefitCard {
+    padding: 1.75rem 1.25rem;
   }
 }

@@ -1,25 +1,74 @@
 import portrait01 from '@/assets/img_001.jpeg';
-import portrait02 from '@/assets/img_002.jpeg';
 import portrait03 from '@/assets/img_003.jpeg';
-import portrait04 from '@/assets/img_004.jpeg';
-import portrait05 from '@/assets/img_005.jpeg';
-import portrait06 from '@/assets/img_006.jpeg';
-import portrait07 from '@/assets/img_007.jpeg';
 
 export const MOCK_STAFF = [
-  { id: 'sample-staff-01', name: 'Sample Staff Member 01', qualification: 'Sample qualification — administration', image: portrait01 },
-  { id: 'sample-staff-02', name: 'Sample Staff Member 02', qualification: 'Sample qualification — student services', image: portrait02 },
-  { id: 'sample-staff-03', name: 'Sample Staff Member 03', qualification: 'Sample qualification — academic leadership', image: portrait03 },
+  {
+    id: 'staff-1',
+    name: 'Dr. Marcus Vance',
+    position: 'Institute Director & Administrator',
+    qualification: 'Education details awaiting confirmation',
+    image: null,
+  },
+  {
+    id: 'staff-2',
+    name: 'Sarah K. Mensah',
+    position: 'Registrar & Student Affairs Head',
+    qualification: 'Education details awaiting confirmation',
+    image: null,
+  },
+  {
+    id: 'staff-3',
+    name: 'Emmanuel J. Cooper',
+    position: 'IT Infrastructure & Systems Lead',
+    qualification: 'Education details awaiting confirmation',
+    image: null,
+  },
 ];
 
 export const MOCK_INSTRUCTORS = [
-  { id: 'sample-instructor-01', name: 'Sample Instructor 01', qualification: 'Sample qualification — solar installation', image: portrait04 },
-  { id: 'sample-instructor-02', name: 'Sample Instructor 02', qualification: 'Sample qualification — electrical installation', image: portrait05 },
-  { id: 'sample-instructor-03', name: 'Sample Instructor 03', qualification: 'Sample qualification — computer studies', image: portrait06 },
-  { id: 'sample-instructor-04', name: 'Sample Instructor 04', qualification: 'Sample qualification — technical drawing', image: portrait07 },
+  {
+    id: 'inst-1',
+    name: 'Engr. David O. Johnson',
+    position: 'Senior Automotive Instructor',
+    qualification: 'Education details awaiting confirmation',
+    image: null,
+  },
+  {
+    id: 'inst-2',
+    name: 'Grace M. Sesay',
+    position: 'Computer Science & ICT Lead',
+    qualification: 'Education details awaiting confirmation',
+    image: null,
+  },
+  {
+    id: 'inst-3',
+    name: 'Moses T. Kamara',
+    position: 'Electrical Engineering Specialist',
+    qualification: 'Education details awaiting confirmation',
+    image: null,
+  },
+  {
+    id: 'inst-4',
+    name: 'Amina B. Diallo',
+    position: 'Welding & Fabrication Master',
+    qualification: 'Education details awaiting confirmation',
+    image: null,
+  },
 ];
 
 export const MOCK_ALUMNI_LEADERS = [
-  { id: 'sample-alumni-president', name: 'Sample Alumni President', qualification: 'Illustrative alumni leadership profile', image: portrait01 },
-  { id: 'sample-alumni-secretary', name: 'Sample Alumni Secretary', qualification: 'Illustrative alumni leadership profile', image: portrait03 },
+  {
+    id: 'sample-alumni-president',
+    name: 'Sample Alumni President',
+    position: 'Alumni President',
+    qualification: 'Education details awaiting confirmation',
+    image: portrait01,
+  },
+  {
+    id: 'sample-alumni-secretary',
+    name: 'Sample Alumni Secretary',
+    position: 'Alumni Secretary',
+    qualification: 'Education details awaiting confirmation',
+    image: portrait03,
+  },
 ];

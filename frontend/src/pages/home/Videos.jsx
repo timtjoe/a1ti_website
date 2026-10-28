@@ -59,7 +59,7 @@ export function VideoExplorer({ fullPage = false }) {
           <div>
             <p className={styles.eyebrow}>Watch</p>
             <h2 id={fullPage ? 'video-page-title' : 'video-section-title'}>
-              {fullPage ? 'YouTube Shorts ad examples' : 'Short ad examples'}
+              {fullPage ? 'Videos' : 'Videos'}
             </h2>
           </div>
           {!fullPage && <Link to="/media/videos">More videos <span aria-hidden="true">→</span></Link>}

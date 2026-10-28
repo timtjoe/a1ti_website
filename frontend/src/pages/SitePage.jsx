@@ -1,14 +1,24 @@
-import { Link, Navigate, useLocation, useSearchParams } from 'react-router';
+import { Link, Navigate, useLocation, useNavigate, useSearchParams } from 'react-router';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/common/Button';
 import { FAQAccordion } from '@/components/common/FAQ';
 import { FAQ_ITEMS } from '@/components/common/faqData';
 import { NewsStoryCards } from '@/components/common/NewsStoryCards';
 import { PageHero } from '@/components/common/PageHero';
+import RegisterButton from '@/components/common/RegisterButton';
+import CertificateVerificationPage from '@/pages/CertificateVerificationPage';
 import { StaffCard } from '@/components/staff/StaffCard';
 import { MOCK_ALUMNI_LEADERS } from '@/components/staff/staffData';
 import { useCourses } from '@/hooks/useCourseCatalog';
 import { useSitePage } from '@/hooks/useSitePage';
+import {
+  createDemoApplicant,
+  getSignedInApplicant,
+  signInDemoApplicant,
+  signOutDemoApplicant,
+  submitDemoApplication,
+} from '@/services/demoApplicantService';
 import { VideoExplorer } from '@/pages/home/Videos';
 import styles from './SitePage.module.css';
 
@@ -30,6 +40,7 @@ function PageError({ message }) {
 
 function MissionPage({ page }) {
   const shouldReduceMotion = useReducedMotion();
+  const navigate = useNavigate();
 
   return (
     <div className={styles.content}>
@@ -42,31 +53,45 @@ function MissionPage({ page }) {
       >
         <p className={styles.missionLabel}>Our mission</p>
         <p className={styles.missionText}>{page.missionStatement}</p>
-        <p className={styles.missionTarget}>A long-term ambition: reach one million young people by 2036.</p>
       </motion.section>
-      {page.sections.map((section, index) => (
-        <motion.section
-          className={styles.section}
-          key={section.title}
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={shouldReduceMotion ? { duration: 0.01 } : { ...entrySpring, delay: index * 0.08 }}
-        >
-          <h2>{section.title}</h2>
-          <p>{section.body}</p>
-        </motion.section>
-      ))}
-      <section className={styles.missionRequest}>
-        <p className={styles.reportPeriod}>Mission 2036 report</p>
-        <h2>Request the latest mission report</h2>
-        <p>Contact A-1 to request an approved progress report and its reporting period.</p>
-        <Link to="/contact?topic=Mission%202036%20report">Request the report</Link>
-      </section>
-      <nav className={styles.actions} aria-label="Related pages">
-        {page.links?.filter((link) => link.to !== '/media/reports')
-          .map((link) => <Link key={link.to} to={link.to}>{link.label}</Link>)}
-      </nav>
+      <motion.section
+        className={styles.missionStatement}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={shouldReduceMotion ? { duration: 0.01 } : { ...entrySpring, delay: 0.12 }}
+      >
+        <p className={styles.missionLabel}>Our vision</p>
+        <p className={styles.missionText}>{page.visionStatement}</p>
+      </motion.section>
+      <motion.section
+        className={styles.missionRequest}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={shouldReduceMotion ? { duration: 0.01 } : entrySpring}
+      >
+        <div className={styles.reportCardCopy}>
+          <span className={styles.reportIcon} aria-hidden="true">
+            <span className="material-symbols-outlined">description</span>
+          </span>
+          <div>
+            <p className={styles.reportPeriod}>Mission 2036 report</p>
+            <h2>Request the latest mission report</h2>
+            <p>Contact the Institute to request an approved mission report.</p>
+          </div>
+        </div>
+        <div className={styles.reportActions}>
+          <Button
+            variant="primary"
+            size="lg"
+            leftIcon="mail"
+            onClick={() => navigate('/contact?topic=Mission%202036%20report')}
+          >
+            Request report
+          </Button>
+        </div>
+      </motion.section>
     </div>
   );
 }
@@ -81,7 +106,6 @@ function HistoryPage({ page }) {
         ))}
       </nav>
       <article className={styles.wikiArticle}>
-        <p className={styles.wikiNotice}>This overview reflects currently confirmed institutional information. Personal names and dates are omitted where they have not been verified.</p>
         {page.sections.map((section) => (
           <section key={section.id} id={section.id}>
             <h2>{section.title}</h2>
@@ -141,6 +165,8 @@ function CampusPage({ campuses }) {
 }
 
 function AlumniPage() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.alumniContent}>
       <section className={styles.alumniIntro}>
@@ -162,137 +188,154 @@ function AlumniPage() {
           ))}
         </div>
       </section>
-      <p className={styles.wikiNotice}>To join the alumni network or share a graduate story, contact the Institute.</p>
-      <Link className={styles.primaryLink} to="/contact?topic=Alumni%20network">Contact the Institute</Link>
+      <section className={styles.alumniCta} aria-labelledby="alumni-cta-title">
+        <div>
+          <p className={styles.reportPeriod}>Get involved</p>
+          <h2 id="alumni-cta-title">Help the alumni network grow</h2>
+          <p>Join the network or share your graduate story with the Institute.</p>
+        </div>
+        <Button
+          variant="secondary"
+          size="lg"
+          leftIcon="mail"
+          onClick={() => navigate('/contact?topic=Alumni%20network')}
+        >
+          Contact the Institute
+        </Button>
+      </section>
     </div>
   );
 }
 
-function ApplyPage({ page }) {
-  const [isChoiceOpen, setIsChoiceOpen] = useState(false);
-  const dialogRef = useRef(null);
-  const triggerRef = useRef(null);
-  const steps = [
-    { id: 'choose-course', title: '1. Choose your course', text: 'Compare course levels, prerequisites, duration, and learning outcomes in the course catalogue. Contact Admissions to confirm that the course is open for your preferred intake.' },
-    { id: 'prepare-documents', title: '2. Prepare your documents', text: 'Prepare valid identification and any academic certificates or previous course records relevant to your chosen course. Admissions can confirm the exact documents required.' },
-    { id: 'submit-application', title: '3. Submit your application', text: 'Complete the registration form with your contact and course details. The online account service is not yet connected, so contact Admissions to submit an application.' },
-    { id: 'confirm-payment', title: '4. Confirm fees and payment', text: 'Confirm current fees, accepted payment channels, and installment terms directly with Finance. Request an official receipt for any payment.' },
-    { id: 'confirm-start', title: '5. Confirm your first class', text: 'Ask Admissions to confirm your intake start date, class session, campus, and any course-specific materials before travelling.' },
+function ApplyPage() {
+  const navigate = useNavigate();
+  const onlineSteps = [
+    'Choose your course or program, campus, and session.',
+    'Fill in your personal and contact details.',
+    'Pay the fee or first installment by bank transfer or mobile money. Enter the transaction ID and upload proof of payment, a valid ID, and your highest academic certificate.',
+    'Submit your application and keep the confirmation. The Finance Office verifies payment and contacts you to confirm admission.',
+    'Collect your uniform items, ID card, and class schedule before classes begin.',
+  ];
+  const officeSteps = [
+    'Visit the Admissions Office with a valid ID and your highest academic certificate.',
+    'Complete the registration form with help from Institute staff.',
+    'Pay by cash, bank deposit, or mobile money and collect your official receipt.',
+    'Receive your admission confirmation, uniform items, ID card, and class schedule.',
   ];
 
-  useEffect(() => {
-    if (!isChoiceOpen) return undefined;
-    const previousOverflow = document.body.style.overflow;
-    const returnFocusTo = triggerRef.current;
-    document.body.style.overflow = 'hidden';
-    dialogRef.current?.focus();
-    const handleEscape = (event) => {
-      if (event.key === 'Escape') setIsChoiceOpen(false);
-      if (event.key !== 'Tab') return;
-      const focusable = dialogRef.current?.querySelectorAll('button:not([disabled]), a[href]');
-      if (!focusable?.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-    window.addEventListener('keydown', handleEscape);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener('keydown', handleEscape);
-      returnFocusTo?.focus();
-    };
-  }, [isChoiceOpen]);
+  return (
+    <section className={styles.applyOptions} aria-label="Application options">
+      <article className={styles.applyOption}>
+        <span className={styles.applyOptionBadge}>Option 1</span>
+        <h2>Register online</h2>
+        <ol>
+          {onlineSteps.map((step) => <li key={step}>{step}</li>)}
+        </ol>
+        <RegisterButton
+          variant="secondary"
+          size="lg"
+          leftIcon="how_to_reg"
+        >
+          Register Now
+        </RegisterButton>
+      </article>
+      <article className={`${styles.applyOption} ${styles.applyOfficeOption}`}>
+        <span className={styles.applyOptionBadge}>Option 2</span>
+        <h2>Register at the office</h2>
+        <ol>
+          {officeSteps.map((step) => <li key={step}>{step}</li>)}
+        </ol>
+        <Button
+          variant="secondary"
+          size="lg"
+          leftIcon="location_on"
+          onClick={() => navigate('/about/campuses')}
+        >
+          Find a campus
+        </Button>
+      </article>
+    </section>
+  );
+}
+
+function FeesPage() {
+  const [search, setSearch] = useState('');
+  const { data: courses = [], isLoading, error } = useCourses();
+  const query = search.trim().toLowerCase();
+  const matchingCourses = courses.filter((course) => (
+    !query || [course.title, course.category, course.level]
+      .some((value) => value.toLowerCase().includes(query))
+  ));
+  const formatFee = (fee) => new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(fee);
 
   return (
-    <>
-      <div className={styles.wikiLayout}>
-        <nav className={styles.wikiContents} aria-label="Application guide contents">
-          <h2>On this page</h2>
-          {steps.map((step) => <a key={step.id} href={`#${step.id}`}>{step.title}</a>)}
-          <a href="#application-help">Get help</a>
-        </nav>
-        <article className={styles.applicationGuide}>
-          <div className={styles.applyStart}>
-            <div>
-              <h2>Ready to apply?</h2>
-              <p>Choose the application option that works best for you.</p>
-            </div>
-            <button type="button" ref={triggerRef} onClick={() => setIsChoiceOpen(true)}>
-              Apply to A-1
-            </button>
-          </div>
-          {steps.map((step) => (
-            <section className={styles.guideStep} key={step.id} id={step.id}>
-              <span className="material-symbols-outlined" aria-hidden="true">check_circle</span>
-              <div><h2>{step.title}</h2><p>{step.text}</p></div>
-            </section>
-          ))}
-          <section className={styles.guideHelp} id="application-help">
-            <h2>Need application help?</h2>
-            <p>{page.sections[0]?.body}</p>
-            <Link to="/contact">Ask Admissions</Link>
-          </section>
-          <section className={styles.guideDirections} id="campus-directions">
-            <h2>Visiting the Admissions Office</h2>
-            <p>Nagbe’s Town Junction, ELWA Road, Paynesville, Liberia. Confirm current office hours before travelling.</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Nagbe%27s+Town+Junction%2C+ELWA+Road%2C+Paynesville%2C+Liberia" target="_blank" rel="noreferrer">
-              Get directions in Google Maps
-            </a>
-          </section>
-        </article>
-      </div>
-      <AnimatePresence>
-        {isChoiceOpen && (
-          <motion.div
-            className={styles.applyBackdrop}
-            role="presentation"
-            onMouseDown={(event) => {
-              if (event.target === event.currentTarget) setIsChoiceOpen(false);
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.section
-              className={styles.applyDialog}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="apply-choice-title"
-              tabIndex="-1"
-              ref={dialogRef}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 12 }}
-            >
-              <button className={styles.applyDialogClose} type="button" aria-label="Close application options" onClick={() => setIsChoiceOpen(false)}>
-                <span className="material-symbols-outlined" aria-hidden="true">close</span>
-              </button>
-              <p className={styles.reportPeriod}>Choose how to apply</p>
-              <h2 id="apply-choice-title">Apply online or in person</h2>
-              <p>Select the option that works best for you. You can review your course details before continuing.</p>
-              <div className={styles.applyChoiceLinks}>
-                <Link to="/admission/register" onClick={() => setIsChoiceOpen(false)}>
-                  <span className="material-symbols-outlined" aria-hidden="true">computer</span>
-                  <span><strong>Apply online</strong><small>Continue to online registration</small></span>
-                  <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-                </Link>
-                <Link to="/contact" onClick={() => setIsChoiceOpen(false)}>
-                  <span className="material-symbols-outlined" aria-hidden="true">location_on</span>
-                  <span><strong>Apply in person</strong><small>View campus contact and directions</small></span>
-                  <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-                </Link>
-              </div>
-            </motion.section>
-          </motion.div>
+    <div className={styles.feesPage}>
+      <section className={styles.feesSearchPanel} aria-labelledby="course-fee-title">
+        <p className={styles.reportPeriod}>Course fee finder</p>
+        <h2 id="course-fee-title">Search fees by course</h2>
+        <p>Search the course catalogue to view a draft fee. Confirm the current amount with Finance before paying.</p>
+        <label htmlFor="course-fee-search">Course name</label>
+        <div className={styles.feesSearchControl}>
+          <span className="material-symbols-outlined" aria-hidden="true">search</span>
+          <input
+            id="course-fee-search"
+            type="search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Search by course name, category, or level"
+          />
+        </div>
+        {isLoading ? (
+          <p className={styles.feeSearchStatus} role="status">Loading course fees…</p>
+        ) : error ? (
+          <p className={styles.feeSearchError} role="alert">Course fees could not be loaded: {error.message}</p>
+        ) : query ? (
+          matchingCourses.length ? (
+            <ul className={styles.feeResults} aria-live="polite">
+              {matchingCourses.map((course) => (
+                <li key={course.id}>
+                  <div>
+                    <h3>{course.title}</h3>
+                    <p>{course.category} · {course.level} · {course.duration}</p>
+                  </div>
+                  <strong>{course.fee == null ? 'Confirm with Finance' : formatFee(course.fee)}</strong>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className={styles.feeSearchStatus} aria-live="polite">No courses match “{search}”. Try another course name.</p>
+          )
+        ) : (
+          <p className={styles.feeSearchStatus}>Enter a course name to see its fee.</p>
         )}
-      </AnimatePresence>
-    </>
+      </section>
+      <section className={styles.applyOptions} aria-label="Fee and payment instructions">
+        <article className={styles.applyOption}>
+          <span className={styles.applyOptionBadge}>Before you pay</span>
+          <h2>Confirm your course fee</h2>
+          <ol>
+            <li>Search for your course above to view its draft fee.</li>
+            <li>Confirm the current fee and any installment plan with the Finance Office.</li>
+            <li>Ask for the approved payment instructions before sending money.</li>
+            <li>Keep your payment confirmation and request an official receipt.</li>
+          </ol>
+        </article>
+        <article className={`${styles.applyOption} ${styles.applyOfficeOption}`}>
+          <span className={styles.applyOptionBadge}>Payment options</span>
+          <h2>Pay through an official channel</h2>
+          <ol>
+            <li>Cash payment at the Finance Office.</li>
+            <li>Bank deposit or transfer using details confirmed by Finance.</li>
+            <li>Orange Money or MTN Mobile Money using the official payment instructions.</li>
+            <li>Confirm that your payment has been recorded before your course begins.</li>
+          </ol>
+        </article>
+      </section>
+    </div>
   );
 }
 
@@ -529,35 +572,207 @@ function VideosPage() {
   return <VideoExplorer fullPage />;
 }
 
-function RegistrationAccessPage({ isLogin, nextPath }) {
+function RegistrationAccessPage({ isLogin, nextPath, accountCreated }) {
+  const navigate = useNavigate();
+  const [formError, setFormError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setFormError('');
+    setIsSubmitting(true);
+    const formData = new FormData(event.currentTarget);
+
+    try {
+      if (isLogin) {
+        await signInDemoApplicant(formData.get('email'), formData.get('password'));
+        const destination = nextPath?.startsWith('/') && !nextPath.startsWith('//')
+          ? nextPath
+          : '/student/portal';
+        navigate(destination, { replace: true });
+      } else {
+        await createDemoApplicant({
+          fullName: formData.get('fullName'),
+          phone: formData.get('phone'),
+          email: formData.get('email'),
+          password: formData.get('password'),
+        });
+        navigate('/login?created=1', { replace: true });
+      }
+    } catch (error) {
+      setFormError(error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <div className={styles.accessLayout}>
-      <section className={styles.accessCard}>
-        <p className={styles.reportPeriod}>{isLogin ? 'Applicant services' : 'Start your application'}</p>
-        <h2>{isLogin ? 'Sign in' : 'Create your applicant account'}</h2>
-        <p className={styles.accessWarning}>
-          Online account creation and sign-in are not connected to an authentication service yet. No account or application will be created until A-1 connects its approved service.
+    <div className={styles.accountLayout}>
+      <section className={styles.accountIntro}>
+        <p className={styles.reportPeriod}>A-1 applicant portal · Demo</p>
+        <h2>{isLogin ? 'Welcome back' : 'Start your A-1 application'}</h2>
+        <p>
+          {isLogin
+            ? 'Sign in to complete an application and check its status.'
+            : 'Create your account with your contact details. Sign in afterward to choose a course, submit your application, and track its progress.'}
         </p>
-        <form onSubmit={(event) => event.preventDefault()}>
+        <ol>
+          <li>Create your applicant account</li>
+          <li>Sign in and choose a course</li>
+          <li>Submit and track your application</li>
+        </ol>
+        <p className={styles.accountDemoNote}>Demo portal — account details stay in this browser and are not sent to Institute systems.</p>
+      </section>
+      <section className={styles.accessCard}>
+        <p className={styles.reportPeriod}>{isLogin ? 'Applicant sign-in' : 'Create an account'}</p>
+        <h2>{isLogin ? 'Sign in to continue' : 'Your details'}</h2>
+        {accountCreated && isLogin && (
+          <p className={styles.formSuccess} role="status">Your demo account is ready. Sign in to continue.</p>
+        )}
+        <form onSubmit={handleSubmit}>
           {!isLogin && (
             <>
               <label htmlFor="applicant-name">Full name</label>
-              <input id="applicant-name" autoComplete="name" disabled />
+              <input id="applicant-name" name="fullName" autoComplete="name" required maxLength={100} />
               <label htmlFor="applicant-phone">Phone number</label>
-              <input id="applicant-phone" type="tel" autoComplete="tel" disabled />
+              <input id="applicant-phone" name="phone" type="tel" autoComplete="tel" required maxLength={30} />
             </>
           )}
           <label htmlFor="applicant-email">Email address</label>
-          <input id="applicant-email" type="email" autoComplete="email" disabled />
+          <input id="applicant-email" name="email" type="email" autoComplete="email" required maxLength={254} />
           <label htmlFor="applicant-password">Password</label>
-          <input id="applicant-password" type="password" autoComplete={isLogin ? 'current-password' : 'new-password'} disabled />
-          <button type="submit" disabled>
-            {isLogin ? 'Sign-in service unavailable' : 'Registration service unavailable'}
-          </button>
+          <input
+            id="applicant-password"
+            name="password"
+            type="password"
+            autoComplete={isLogin ? 'current-password' : 'new-password'}
+            required
+            minLength={8}
+            onChange={(event) => {
+              if (isLogin) return;
+              const confirmation = event.currentTarget.form.elements.passwordConfirm;
+              confirmation.setCustomValidity(
+                confirmation.value && confirmation.value !== event.currentTarget.value
+                  ? 'Passwords do not match.'
+                  : '',
+              );
+            }}
+          />
+          {!isLogin && (
+            <>
+              <label htmlFor="applicant-password-confirm">Confirm password</label>
+              <input
+                id="applicant-password-confirm"
+                name="passwordConfirm"
+                type="password"
+                autoComplete="new-password"
+                required
+                minLength={8}
+                onChange={(event) => {
+                  const password = event.currentTarget.form.elements.password;
+                  event.currentTarget.setCustomValidity(
+                    event.currentTarget.value === password.value ? '' : 'Passwords do not match.',
+                  );
+                }}
+              />
+            </>
+          )}
+          {formError && <p className={styles.formError} role="alert">{formError}</p>}
+          <Button type="submit" variant="secondary" size="lg" fullWidth disabled={isSubmitting}>
+            {isSubmitting ? 'Please wait…' : isLogin ? 'Sign in' : 'Create applicant account'}
+          </Button>
         </form>
-        <p className={styles.accessHelp}>Please contact Admissions to register or request help with an existing application.</p>
-        <Link to="/contact">Contact Admissions</Link>
-        {isLogin && nextPath === '/track' && <p className={styles.accessHelp}>After sign-in is connected, you can return to track your registration.</p>}
+        <p className={styles.accessHelp}>
+          {isLogin ? 'New applicant?' : 'Already have an applicant account?'}
+          {' '}
+          <Link to={isLogin ? '/register' : '/login'}>{isLogin ? 'Create an account' : 'Sign in'}</Link>
+        </p>
+        <Link className={styles.accountContactLink} to="/contact">Contact Admissions</Link>
+      </section>
+    </div>
+  );
+}
+
+function ApplicantPortalPage() {
+  const navigate = useNavigate();
+  const { data: courses = [], isLoading, error } = useCourses();
+  const [applicant, setApplicant] = useState(() => getSignedInApplicant());
+  const [selectedCourse, setSelectedCourse] = useState('');
+  const [formError, setFormError] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setFormError('');
+    const course = courses.find((item) => item.id === selectedCourse);
+    if (!course) {
+      setFormError('Choose a course before submitting your application.');
+      return;
+    }
+    try {
+      submitDemoApplication(course);
+      setApplicant(getSignedInApplicant());
+      setSelectedCourse('');
+    } catch (error) {
+      setFormError(error.message);
+    }
+  };
+
+  const handleSignOut = () => {
+    signOutDemoApplicant();
+    navigate('/login', { replace: true });
+  };
+
+  return (
+    <div className={styles.portalLayout}>
+      <section className={styles.portalWelcome}>
+        <div>
+          <p className={styles.reportPeriod}>Applicant portal · Demo</p>
+          <h2>Hello, {applicant.fullName}</h2>
+          <p>Submit an application for a course and check its status here.</p>
+        </div>
+        <Button type="button" variant="outline" size="md" onClick={handleSignOut}>Sign out</Button>
+      </section>
+      <section className={styles.portalPanel}>
+        <h2>Start an application</h2>
+        {isLoading ? (
+          <p role="status">Loading courses…</p>
+        ) : error ? (
+          <p className={styles.formError} role="alert">Courses could not be loaded: {error.message}</p>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="application-course">Choose a course</label>
+            <select
+              id="application-course"
+              value={selectedCourse}
+              onChange={(event) => setSelectedCourse(event.target.value)}
+              required
+            >
+              <option value="">Select a course</option>
+              {courses.map((course) => <option key={course.id} value={course.id}>{course.title}</option>)}
+            </select>
+            {formError && <p className={styles.formError} role="alert">{formError}</p>}
+            <Button type="submit" variant="secondary" size="lg" leftIcon="send">Submit demo application</Button>
+          </form>
+        )}
+      </section>
+      <section className={styles.portalPanel} aria-labelledby="application-list-title">
+        <h2 id="application-list-title">Your applications</h2>
+        {applicant.applications.length ? (
+          <ul className={styles.applicationList}>
+            {applicant.applications.map((application) => (
+              <li key={application.reference}>
+                <div>
+                  <h3>{application.courseTitle}</h3>
+                  <p>Reference: {application.reference}</p>
+                  <p>Submitted {new Date(application.submittedAt).toLocaleDateString()}</p>
+                </div>
+                <span>{application.status}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={styles.accessHelp}>No applications yet. Choose a course above to get started.</p>
+        )}
       </section>
     </div>
   );
@@ -568,9 +783,6 @@ function ReportsPage({ reports }) {
 
   return (
     <div className={styles.content}>
-      <p className={styles.disclaimer}>
-        These downloads summarize information currently published by A-1; they are not annual performance reports.
-      </p>
       <div className={styles.reportGrid}>
         {reports.map((report, index) => (
           <motion.article
@@ -581,32 +793,38 @@ function ReportsPage({ reports }) {
             viewport={{ once: true, amount: 0.2 }}
             transition={shouldReduceMotion ? { duration: 0.01 } : { ...entrySpring, delay: index * 0.08 }}
           >
-            <span className={styles.reportIcon} aria-hidden="true">
-              <span className="material-symbols-outlined">description</span>
-            </span>
-            <p className={styles.reportPeriod}>{report.period}</p>
-            <h2>{report.title}</h2>
-            <p className={styles.reportDescription}>{report.description}</p>
-            {report.includeCourseList && isLoading ? (
-              <p className={styles.downloadStatus} role="status">Preparing the current course list…</p>
-            ) : report.includeCourseList && error ? (
-              <p className={styles.downloadError} role="alert">Course details could not be loaded: {error.message}</p>
-            ) : (
-              <a
-                className={styles.downloadLink}
-                href={`data:text/plain;charset=utf-8,${encodeURIComponent(
-                  report.includeCourseList
-                    ? `${report.downloadContent}\n${courses.map((course) => (
-                      `${course.title} | ${course.category} | ${course.level} | ${course.duration} | Prerequisites: ${course.prerequisites}`
-                    )).join('\n')}\n`
-                    : report.downloadContent
-                )}`}
-                download={report.downloadName}
-              >
-                <span className="material-symbols-outlined" aria-hidden="true">download</span>
-                Download report
-              </a>
-            )}
+            <div className={styles.reportCardCopy}>
+              <span className={styles.reportIcon} aria-hidden="true">
+                <span className="material-symbols-outlined">description</span>
+              </span>
+              <div>
+                <p className={styles.reportPeriod}>{report.period}</p>
+                <h2>{report.title}</h2>
+                <p className={styles.reportDescription}>{report.description}</p>
+              </div>
+            </div>
+            <div className={styles.reportActions}>
+              {report.includeCourseList && isLoading ? (
+                <p className={styles.downloadStatus} role="status">Preparing the current course list…</p>
+              ) : report.includeCourseList && error ? (
+                <p className={styles.downloadError} role="alert">Course details could not be loaded: {error.message}</p>
+              ) : (
+                <a
+                  className={styles.downloadLink}
+                  href={`data:text/plain;charset=utf-8,${encodeURIComponent(
+                    report.includeCourseList
+                      ? `${report.downloadContent}\n${courses.map((course) => (
+                        `${course.title} | ${course.category} | ${course.level} | ${course.duration} | Prerequisites: ${course.prerequisites}`
+                      )).join('\n')}\n`
+                      : report.downloadContent
+                  )}`}
+                  download={report.downloadName}
+                >
+                  <span className="material-symbols-outlined" aria-hidden="true">download</span>
+                  Download report
+                </a>
+              )}
+            </div>
           </motion.article>
         ))}
       </div>
@@ -801,7 +1019,9 @@ export default function SitePage() {
 
   if (isLoading) return <PageLoading />;
   if (error) return <PageError message={error.message} />;
-  if (page.loginRequired) return <Navigate to={`/login?next=${encodeURIComponent(pathname)}`} replace />;
+  if (page.loginRequired && !getSignedInApplicant()) {
+    return <Navigate to={`/login?next=${encodeURIComponent(pathname)}`} replace />;
+  }
 
   return (
     <div>
@@ -822,19 +1042,30 @@ export default function SitePage() {
       {page.historyProfile && <HistoryPage page={page} />}
       {page.campuses && <CampusPage campuses={page.campuses} />}
       {page.alumniPage && <AlumniPage />}
-      {page.applyPage && <ApplyPage page={page} />}
+      {page.applyPage && <ApplyPage />}
+      {page.feesPage && <FeesPage />}
       {page.faqPage && <FAQPage />}
       {page.intakeCalendar && <IntakeCalendar />}
       {page.newsPage && <NewsPage stories={page.newsStories} />}
       {page.newsArticle && <NewsArticle story={page.newsArticle} stories={page.newsStories} />}
       {page.videoPage && <VideosPage />}
       {page.contactPage && <ContactPage search={search} />}
+      {page.certificateVerificationPage && <CertificateVerificationPage />}
       {page.registrationPage && <RegistrationAccessPage isLogin={false} />}
-      {page.loginPage && <RegistrationAccessPage isLogin nextPath={searchParams.get('next')} />}
+      {page.loginPage && (
+        <RegistrationAccessPage
+          isLogin
+          nextPath={searchParams.get('next')}
+          accountCreated={searchParams.get('created') === '1'}
+        />
+      )}
+      {(page.studentPortalPage || page.trackingPage) && <ApplicantPortalPage />}
       {!page.missionStatement && !page.reports && !page.galleryItems &&
        !page.historyProfile && !page.campuses && !page.alumniPage && !page.applyPage &&
-       !page.faqPage && !page.intakeCalendar && !page.newsPage && !page.newsArticle &&
-       !page.videoPage && !page.contactPage && !page.registrationPage && !page.loginPage && (
+       !page.feesPage && !page.faqPage && !page.intakeCalendar && !page.newsPage && !page.newsArticle &&
+       !page.videoPage && !page.contactPage && !page.certificateVerificationPage &&
+       !page.registrationPage && !page.loginPage &&
+       !page.studentPortalPage && !page.trackingPage && (
       <div className={styles.content}>
         {page.sections.map((section) => (
           <section className={styles.section} key={section.title}>

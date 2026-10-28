@@ -1,0 +1,23 @@
+[
+  {
+    "certificateNumber": "A1-DEMO-2024-001",
+    "name": "Jordan Sample",
+    "graduationYear": 2024,
+    "course": "Electrical Installation",
+    "status": "valid"
+  },
+  {
+    "certificateNumber": "A1-DEMO-2023-002",
+    "name": "Taylor Example",
+    "graduationYear": 2023,
+    "course": "Computer Systems Support",
+    "status": "valid"
+  },
+  {
+    "certificateNumber": "A1-DEMO-2025-003",
+    "name": "Casey Test",
+    "graduationYear": 2025,
+    "course": "Solar System Installation",
+    "status": "valid"
+  }
+]
