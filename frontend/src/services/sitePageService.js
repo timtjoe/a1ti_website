@@ -192,10 +192,28 @@ const sitePages = {
     description: 'Find current campus information and check with Admissions before travelling.',
     campuses: [
       {
-        name: 'Main Campus',
-        address: 'Nagbe’s Town Junction, ELWA Road, Paynesville, Liberia',
-        phone: 'Contact number awaiting confirmation',
-        hours: 'Contact the Institute to confirm office and class hours.',
+        name: 'Demo Campus · Monrovia',
+        address: 'Monrovia, Liberia — illustrative city location only',
+        mapQuery: 'Monrovia, Liberia',
+        phone: 'Demo contact — not available',
+        hours: 'Illustrative only; confirm with the Institute.',
+        isDemo: true,
+      },
+      {
+        name: 'Demo Campus · Paynesville',
+        address: 'Paynesville, Liberia — illustrative city location only',
+        mapQuery: 'Paynesville, Liberia',
+        phone: 'Demo contact — not available',
+        hours: 'Illustrative only; confirm with the Institute.',
+        isDemo: true,
+      },
+      {
+        name: 'Demo Campus · Buchanan',
+        address: 'Buchanan, Liberia — illustrative city location only',
+        mapQuery: 'Buchanan, Liberia',
+        phone: 'Demo contact — not available',
+        hours: 'Illustrative only; confirm with the Institute.',
+        isDemo: true,
       },
     ],
     sections: [

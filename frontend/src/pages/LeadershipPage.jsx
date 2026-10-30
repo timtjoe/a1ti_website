@@ -5,18 +5,19 @@ import { StaffCard } from '@/components/staff/StaffCard';
 import { MOCK_INSTRUCTORS, MOCK_STAFF } from '@/components/staff/staffData';
 import styles from './LeadershipPage.module.css';
 
-const STAFF_GROUPS = [
-  { id: 'staff', label: 'Leadership & Staff', people: MOCK_STAFF },
-  { id: 'instructors', label: 'Instructors', people: MOCK_INSTRUCTORS },
-];
+const instituteDirector = MOCK_STAFF.find((person) => person.position.includes('Director'));
+const staffLeads = MOCK_STAFF.filter((person) => person !== instituteDirector);
+const chiefExecutive = {
+  id: 'chief-executive-pending',
+  name: 'Name awaiting confirmation',
+  position: 'Chief Executive',
+  qualification: 'Profile awaiting confirmation',
+  image: null,
+};
 
 export  function LeadershipPage() {
-  const [selectedGroup, setSelectedGroup] = useState('all');
+  const [selectedGroup, setSelectedGroup] = useState('staff');
   const reduceMotion = useReducedMotion();
-
-  const visibleGroups = selectedGroup === 'all'
-    ? STAFF_GROUPS
-    : STAFF_GROUPS.filter((group) => group.id === selectedGroup);
 
   return (
     <div>
@@ -34,8 +35,8 @@ export  function LeadershipPage() {
           <h2 id="people-filter-title">Filter people</h2>
           <div role="group" aria-label="Choose people to display">
             {[
-              { id: 'all', label: 'All' },
-              ...STAFF_GROUPS,
+              { id: 'staff', label: 'Staff' },
+              { id: 'instructors', label: 'Instructors' },
             ].map((group) => (
               <button
                 type="button"
@@ -50,24 +51,79 @@ export  function LeadershipPage() {
         </aside>
 
         <div className={styles.results}>
-          {visibleGroups.map((group) => (
-            <section className={styles.staffSection} id={group.id} key={group.id}>
+          {selectedGroup === 'staff' && (
+            <section className={styles.staffSection} id="staff">
               <div className={styles.sectionHeader}>
                 <p className={styles.eyebrow}>A-1 Technical Institute</p>
-                <h2>{group.label}</h2>
+                <h2>Staff</h2>
+              </div>
+              <div className={styles.orgChart} aria-label="Staff hierarchy">
+                <div className={`${styles.orgLevel} ${styles.orgLevelSingle}`}>
+                  <StaffCard {...chiefExecutive} reduceMotion={reduceMotion} />
+                </div>
+                {instituteDirector && (
+                  <>
+                    <div
+                      className={`${styles.orgConnector} ${styles.orgConnectorSingle}`}
+                      aria-hidden="true"
+                    />
+                    <div className={`${styles.orgLevel} ${styles.orgLevelSingle}`}>
+                      <StaffCard
+                        {...instituteDirector}
+                        index={0}
+                        reduceMotion={reduceMotion}
+                      />
+                    </div>
+                  </>
+                )}
+                {staffLeads.length > 0 && (
+                  <>
+                    <div className={styles.orgConnector} aria-hidden="true" />
+                    <div className={styles.orgLevel}>
+                      {staffLeads.map((person, index) => (
+                        <StaffCard
+                          key={person.id}
+                          {...person}
+                          index={index + 1}
+                          reduceMotion={reduceMotion}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+                {!instituteDirector && (
+                  <div className={styles.grid}>
+                    {MOCK_STAFF.map((person, index) => (
+                      <StaffCard
+                        key={person.id}
+                        {...person}
+                        index={index}
+                        reduceMotion={reduceMotion}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
+          {selectedGroup === 'instructors' && (
+            <section className={styles.staffSection} id="instructors">
+              <div className={styles.sectionHeader}>
+                <p className={styles.eyebrow}>A-1 Technical Institute</p>
+                <h2>Instructors</h2>
               </div>
               <div className={styles.grid}>
-                {group.people.map((person, index) => (
-                  <StaffCard 
-                    key={person.id} 
-                    {...person} 
-                    index={index} 
-                    reduceMotion={reduceMotion} 
+                {MOCK_INSTRUCTORS.map((person, index) => (
+                  <StaffCard
+                    key={person.id}
+                    {...person}
+                    index={index}
+                    reduceMotion={reduceMotion}
                   />
                 ))}
               </div>
             </section>
-          ))}
+          )}
         </div>
       </div>
     </div>

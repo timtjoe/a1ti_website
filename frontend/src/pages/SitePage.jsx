@@ -1,15 +1,20 @@
 import { Link, Navigate, useLocation, useNavigate, useSearchParams } from 'react-router';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/common/Button';
 import { FAQAccordion } from '@/components/common/FAQ';
 import { FAQ_CATEGORIES, FAQ_ITEMS, POPULAR_FAQ_ITEMS } from '@/components/common/faqData';
 import { NewsStoryCards } from '@/components/common/NewsStoryCards';
 import { PageHero } from '@/components/common/PageHero';
+import AlumniPage from '@/pages/AlumniPage';
 import RegisterButton from '@/components/common/RegisterButton';
 import CertificateVerificationPage from '@/pages/CertificateVerificationPage';
-import { StaffCard } from '@/components/staff/StaffCard';
-import { MOCK_ALUMNI_LEADERS } from '@/components/staff/staffData';
 import { useCourses } from '@/hooks/useCourseCatalog';
 import { useSitePage } from '@/hooks/useSitePage';
 import {
@@ -20,6 +25,9 @@ import {
   submitDemoApplication,
 } from '@/services/demoApplicantService';
 import { VideoExplorer } from '@/pages/home/Videos';
+import campusImage01 from '@/assets/img_005.jpeg';
+import campusImage02 from '@/assets/img_007.jpeg';
+import campusImage03 from '@/assets/img_003.jpeg';
 import styles from './SitePage.module.css';
 
 const entrySpring = { type: 'spring', stiffness: 75, damping: 15, mass: 0.8 };
@@ -41,37 +49,68 @@ function PageError({ message }) {
 function MissionPage({ page }) {
   const shouldReduceMotion = useReducedMotion();
   const navigate = useNavigate();
+  const missionRef = useRef(null);
+  const visionRef = useRef(null);
+  const impactRef = useRef(null);
+  const reportRef = useRef(null);
+  const { scrollYProgress: missionProgress } = useScroll({
+    target: missionRef,
+    offset: ['start end', 'end start'],
+  });
+  const { scrollYProgress: visionProgress } = useScroll({
+    target: visionRef,
+    offset: ['start end', 'end start'],
+  });
+  const { scrollYProgress: impactProgress } = useScroll({
+    target: impactRef,
+    offset: ['start end', 'end start'],
+  });
+  const { scrollYProgress: reportProgress } = useScroll({
+    target: reportRef,
+    offset: ['start end', 'end start'],
+  });
+  const missionY = useTransform(missionProgress, [0, 1], [56, -56]);
+  const visionY = useTransform(visionProgress, [0, 1], [56, -56]);
+  const impactY = useTransform(impactProgress, [0, 1], [56, -56]);
+  const reportY = useTransform(reportProgress, [0, 1], [56, -56]);
+  const motionStyle = (y) => (shouldReduceMotion ? undefined : { y });
 
   return (
-    <div className={styles.content}>
+    <div className={styles.missionPage}>
       <motion.section
-        className={styles.missionStatement}
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={shouldReduceMotion ? { duration: 0.01 } : entrySpring}
+        ref={missionRef}
+        className={`${styles.missionStatement} ${styles.missionMission}`}
       >
-        <p className={styles.missionLabel}>Our mission</p>
-        <p className={styles.missionText}>{page.missionStatement}</p>
+        <motion.div className={styles.missionCopy} style={motionStyle(missionY)}>
+          <p className={styles.missionLabel}>Our mission</p>
+          <p className={styles.missionText}>{page.missionStatement}</p>
+        </motion.div>
       </motion.section>
       <motion.section
-        className={styles.missionStatement}
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={shouldReduceMotion ? { duration: 0.01 } : { ...entrySpring, delay: 0.12 }}
+        ref={visionRef}
+        className={`${styles.missionStatement} ${styles.missionVision}`}
       >
-        <p className={styles.missionLabel}>Our vision</p>
-        <p className={styles.missionText}>{page.visionStatement}</p>
+        <motion.div className={styles.missionCopy} style={motionStyle(visionY)}>
+          <p className={styles.missionLabel}>Our vision</p>
+          <p className={styles.missionText}>{page.visionStatement}</p>
+        </motion.div>
       </motion.section>
       <motion.section
+        ref={impactRef}
+        className={styles.missionImpact}
+      >
+        <motion.div className={styles.missionImpactCopy} style={motionStyle(impactY)}>
+          <p className={styles.missionLabel}>Mission 2036 ambition</p>
+          <h2>One million young people by 2036</h2>
+          <p>Expanding access to practical skills training and opportunity across Liberia.</p>
+          <small>This is a long-term target, not a claim of results already achieved.</small>
+        </motion.div>
+      </motion.section>
+      <motion.section
+        ref={reportRef}
         className={styles.missionRequest}
-        initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={shouldReduceMotion ? { duration: 0.01 } : entrySpring}
       >
-        <div className={styles.reportCardCopy}>
+        <motion.div className={styles.reportCardCopy} style={motionStyle(reportY)}>
           <span className={styles.reportIcon} aria-hidden="true">
             <span className="material-symbols-outlined">description</span>
           </span>
@@ -80,8 +119,8 @@ function MissionPage({ page }) {
             <h2>Request the latest mission report</h2>
             <p>Contact the Institute to request an approved mission report.</p>
           </div>
-        </div>
-        <div className={styles.reportActions}>
+        </motion.div>
+        <motion.div className={styles.reportActions} style={motionStyle(reportY)}>
           <Button
             variant="primary"
             size="lg"
@@ -90,7 +129,7 @@ function MissionPage({ page }) {
           >
             Request report
           </Button>
-        </div>
+        </motion.div>
       </motion.section>
     </div>
   );
@@ -136,21 +175,36 @@ function HistoryPage({ page }) {
 }
 
 function CampusPage({ campuses }) {
+  const reduceMotion = useReducedMotion();
+  const campusImages = [campusImage01, campusImage02, campusImage03];
+
   return (
     <div className={styles.campusList}>
       {campuses.map((campus, index) => {
-        const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(campus.address)}&output=embed`;
+        const mapQuery = campus.mapQuery || campus.address;
+        const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
         return (
-          <section className={styles.campusRow} key={campus.name}>
+          <motion.section
+            className={styles.campusRow}
+            key={campus.name}
+            initial={reduceMotion ? false : { opacity: 0, y: 36 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={reduceMotion ? { duration: 0.01 } : { ...entrySpring, delay: index * 0.08 }}
+          >
+            <div className={styles.campusPhoto}>
+              <img src={campus.image || campusImages[index % campusImages.length]} alt="" loading="lazy" />
+              {campus.isDemo && <span>Illustrative demo location</span>}
+            </div>
             <div className={styles.campusDetails}>
-              <p className={styles.reportPeriod}>Campus {index + 1}</p>
+              <p className={styles.reportPeriod}>{campus.isDemo ? 'Demo campus' : `Campus ${index + 1}`}</p>
               <h2>{campus.name}</h2>
               <dl>
                 <div><dt>Location</dt><dd>{campus.address}</dd></div>
                 <div><dt>Contact</dt><dd>{campus.phone}</dd></div>
                 <div><dt>Office hours</dt><dd>{campus.hours}</dd></div>
               </dl>
-              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(campus.address)}`} target="_blank" rel="noreferrer">
+              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`} target="_blank" rel="noreferrer">
                 Get directions
               </a>
             </div>
@@ -161,53 +215,12 @@ function CampusPage({ campuses }) {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
-          </section>
+          </motion.section>
         );
       })}
-      <p className={styles.wikiNotice}>Additional campus details will be added when their names, locations, and contact information are confirmed.</p>
-    </div>
-  );
-}
-
-function AlumniPage() {
-  const navigate = useNavigate();
-
-  return (
-    <div className={styles.alumniContent}>
-      <section className={styles.alumniIntro}>
-        <p className={styles.reportPeriod}>A-1 graduate network</p>
-        <h2>Stay connected beyond the classroom</h2>
-        <p>The alumni network can help graduates keep in touch with classmates, share career progress, and stay informed about Institute activities.</p>
-      </section>
-      <div className={styles.alumniGrid}>
-        <article><span className="material-symbols-outlined" aria-hidden="true">diversity_3</span><h2>Connect</h2><p>Reconnect with classmates and take part in future graduate meet-ups.</p></article>
-        <article><span className="material-symbols-outlined" aria-hidden="true">work</span><h2>Share your progress</h2><p>Share career and training updates to help prospective students understand graduate pathways.</p></article>
-        <article><span className="material-symbols-outlined" aria-hidden="true">volunteer_activism</span><h2>Support learners</h2><p>Alumni may be able to contribute through mentoring, practical demonstrations, or career guidance.</p></article>
-      </div>
-      <section className={styles.alumniLeaders}>
-        <h2>Alumni leadership</h2>
-        <p>Illustrative mock profiles only. Replace with the elected alumni president and committee after their details are confirmed.</p>
-        <div className={styles.pendingPeople}>
-          {MOCK_ALUMNI_LEADERS.map((person) => (
-            <StaffCard key={person.id} {...person} imageAlt="Illustrative mock alumni portrait, not a verified profile" />
-          ))}
-        </div>
-      </section>
-      <section className={styles.alumniCta} aria-labelledby="alumni-cta-title">
-        <div>
-          <p className={styles.reportPeriod}>Get involved</p>
-          <h2 id="alumni-cta-title">Help the alumni network grow</h2>
-          <p>Join the network or share your graduate story with the Institute.</p>
-        </div>
-        <Button
-          variant="secondary"
-          size="lg"
-          leftIcon="mail"
-          onClick={() => navigate('/contact?topic=Alumni%20network')}
-        >
-          Contact the Institute
-        </Button>
-      </section>
+      <p className={styles.wikiNotice}>
+        Demo locations and photos are illustrative only; they do not confirm A-1 campus sites, contact numbers, or office hours.
+      </p>
     </div>
   );
 }
@@ -1260,7 +1273,7 @@ export default function SitePage() {
 
   return (
     <div>
-      {!page.newsArticle && !page.faqPage && (
+      {!page.newsArticle && !page.faqPage && !page.alumniPage && (
         <PageHero
           breadcrumbs={[
             { label: 'Home', to: '/' },

@@ -7,8 +7,57 @@
   padding: 2.5rem 1.5rem 4rem;
 }
 
+.missionPage {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+
 .missionStatement {
-  padding: clamp(2rem, 7vw, 5.5rem) 0;
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  padding: clamp(4rem, 10vw, 8rem) max(1.5rem, calc((100% - 1200px) / 2));
+  background-position: center;
+  background-size: cover;
+  isolation: isolate;
+}
+
+.missionStatement::before,
+.missionImpact::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: '';
+}
+
+.missionStatement::before {
+  background: linear-gradient(90deg, rgb(5 12 38 / 82%), rgb(5 12 38 / 55%) 58%, rgb(5 12 38 / 22%));
+}
+
+.missionMission {
+  background-image: url('../assets/img_007.jpeg');
+}
+
+.missionVision {
+  background-image: url('../assets/img_003.jpeg');
+}
+
+.missionCopy {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+}
+
+.missionStatement .missionLabel,
+.missionImpact .missionLabel {
+  color: #ffe486;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 65%);
 }
 
 .missionLabel {
@@ -20,14 +69,63 @@
 }
 
 .missionText {
-  max-width: 18ch;
+  max-width: 17ch;
   margin-top: 0.8rem;
-  color: var(--navy-deep);
+  color: #fff;
   font-family: var(--font-open-sans);
   font-size: clamp(2.5rem, 7vw, 5.8rem);
   font-weight: 900;
   letter-spacing: -0.045em;
   line-height: 1.02;
+  text-shadow: 0 3px 20px rgb(0 0 0 / 72%);
+}
+
+.missionImpact {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  padding: clamp(4rem, 10vw, 8rem) max(1.5rem, calc((100% - 1200px) / 2));
+  background: url('../assets/img_005.jpeg') center 48% / cover no-repeat;
+  isolation: isolate;
+}
+
+.missionImpact::before {
+  background: linear-gradient(100deg, rgb(5 12 38 / 84%), rgb(5 12 38 / 48%) 65%, rgb(5 12 38 / 24%));
+}
+
+.missionImpactCopy {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  color: #fff;
+  text-shadow: 0 2px 14px rgb(0 0 0 / 68%);
+}
+
+.missionImpactCopy h2 {
+  max-width: 13ch;
+  margin: 0.75rem 0;
+  color: #fff;
+  font-family: var(--font-open-sans);
+  font-size: clamp(3rem, 9vw, 7rem);
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+.missionImpactCopy > p:not(.missionLabel) {
+  max-width: 36rem;
+  font-size: clamp(1.15rem, 2.3vw, 1.6rem);
+  line-height: 1.55;
+}
+
+.missionImpactCopy small {
+  display: block;
+  margin-top: 1.25rem;
+  color: #fff;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .section {
@@ -437,6 +535,7 @@
 }
 
 .missionRequest {
+  width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
@@ -449,6 +548,13 @@
     radial-gradient(ellipse at 100% 0, rgba(255, 215, 0, 0.16), transparent 42%),
     linear-gradient(135deg, #f7f6ff, #fff 72%);
   box-shadow: 0 1rem 2.5rem rgba(13, 4, 96, 0.08);
+}
+
+.missionPage .missionRequest {
+  margin: 0;
+  padding: clamp(2rem, 6vw, 4rem) max(1.5rem, calc((100% - 1200px) / 2));
+  border: 0;
+  border-radius: 0;
 }
 
 .reportCardCopy {
@@ -514,6 +620,13 @@
 }
 
 @media (max-width: 760px) {
+  .missionStatement,
+  .missionImpact {
+    min-height: 100svh;
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
   .missionRequest {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -736,17 +849,56 @@
 .campusList {
   display: grid;
   width: min(1200px, 100%);
-  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  align-items: stretch;
+  gap: 1.5rem;
   margin: 0 auto;
   padding: 1.8rem 1.5rem 3rem;
 }
 
 .campusRow {
-  display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: 3rem;
-  padding: 1.2rem 0;
-  border-bottom: 1px solid var(--border-color);
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(13, 4, 96, 0.05);
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+.campusRow:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(13, 4, 96, 0.12);
+}
+
+.campusPhoto {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+  background: #eeecff;
+}
+
+.campusPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+.campusPhoto span {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  color: #fff;
+  background: rgb(13 4 96 / 84%);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.campusDetails {
+  padding: 1.25rem 1.25rem 0.5rem;
 }
 
 .campusDetails h2 {
@@ -766,6 +918,12 @@
 .campusDetails > a {
   padding-bottom: 0.25rem;
   border-bottom: 1px solid currentColor;
+}
+
+.campusRow .campusMap {
+  min-height: 210px;
+  margin-top: 1.1rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .campusMap,
@@ -2483,7 +2641,6 @@
 
     .campusRow {
       grid-template-columns: 1fr;
-      gap: 1rem;
     }
 
     .newsStories {

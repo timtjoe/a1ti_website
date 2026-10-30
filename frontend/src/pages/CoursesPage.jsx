@@ -63,7 +63,7 @@ export default function CoursesPage() {
         ]}
         eyebrow="Find your path"
         title="Explore our courses"
-        description="Search practical technical and professional training, then choose a course that fits your goals."
+        description="Search  practical technical and professional training, then choose a course that fits your goals."
       />
       <section className={styles.catalog} aria-label="Course catalogue">
         <div className={styles.searchBox}>
