@@ -8,7 +8,7 @@ function readApplicants() {
 
   const applicants = JSON.parse(savedApplicants);
   if (!Array.isArray(applicants)) {
-    throw new Error('Saved demo applicant data is invalid. Clear this site’s data and try again.');
+    throw new Error('Saved applicant data is invalid. Clear this site’s data and try again.');
   }
   return applicants;
 }
@@ -68,7 +68,7 @@ export async function createDemoApplicant({ fullName, phone, email, password }) 
 export async function signInDemoApplicant(email, password) {
   const normalizedEmail = email.trim().toLowerCase();
   const applicant = getApplicantByEmail(normalizedEmail);
-  if (!applicant) throw new Error('No demo account was found for this email. Create an account first.');
+  if (!applicant) throw new Error('No account was found for this email. Create an account first.');
 
   const salt = Uint8Array.from(window.atob(applicant.passwordSalt), (character) => character.charCodeAt(0));
   const passwordHash = await hashPassword(password, salt);

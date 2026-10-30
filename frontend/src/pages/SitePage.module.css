@@ -563,6 +563,39 @@
   text-decoration: underline;
 }
 
+.historyPromo {
+  margin-top: 1.1rem;
+  padding: 0.9rem;
+  border: 1px solid #dcd9fa;
+  border-radius: 0.65rem;
+  background:
+    linear-gradient(rgba(247, 246, 255, 0.9), rgba(255, 255, 255, 0.94)),
+    url('../assets/img_006.jpeg') center / cover;
+}
+
+.historyPromo > p {
+  color: var(--blue-royal);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.historyPromo h3 {
+  margin-top: 0.35rem;
+  color: var(--navy-deep);
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.historyPromo a {
+  display: inline-block;
+  margin-top: 0.65rem;
+  color: var(--blue-royal);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
 .wikiArticle {
   width: 100%;
   max-width: 650px;
@@ -1078,42 +1111,503 @@
 }
 
 .faqPage {
-  width: min(780px, 100%);
+  padding-bottom: 3rem;
+}
+
+.faqHero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #100b50;
+}
+
+.faqHero::before,
+.faqHero::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+}
+
+.faqHero::before {
+  z-index: -2;
+  inset: -5px;
+  background: url('../assets/img_006.jpeg') center 42% / cover no-repeat;
+  filter: blur(1px);
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+.faqHero::after {
+  background:
+    radial-gradient(ellipse at 15% 10%, rgb(91 72 193 / 12%), transparent 45%),
+    linear-gradient(115deg, rgb(11 7 67 / 34%) 0%, rgb(20 13 83 / 24%) 55%, rgb(13 17 58 / 34%) 100%);
+}
+
+.faqHeroContent {
+  width: min(1120px, 100%);
   margin: 0 auto;
-  padding: 2rem 1.5rem 3rem;
+  padding: clamp(3rem, 7vw, 5.5rem) 1.5rem 2.75rem;
 }
 
-.faqPage > label {
-  display: block;
-  margin-bottom: 0.4rem;
-  color: var(--navy-deep);
-  font-weight: 800;
+.faqHeroContent > h1 {
+  color: #fff;
+  text-shadow: 0 2px 18px rgb(5 8 38 / 55%);
+  font-family: var(--font-open-sans);
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  text-align: center;
 }
 
-.faqPage > input {
+.faqHeroDescription {
+  margin: 0.85rem auto 0;
+  color: #f0efff;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  text-shadow: 0 1px 9px rgb(5 8 38 / 75%);
+  text-align: center;
+}
+
+.faqSearchForm {
+  position: relative;
+  width: min(740px, 100%);
+  margin: 1.8rem auto 0;
+}
+
+.faqSearchControl {
+  display: flex;
   width: 100%;
-  min-height: 2.8rem;
-  padding: 0.6rem 0.75rem;
-  border: 1px solid #828397;
-  border-radius: 3px;
-  color: var(--text-main);
+  min-height: 3.65rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgb(255 255 255 / 70%);
+  border-radius: 0.65rem;
   background: #fff;
+  box-shadow: 0 0.9rem 2.5rem rgb(0 0 0 / 20%);
 }
 
-.faqPage > input:focus-visible {
+.faqSearchControl:focus-within {
+  outline: 3px solid rgb(255 226 120 / 75%);
+  outline-offset: 3px;
+}
+
+.faqSearchControl > span {
+  color: var(--blue-royal);
+  font-size: 1.45rem;
+}
+
+.faqSearchControl input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  color: var(--text-main);
+  background: transparent;
+  font: inherit;
+}
+
+.faqSearchSubmit {
+  display: grid;
+  width: 2.45rem;
+  height: 2.45rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 0;
+  border-radius: 0.4rem;
+  color: #fff;
+  background: var(--navy-deep);
+  cursor: pointer;
+}
+
+.faqSearchSubmit:hover {
+  background: var(--blue-royal);
+}
+
+.faqSearchSubmit:focus-visible {
+  outline: 3px solid var(--blue-royal);
+  outline-offset: 3px;
+}
+
+.faqSuggestions {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 0.45rem);
+  right: 0;
+  left: 0;
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0.45rem;
+  border: 1px solid #d5d8e2;
+  border-radius: 0.6rem;
+  background: #fff;
+  box-shadow: 0 0.8rem 2rem rgb(5 8 38 / 22%);
+  list-style: none;
+}
+
+.faqSuggestions button {
+  display: flex;
+  width: 100%;
+  min-height: 2.7rem;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.7rem;
+  border: 0;
+  border-radius: 0.35rem;
+  color: var(--navy-deep);
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faqSuggestions button:hover,
+.faqSuggestions button[aria-selected='true'] {
+  background: #f0efff;
+}
+
+.faqSuggestions button:focus-visible {
+  outline: 2px solid var(--blue-royal);
+  outline-offset: -2px;
+}
+
+.faqSuggestions button > span {
+  flex: 0 0 auto;
+  color: var(--blue-royal);
+}
+
+.faqHeroCategories {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.faqHeroCategoryHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.faqHeroCategoryHeading p {
+  color: #ffe278;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 8px rgb(5 8 38 / 65%);
+  text-transform: uppercase;
+}
+
+.faqHeroCategoryHeading h2 {
+  margin-top: 0.2rem;
+  color: #fff;
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+  text-shadow: 0 2px 12px rgb(5 8 38 / 65%);
+}
+
+.faqSectionHeading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.faqSectionHeading h2 {
+  margin-top: 0.25rem;
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.3rem, 2.3vw, 1.7rem);
+}
+
+.faqCount {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.faqCategoryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.faqCategoryCard {
+  display: grid;
+  min-height: 150px;
+  align-content: start;
+  justify-items: start;
+  gap: 0.45rem;
+  padding: 1rem;
+  border: 1px solid rgb(255 255 255 / 82%);
+  border-radius: 0.65rem;
+  color: var(--navy-deep);
+  background: #fffdf6;
+  box-shadow: 0 0.65rem 1.5rem rgb(5 8 38 / 20%);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.faqCategoryCard:hover {
+  border-color: #ffe278;
+  background: #fff5cb;
+  box-shadow: 0 0.8rem 1.8rem rgb(5 8 38 / 28%);
+  transform: translateY(-2px);
+}
+
+.faqCategoryCard[aria-pressed='true'] {
+  border-color: #ffe278;
+  color: #fff;
+  background: var(--navy-deep);
+  box-shadow: inset 0 0 0 1px #ffe278;
+}
+
+.faqCategoryCard:focus-visible {
   outline: 3px solid var(--blue-royal);
   outline-offset: 2px;
 }
 
-.faqPage .faqCount {
-  margin: 0.75rem 0;
+.faqCategoryCard > span:first-child {
+  color: var(--blue-royal);
+  font-size: 1.5rem;
+}
+
+.faqCategoryCard strong {
+  color: var(--navy-deep);
+  font-size: 0.95rem;
+}
+
+.faqCategoryCard > span:last-child {
+  color: #4b4d60;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.faqCategoryCard[aria-pressed='true'] > span:first-child,
+.faqCategoryCard[aria-pressed='true'] strong,
+.faqCategoryCard[aria-pressed='true'] > span:last-child {
+  color: #fff;
+}
+
+.faqCategoryCard[aria-pressed='true'] > span:first-child {
+  color: #ffe278;
+}
+
+.faqSelectedTopic {
+  display: flex;
+  width: min(740px, 100%);
+  min-height: 3.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.8rem auto 0;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid rgb(255 255 255 / 70%);
+  border-radius: 0.55rem;
+  color: #fff;
+  background: rgb(9 17 58 / 42%);
+  box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 14%);
+}
+
+.faqSelectedTopic > span {
+  color: #ffe278;
+}
+
+.faqSelectedTopic button {
+  min-height: 2.3rem;
+  margin-left: auto;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid rgb(255 255 255 / 70%);
+  border-radius: 0.4rem;
+  color: var(--navy-deep);
+  background: #fffdf6;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.faqSelectedTopic button:hover {
+  background: #fff5cb;
+}
+
+.faqSelectedTopic button:focus-visible,
+.faqBackButton:focus-visible {
+  outline: 3px solid var(--blue-royal);
+  outline-offset: 3px;
+}
+
+.faqContentLayout {
+  display: grid;
+  width: min(1120px, 100%);
+  grid-template-columns: minmax(230px, 0.72fr) minmax(0, 1.8fr);
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  margin: 0 auto;
+  padding: 2.75rem 1.5rem 0;
+}
+
+.faqCategoryResultsLayout {
+  grid-template-columns: minmax(0, 1fr);
+  padding-top: 1.75rem;
+}
+
+.faqCategoryResultsLayout .faqQuestionsSection {
+  width: 100%;
+}
+
+.faqContactPane {
+  position: sticky;
+  top: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  background: #f5f6fa;
+}
+
+.faqContactPane h2 {
+  margin-top: 0.3rem;
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: 1.5rem;
+}
+
+.faqContactIntro {
+  margin-top: 0.55rem;
   color: var(--text-muted);
   font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.faqContactPane dl {
+  margin: 1rem 0 0;
+}
+
+.faqContactPane dl > div {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.faqContactPane dt {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--navy-deep);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.faqContactPane dt span {
+  color: var(--blue-royal);
+  font-size: 1.1rem;
+}
+
+.faqContactPane dd {
+  margin: 0.3rem 0 0 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.87rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.faqContactLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  color: var(--blue-royal);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.faqContactLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.faqContactLink:focus-visible {
+  outline: 3px solid var(--blue-royal);
+  outline-offset: 3px;
+}
+
+.faqQuestionsSection {
+  display: grid;
+  gap: 0.9rem;
+  min-width: 0;
+  padding-top: 0.25rem;
+  scroll-margin-top: 1rem;
+}
+
+.faqQuestionsSection .faqSectionHeading {
+  margin-bottom: 0.25rem;
+}
+
+.faqBackButton {
+  display: inline-flex;
+  min-height: 2.6rem;
+  align-items: center;
+  justify-self: start;
+  gap: 0.45rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--navy-deep);
+  border-radius: 0.4rem;
+  color: var(--navy-deep);
+  background: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.faqBackButton:hover {
+  background: #f0efff;
+}
+
+.faqSearchResults {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.faqSearchResult {
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--blue-royal);
+  border-radius: 0.55rem;
+  background: #fff;
+  box-shadow: 0 0.35rem 1rem rgb(13 4 96 / 5%);
+}
+
+.faqSearchResult h3 {
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: 1.1rem;
+}
+
+.faqSearchResult p {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  line-height: 1.65;
 }
 
 .emptyFaq {
-  padding: 1rem 0;
+  padding: 1rem;
+  border: 1px dashed #b6b8c5;
+  border-radius: 0.5rem;
   color: var(--text-muted);
+  background: #fafaff;
+}
+
+@media (max-width: 760px) {
+  .faqContentLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .faqCategoryResultsLayout {
+    padding-top: 1.25rem;
+  }
+
+  .faqContactPane {
+    position: static;
+  }
 }
 
 .calendarPage {
@@ -1572,17 +2066,45 @@
 }
 
 .accountLayout {
+  position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(340px, 1fr);
-  gap: clamp(2rem, 6vw, 5rem);
-  align-items: start;
-  width: min(1040px, 100%);
+  grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
+  gap: clamp(3rem, 7vw, 6rem);
+  align-items: center;
+  width: min(1200px, 100%);
   margin: 0 auto;
   padding: 2.5rem 1.5rem 4rem;
 }
 
+.accountLayout::before,
+.accountLayout::after {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  content: '';
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.accountLayout::before {
+  z-index: -2;
+  background: url('../assets/img_006.jpeg') center 42% / cover no-repeat;
+}
+
+.accountLayout::after {
+  background: linear-gradient(110deg, rgb(9 17 58 / 43%), rgb(20 30 88 / 32%));
+}
+
 .accountIntro {
-  padding: 1.25rem 0;
+  position: relative;
+  z-index: 0;
+  max-width: 46rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem) 0;
+  color: #fff;
 }
 
 .accountIntro h2,
@@ -1594,11 +2116,23 @@
   line-height: 1.2;
 }
 
-.accountIntro > p:not(.reportPeriod, .accountDemoNote) {
+.accountIntro h2 {
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  text-shadow: 0 2px 16px rgb(5 8 38 / 92%);
+}
+
+.accountIntro > p:not(.reportPeriod, .accountStorageNote) {
   max-width: 38rem;
-  color: var(--text-muted);
+  color: #fff;
   font-size: 1.05rem;
   line-height: 1.75;
+  text-shadow: 0 1px 10px rgb(5 8 38 / 95%);
+}
+
+.accountIntro .reportPeriod {
+  color: #fff0a8;
+  text-shadow: 0 1px 9px rgb(5 8 38 / 95%);
 }
 
 .accountIntro ol {
@@ -1606,18 +2140,20 @@
   gap: 0.8rem;
   margin: 1.7rem 0;
   padding-left: 1.35rem;
-  color: var(--navy-deep);
+  color: #fff;
   font-weight: 700;
+  text-shadow: 0 1px 10px rgb(5 8 38 / 95%);
 }
 
-.accountDemoNote {
+.accountStorageNote {
   max-width: 34rem;
   margin-top: 2rem;
   padding: 0.85rem 0;
-  border-top: 1px solid var(--border-color);
-  color: var(--text-muted);
+  border-top: 1px solid rgb(255 255 255 / 65%);
+  color: #fff;
   font-size: 0.9rem;
   line-height: 1.6;
+  text-shadow: 0 1px 9px rgb(5 8 38 / 95%);
 }
 
 .accessCard,
@@ -1627,6 +2163,16 @@
   border-radius: 12px;
   background: #fff;
   box-shadow: 0 16px 42px rgb(16 35 67 / 8%);
+}
+
+.accessCard {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  max-width: 500px;
+  justify-self: end;
+  background: #fff;
+  box-shadow: 0 1.25rem 3.5rem rgb(5 8 38 / 32%);
 }
 
 .accessCard h2,
@@ -1640,7 +2186,7 @@
 .accessCard form,
 .portalPanel form {
   display: grid;
-  gap: 0.45rem;
+  gap: 0.55rem;
   margin-top: 1rem;
 }
 
@@ -1655,18 +2201,35 @@
 .accessCard input,
 .portalPanel select {
   width: 100%;
-  min-height: 2.9rem;
-  padding: 0.65rem 0.75rem;
+  min-height: 3rem;
+  padding: 0.7rem 0.85rem;
   border: 1px solid #c9d0dc;
-  border-radius: 6px;
+  border-radius: 0.5rem;
   color: var(--text-main);
   background: #fff;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .accessCard input:focus,
 .portalPanel select:focus {
-  border-color: var(--blue-royal);
-  outline: 3px solid rgb(38 94 173 / 14%);
+  border-color: #9a94d8;
+  outline: 0;
+  box-shadow: 0 0 0 3px rgb(122 108 249 / 14%);
+}
+
+.accessContactFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.accessContactFields > div {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.accessContactFields label {
+  margin-top: 0.5rem;
 }
 
 .accessCard form > button,
@@ -1681,10 +2244,50 @@
   line-height: 1.5;
 }
 
-.accessHelp a,
 .accountContactLink {
   color: var(--blue-royal);
   font-weight: 800;
+}
+
+.accessSwitch {
+  display: grid;
+  justify-items: center;
+  gap: 0.7rem;
+  margin-top: 1.15rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.accessSwitch p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.accessSwitchButton {
+  display: flex;
+  width: 100%;
+  min-height: 2.65rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.15rem;
+  border: 1px solid var(--navy-deep);
+  border-radius: 0.45rem;
+  color: var(--navy-deep);
+  background: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.accessSwitchButton:hover {
+  color: #fff;
+  background: var(--navy-deep);
+}
+
+.accessSwitchButton:focus-visible {
+  outline: 3px solid var(--blue-royal);
+  outline-offset: 3px;
 }
 
 .accountContactLink {
@@ -1791,6 +2394,10 @@
     padding-top: 1.5rem;
   }
 
+  .faqCategoryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .portalWelcome {
     grid-column: auto;
     align-items: flex-start;
@@ -1798,6 +2405,34 @@
 }
 
 @media (max-width: 520px) {
+  .faqHeroContent {
+    padding: 2.75rem 1rem 2rem;
+  }
+
+  .faqCategoryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+  }
+
+  .faqCategoryCard {
+    min-height: 135px;
+    padding: 0.75rem;
+  }
+
+  .accessContactFields {
+    grid-template-columns: 1fr;
+  }
+
+  .faqHeroCategoryHeading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .faqSectionHeading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .portalWelcome {
     flex-direction: column;
   }

@@ -1,8 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { Button } from '@/components/common/Button';
+import portraitJordan from '@/assets/img_001.jpeg';
+import portraitTaylor from '@/assets/img_012.jpeg';
+import portraitCasey from '@/assets/img_005.jpeg';
 import mockCertificates from '@/data/mockCertificates.json';
 import styles from './CertificateVerificationPage.module.css';
+
+const CERTIFICATE_PORTRAITS = {
+  'A1-DEMO-2024-001': portraitJordan,
+  'A1-DEMO-2023-002': portraitTaylor,
+  'A1-DEMO-2025-003': portraitCasey,
+};
 
 function getScanError(error) {
   if (error.name === 'NotAllowedError' || error.name === 'SecurityError') {
@@ -60,11 +69,12 @@ export default function CertificateVerificationPage() {
 
   const lookupCertificate = useCallback((number) => {
     const normalizedNumber = getCertificateNumber(number);
+    const certificate = normalizedNumber
+      ? mockCertificates.find((item) => item.certificateNumber === normalizedNumber)
+      : null;
     setCertificateNumber(normalizedNumber);
     setHasSearched(Boolean(normalizedNumber));
-    setResult(normalizedNumber
-      ? mockCertificates.find((certificate) => certificate.certificateNumber === normalizedNumber) || null
-      : null);
+    setResult(certificate ? { ...certificate, image: CERTIFICATE_PORTRAITS[certificate.certificateNumber] } : null);
     setScanError('');
   }, []);
 
@@ -258,12 +268,15 @@ export default function CertificateVerificationPage() {
                 <span className={styles.resultReference}>{result.certificateNumber}</span>
               </div>
               <h3 id="certificate-result-title">Certificate details</h3>
-              <dl className={styles.certificateDetails}>
-                <div><dt>Graduate name</dt><dd>{result.name}</dd></div>
-                <div><dt>Graduation year</dt><dd>{result.graduationYear}</dd></div>
-                <div><dt>Course</dt><dd>{result.course}</dd></div>
-              </dl>
-              <p className={styles.resultDisclaimer}>This match is from a mock design record. It does not confirm a real certificate.</p>
+              <div className={styles.resultPerson}>
+                <img src={result.image} alt={`Illustrative sample portrait for ${result.name}`} />
+                <dl className={styles.certificateDetails}>
+                  <div><dt>Graduate name</dt><dd>{result.name}</dd></div>
+                  <div><dt>Graduation year</dt><dd>{result.graduationYear}</dd></div>
+                  <div><dt>Course</dt><dd>{result.course}</dd></div>
+                </dl>
+              </div>
+              <p className={styles.resultDisclaimer}>This sample portrait and record are illustrative only. They do not identify a real graduate or confirm a real certificate.</p>
             </section>
           ) : (
             <section className={styles.invalidResult} role="status" aria-live="polite">

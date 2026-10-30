@@ -217,6 +217,24 @@
   margin: 0;
 }
 
+.resultPerson {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.8rem;
+}
+
+.resultPerson > img {
+  display: block;
+  width: 100%;
+  min-height: 150px;
+  border: 1px solid #d5e9db;
+  border-radius: 0.5rem;
+  background: #e8eaf5;
+  object-fit: cover;
+  object-position: center 35%;
+}
+
 .certificateDetails > div {
   min-width: 0;
   padding: 0.8rem;
@@ -292,5 +310,14 @@
 
   .certificateDetails {
     grid-template-columns: 1fr;
+  }
+
+  .resultPerson {
+    grid-template-columns: 1fr;
+  }
+
+  .resultPerson > img {
+    width: 120px;
+    min-height: 140px;
   }
 }

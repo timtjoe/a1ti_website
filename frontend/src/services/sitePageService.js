@@ -177,13 +177,14 @@ const sitePages = {
     links: [{ label: 'Contact A-1', to: '/contact' }, { label: 'Explore courses', to: '/academic/courses' }],
   },
   '/student/alumni': {
-    title: 'Alumni program',
-    eyebrow: 'Student services',
+    title: 'Alumni',
+    eyebrow: 'For students',
     description: 'Information for A-1 graduates and alumni.',
+    alumniPage: true,
     sections: [
       { title: 'Connect with the Institute', body: 'Contact the Institute to share a graduate update or ask about alumni activities.' },
     ],
-    links: [{ label: 'Alumni information', to: '/about/alumni' }, { label: 'Contact A-1', to: '/contact' }],
+    links: [{ label: 'Contact Us', to: '/contact' }],
   },
   '/about/campuses': {
     title: 'Our campuses',
@@ -333,7 +334,7 @@ const sitePages = {
     links: [{ label: 'Browse courses', to: '/academic/courses' }, { label: 'Contact Admissions', to: '/contact' }],
   },
   '/register': {
-    title: 'Register with A-1',
+    title: 'Register with us',
     eyebrow: 'Admissions',
     description: 'Choose a course and contact Admissions to confirm current registration steps.',
     registrationPage: true,
@@ -345,7 +346,7 @@ const sitePages = {
   '/admission/faq': {
     title: 'Frequently asked questions',
     eyebrow: 'Admissions',
-    description: 'Find answers to common questions about choosing a course, registration, and student life.',
+    description: 'Search common questions about courses, registration, fees, student life, and certificates.',
     faqPage: true,
     sections: [
       { title: 'Course and registration questions', body: 'Review the frequently asked questions below or contact Admissions for course-specific guidance.' },
@@ -485,7 +486,7 @@ const sitePages = {
     links: [{ label: 'Contact A-1', to: '/contact' }, { label: 'Leadership & staff', to: '/about/leadership' }],
   },
   '/contact': {
-    title: 'Contact A-1',
+    title: 'Contact Us',
     eyebrow: 'We’re here to help',
     description: 'Questions about courses, fees, registration, or campus visits? Contact the Institute for current information.',
     contactPage: true,

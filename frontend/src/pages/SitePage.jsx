@@ -3,7 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/common/Button';
 import { FAQAccordion } from '@/components/common/FAQ';
-import { FAQ_ITEMS } from '@/components/common/faqData';
+import { FAQ_CATEGORIES, FAQ_ITEMS, POPULAR_FAQ_ITEMS } from '@/components/common/faqData';
 import { NewsStoryCards } from '@/components/common/NewsStoryCards';
 import { PageHero } from '@/components/common/PageHero';
 import RegisterButton from '@/components/common/RegisterButton';
@@ -104,6 +104,11 @@ function HistoryPage({ page }) {
         {page.sections.map((section, index) => (
           <a key={section.id} href={`#${section.id}`}>{index + 1}. {section.title}</a>
         ))}
+        <section className={styles.historyPromo} aria-labelledby="history-promo-title">
+          <p>Explore A-1</p>
+          <h3 id="history-promo-title">Build practical skills for your future</h3>
+          <Link to="/academic/courses">Explore our courses</Link>
+        </section>
       </nav>
       <article className={styles.wikiArticle}>
         {page.sections.map((section) => (
@@ -340,28 +345,245 @@ function FeesPage() {
 }
 
 function FAQPage() {
-  const [search, setSearch] = useState('');
-  const filteredQuestions = FAQ_ITEMS.filter(({ question, answer }) =>
-    `${question} ${answer}`.toLowerCase().includes(search.trim().toLowerCase())
+  const [searchParams, setSearchParams] = useSearchParams();
+  const questionsSectionRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
+  const search = searchParams.get('q') || '';
+  const isSearchResults = searchParams.get('faq') === 'results';
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
+  const activeCategory = searchParams.get('filter') || '';
+  const selectedCategory = FAQ_CATEGORIES.find(({ id }) => id === activeCategory);
+  useEffect(() => {
+    if (!selectedCategory || isSearchResults) return;
+    questionsSectionRef.current?.scrollIntoView({
+      behavior: shouldReduceMotion ? 'auto' : 'smooth',
+      block: 'start',
+    });
+  }, [activeCategory, isSearchResults, selectedCategory, shouldReduceMotion]);
+  const normalizedSearch = search.trim().toLowerCase();
+  const questionsForView = activeCategory
+    ? FAQ_ITEMS.filter(({ category }) => category === selectedCategory?.id)
+    : isSearchResults
+      ? FAQ_ITEMS
+      : POPULAR_FAQ_ITEMS;
+  const matchingQuestions = questionsForView.filter(({ question, answer }) =>
+    !normalizedSearch || `${question} ${answer}`.toLowerCase().includes(normalizedSearch)
   );
+  const suggestions = normalizedSearch
+    ? FAQ_ITEMS.filter(({ question, answer }) =>
+      `${question} ${answer}`.toLowerCase().includes(normalizedSearch)
+    ).slice(0, 6)
+    : [];
+  const suggestionsAreOpen = isSearchFocused && suggestions.length > 0 && !isSearchResults;
+  const updateSearchParams = (updates, { replace = false } = {}) => {
+    const nextParams = new URLSearchParams(searchParams);
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value === null) {
+        nextParams.delete(key);
+      } else {
+        nextParams.set(key, value);
+      }
+    });
+    setSearchParams(nextParams, { replace });
+  };
+  const submitSearch = (query = search) => {
+    if (!query.trim()) return;
+    setIsSearchFocused(false);
+    updateSearchParams({ q: query.trim(), faq: 'results' });
+  };
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    const suggestion = suggestions[activeSuggestionIndex];
+    submitSearch(suggestion?.question || search);
+  };
+  const handleSearchKeyDown = (event) => {
+    if (event.key === 'ArrowDown' && suggestionsAreOpen) {
+      event.preventDefault();
+      setActiveSuggestionIndex((index) => (index + 1) % suggestions.length);
+    } else if (event.key === 'ArrowUp' && suggestionsAreOpen) {
+      event.preventDefault();
+      setActiveSuggestionIndex((index) => (index <= 0 ? suggestions.length - 1 : index - 1));
+    } else if (event.key === 'Escape') {
+      setIsSearchFocused(false);
+      setActiveSuggestionIndex(-1);
+    }
+  };
+  const selectCategory = (categoryId) => {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete('q');
+    nextParams.delete('faq');
+    if (categoryId) {
+      nextParams.set('filter', categoryId);
+    } else {
+      nextParams.delete('filter');
+    }
+    setSearchParams(nextParams);
+  };
+  const handleCategorySelect = (categoryId) => {
+    selectCategory(categoryId);
+  };
+  const returnToSearch = () => {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete('faq');
+    setSearchParams(nextParams);
+  };
 
   return (
     <div className={styles.faqPage}>
-      <label htmlFor="faq-search">Search answers</label>
-      <input
-        id="faq-search"
-        type="search"
-        value={search}
-        onChange={(event) => setSearch(event.target.value)}
-        placeholder="Search courses, fees, registration..."
-      />
-      <p className={styles.faqCount} aria-live="polite">
-        {filteredQuestions.length} {filteredQuestions.length === 1 ? 'answer' : 'answers'}
-      </p>
-      {filteredQuestions.length
-        ? <FAQAccordion questions={filteredQuestions} />
-        : <p className={styles.emptyFaq}>No answers match that search. Try another phrase or contact Admissions.</p>}
-      <Link className={styles.primaryLink} to="/contact">Ask Admissions</Link>
+      <section className={styles.faqHero} aria-labelledby="faq-search-title">
+        <div className={styles.faqHeroContent}>
+          <h1 id="faq-search-title">{isSearchResults ? 'Search results' : 'How can we help?'}</h1>
+          <p className={styles.faqHeroDescription}>
+            {isSearchResults
+              ? `Answers matching “${search}”.`
+              : 'Search for answers or choose a topic to find the information you need.'}
+          </p>
+          <form className={styles.faqSearchForm} role="search" onSubmit={handleSearchSubmit}>
+            <div className={styles.faqSearchControl}>
+              <span className="material-symbols-outlined" aria-hidden="true">search</span>
+              <input
+                id="faq-search"
+                type="search"
+                role="combobox"
+                aria-label="Search frequently asked questions"
+                aria-autocomplete="list"
+                aria-expanded={suggestionsAreOpen}
+                aria-controls="faq-search-suggestions"
+                aria-activedescendant={activeSuggestionIndex >= 0 ? `faq-suggestion-${activeSuggestionIndex}` : undefined}
+                value={search}
+                onChange={(event) => {
+                  updateSearchParams({ q: event.target.value || null, faq: null }, { replace: true });
+                  setActiveSuggestionIndex(-1);
+                }}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setIsSearchFocused(false)}
+                onKeyDown={handleSearchKeyDown}
+                placeholder="Search courses, fees, registration..."
+              />
+              <button type="submit" className={styles.faqSearchSubmit} aria-label="Search">
+                <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </button>
+            </div>
+            {suggestionsAreOpen && (
+              <ul className={styles.faqSuggestions} id="faq-search-suggestions" role="listbox" aria-label="Suggested questions">
+                {suggestions.map((item, index) => (
+                  <li key={item.question}>
+                    <button
+                      id={`faq-suggestion-${index}`}
+                      type="button"
+                      role="option"
+                      aria-selected={index === activeSuggestionIndex}
+                      onMouseDown={(event) => event.preventDefault()}
+                      onClick={() => submitSearch(item.question)}
+                    >
+                      <span className="material-symbols-outlined" aria-hidden="true">help</span>
+                      {item.question}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </form>
+          {!isSearchResults && !selectedCategory && <div className={styles.faqHeroCategories}>
+            <div className={styles.faqHeroCategoryHeading}>
+              <div>
+                <p>Browse by topic</p>
+                <h2 id="faq-categories-title">What do you need help with?</h2>
+              </div>
+            </div>
+            <div className={styles.faqCategoryGrid}>
+              {FAQ_CATEGORIES.map((category) => (
+                <button
+                  className={styles.faqCategoryCard}
+                  key={category.id}
+                  type="button"
+                  aria-pressed={!isSearchResults && selectedCategory?.id === category.id}
+                  onClick={() => handleCategorySelect(selectedCategory?.id === category.id ? '' : category.id)}
+                >
+                  <span className="material-symbols-outlined" aria-hidden="true">{category.icon}</span>
+                  <strong>{category.title}</strong>
+                  <span>{category.description}</span>
+                </button>
+              ))}
+            </div>
+          </div>}
+          {!isSearchResults && selectedCategory && (
+            <div className={styles.faqSelectedTopic}>
+              <span className="material-symbols-outlined" aria-hidden="true">{selectedCategory.icon}</span>
+              <strong>{selectedCategory.title}</strong>
+              <button type="button" onClick={() => handleCategorySelect('')}>Browse topics</button>
+            </div>
+          )}
+        </div>
+      </section>
+      <div className={`${styles.faqContentLayout} ${selectedCategory && !isSearchResults ? styles.faqCategoryResultsLayout : ''}`}>
+        {(!selectedCategory || isSearchResults) && <aside className={styles.faqContactPane} aria-labelledby="faq-contact-title">
+          <p className={styles.reportPeriod}>Need personal assistance?</p>
+          <h2 id="faq-contact-title">Contact Us</h2>
+          <p className={styles.faqContactIntro}>Our team can help with questions about courses, registration, and student services.</p>
+          <dl>
+            <div>
+              <dt><span className="material-symbols-outlined" aria-hidden="true">location_on</span>Address</dt>
+              <dd>Nagbe’s Town Junction, ELWA Road, Paynesville, Liberia</dd>
+            </div>
+            <div>
+              <dt><span className="material-symbols-outlined" aria-hidden="true">call</span>Phone</dt>
+              <dd>Contact number awaiting confirmation</dd>
+            </div>
+            <div>
+              <dt><span className="material-symbols-outlined" aria-hidden="true">mail</span>Email</dt>
+              <dd>Email address awaiting confirmation</dd>
+            </div>
+            <div>
+              <dt><span className="material-symbols-outlined" aria-hidden="true">schedule</span>Office hours</dt>
+              <dd>Confirm current office hours before visiting.</dd>
+            </div>
+          </dl>
+          <Link className={styles.faqContactLink} to="/contact?topic=FAQ%20question">
+            Contact Us <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+          </Link>
+        </aside>}
+        <section
+          className={styles.faqQuestionsSection}
+          aria-labelledby="faq-questions-title"
+          ref={questionsSectionRef}
+        >
+          <div className={styles.faqSectionHeading}>
+            <div>
+              <p className={styles.reportPeriod}>
+                {isSearchResults ? 'Frequently asked questions' : activeCategory ? 'Selected topic' : 'Quick answers'}
+              </p>
+              <h2 id="faq-questions-title">
+                {isSearchResults ? 'Questions and answers' : selectedCategory?.title || (activeCategory ? 'Topic not found' : 'Popular questions')}
+              </h2>
+            </div>
+            <p className={styles.faqCount} aria-live="polite">
+              {matchingQuestions.length} {matchingQuestions.length === 1 ? 'answer' : 'answers'}
+            </p>
+          </div>
+          {isSearchResults && (
+            <button type="button" className={styles.faqBackButton} onClick={returnToSearch}>
+              <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+              Back to FAQ search
+            </button>
+          )}
+          {matchingQuestions.length
+            ? isSearchResults
+              ? (
+                <div className={styles.faqSearchResults}>
+                  {matchingQuestions.map(({ question, answer }) => (
+                    <article className={styles.faqSearchResult} key={question}>
+                      <h3>{question}</h3>
+                      <p>{answer}</p>
+                    </article>
+                  ))}
+                </div>
+              )
+              : <FAQAccordion questions={matchingQuestions} />
+            : <p className={styles.emptyFaq}>No answers match that search. Try another phrase or choose a different topic.</p>}
+        </section>
+      </div>
     </div>
   );
 }
@@ -538,16 +760,17 @@ function ContactPage({ search }) {
   return (
     <div className={styles.contactLayout}>
       <aside className={styles.contactSidebar}>
-        <h2>Contact A-1</h2>
+        <h2>Contact Us</h2>
         <dl>
           <div><dt>Address</dt><dd>{address}</dd></div>
           <div><dt>Phone</dt><dd>Contact number awaiting confirmation</dd></div>
           <div><dt>Email</dt><dd>Email address awaiting confirmation</dd></div>
           <div><dt>Office hours</dt><dd>Confirm current office hours before visiting.</dd></div>
         </dl>
-        <Link to="/academic/courses">Course questions</Link>
-        <Link to="/admission/fees">Fees and payments</Link>
-        <Link to="/admission/apply">Application help</Link>
+        <Link to="/admission/faq?filter=courses">Course questions</Link>
+        <Link to="/admission/faq?filter=fees">Fees and payments</Link>
+        <Link to="/admission/faq?filter=registration">Application help</Link>
+        <Link to="/admission/faq?filter=general">Browse all FAQs</Link>
       </aside>
       <section className={styles.contactMain}>
         <h2>How can we help?</h2>
@@ -609,8 +832,8 @@ function RegistrationAccessPage({ isLogin, nextPath, accountCreated }) {
   return (
     <div className={styles.accountLayout}>
       <section className={styles.accountIntro}>
-        <p className={styles.reportPeriod}>A-1 applicant portal · Demo</p>
-        <h2>{isLogin ? 'Welcome back' : 'Start your A-1 application'}</h2>
+        <p className={styles.reportPeriod}>A-1 applicant portal</p>
+        <h2>{isLogin ? 'Welcome back' : 'Start your application'}</h2>
         <p>
           {isLogin
             ? 'Sign in to complete an application and check its status.'
@@ -621,25 +844,37 @@ function RegistrationAccessPage({ isLogin, nextPath, accountCreated }) {
           <li>Sign in and choose a course</li>
           <li>Submit and track your application</li>
         </ol>
-        <p className={styles.accountDemoNote}>Demo portal — account details stay in this browser and are not sent to Institute systems.</p>
+        <p className={styles.accountStorageNote}>Account details are stored in this browser and aren’t submitted to Institute systems.</p>
       </section>
       <section className={styles.accessCard}>
         <p className={styles.reportPeriod}>{isLogin ? 'Applicant sign-in' : 'Create an account'}</p>
         <h2>{isLogin ? 'Sign in to continue' : 'Your details'}</h2>
         {accountCreated && isLogin && (
-          <p className={styles.formSuccess} role="status">Your demo account is ready. Sign in to continue.</p>
+          <p className={styles.formSuccess} role="status">Your account is ready. Sign in to continue.</p>
         )}
         <form onSubmit={handleSubmit}>
           {!isLogin && (
             <>
               <label htmlFor="applicant-name">Full name</label>
               <input id="applicant-name" name="fullName" autoComplete="name" required maxLength={100} />
-              <label htmlFor="applicant-phone">Phone number</label>
-              <input id="applicant-phone" name="phone" type="tel" autoComplete="tel" required maxLength={30} />
+              <div className={styles.accessContactFields}>
+                <div>
+                  <label htmlFor="applicant-phone">Phone number</label>
+                  <input id="applicant-phone" name="phone" type="tel" autoComplete="tel" required maxLength={30} />
+                </div>
+                <div>
+                  <label htmlFor="applicant-email">Email address</label>
+                  <input id="applicant-email" name="email" type="email" autoComplete="email" required maxLength={254} />
+                </div>
+              </div>
             </>
           )}
-          <label htmlFor="applicant-email">Email address</label>
-          <input id="applicant-email" name="email" type="email" autoComplete="email" required maxLength={254} />
+          {isLogin && (
+            <>
+              <label htmlFor="applicant-email">Email address</label>
+              <input id="applicant-email" name="email" type="email" autoComplete="email" required maxLength={254} />
+            </>
+          )}
           <label htmlFor="applicant-password">Password</label>
           <input
             id="applicant-password"
@@ -679,15 +914,15 @@ function RegistrationAccessPage({ isLogin, nextPath, accountCreated }) {
           )}
           {formError && <p className={styles.formError} role="alert">{formError}</p>}
           <Button type="submit" variant="secondary" size="lg" fullWidth disabled={isSubmitting}>
-            {isSubmitting ? 'Please wait…' : isLogin ? 'Sign in' : 'Create applicant account'}
+            {isSubmitting ? 'Please wait…' : isLogin ? 'Sign in' : 'Register'}
           </Button>
         </form>
-        <p className={styles.accessHelp}>
-          {isLogin ? 'New applicant?' : 'Already have an applicant account?'}
-          {' '}
-          <Link to={isLogin ? '/register' : '/login'}>{isLogin ? 'Create an account' : 'Sign in'}</Link>
-        </p>
-        <Link className={styles.accountContactLink} to="/contact">Contact Admissions</Link>
+        <div className={styles.accessSwitch}>
+          <p>{isLogin ? 'New applicant?' : 'Already have an applicant account?'}</p>
+          <Link className={styles.accessSwitchButton} to={isLogin ? '/register' : '/login'}>
+            {isLogin ? 'Register' : 'Sign in'}
+          </Link>
+        </div>
       </section>
     </div>
   );
@@ -1025,7 +1260,7 @@ export default function SitePage() {
 
   return (
     <div>
-      {!page.newsArticle && (
+      {!page.newsArticle && !page.faqPage && (
         <PageHero
           breadcrumbs={[
             { label: 'Home', to: '/' },

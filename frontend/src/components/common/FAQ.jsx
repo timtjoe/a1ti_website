@@ -1,9 +1,9 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useState } from 'react';
-import { FAQ_ITEMS } from './faqData';
+import { POPULAR_FAQ_ITEMS } from './faqData';
 import styles from './FAQ.module.css';
 
-export function FAQAccordion({ questions = FAQ_ITEMS }) {
+export function FAQAccordion({ questions = POPULAR_FAQ_ITEMS }) {
   const [openQuestion, setOpenQuestion] = useState(null);
   const shouldReduceMotion = useReducedMotion();
 

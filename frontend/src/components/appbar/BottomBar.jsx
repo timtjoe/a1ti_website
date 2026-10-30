@@ -30,7 +30,6 @@ export function BottomBar() {
         { icon: 'history', text: 'History', link: '/about/history' },
         { icon: 'visibility', text: 'Mission', link: '/about/mission' },
         { icon: 'group', text: 'Leadership', link: '/about/leadership' },
-        { icon: 'school', text: 'Alumni', link: '/about/alumni' },
         { icon: 'apartment', text: 'Campuses', link: '/about/campuses' },
       ],
     },

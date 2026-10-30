@@ -29,7 +29,7 @@ export function TopBar() {
 
   const studentMenuItems = [
     { icon: 'dashboard', text: 'Student Portal', link: '/student/portal' },
-    { icon: 'school', text: 'Alumni Program', link: '/student/alumni' },
+    { icon: 'school', text: 'Alumni', link: '/student/alumni' },
     { icon: 'help', text: 'How to use the Portal', link: '/student/faq' },
     { icon: 'support', text: 'General Support', link: '/student/support' },
   ];
@@ -78,7 +78,7 @@ export function TopBar() {
               rightIcon={studentDropdownOpen ? 'arrow_drop_up' : 'arrow_drop_down'}
               onClick={() => setStudentDropdownOpen(!studentDropdownOpen)}
             >
-              For Student
+              For Students
             </Button>
 
             <DropdownMenu
