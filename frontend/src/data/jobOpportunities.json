@@ -1,0 +1,482 @@
+[
+  {
+    "id": "job-001",
+    "title": "Solar Installation Technician",
+    "organization": "SunGrid Liberia",
+    "location": "Paynesville, Liberia",
+    "type": "Full time",
+    "salary": "L$ 18,000 – L$ 24,000 / month",
+    "description": "Install and maintain residential and small commercial solar systems with a focus on safety and quality.",
+    "responsibilities": [
+      "Install panels, mounting frames, and basic wiring.",
+      "Perform system checks and record readings.",
+      "Explain basic system care to customers."
+    ],
+    "perks": ["Transport allowance", "Paid safety training", "Performance bonus"],
+    "requirements": "Practical solar installation training, attention to safety, and willingness to learn."
+  },
+  {
+    "id": "job-002",
+    "title": "Junior ICT Support Assistant",
+    "organization": "TechBridge Liberia",
+    "location": "Monrovia, Liberia",
+    "type": "Entry level",
+    "salary": "L$ 14,000 – L$ 19,000 / month",
+    "description": "Provide first-line IT support for hardware, software, and basic network issues.",
+    "responsibilities": [
+      "Set up workstations, printers, and networks.",
+      "Log and track support requests.",
+      "Assist with common office software."
+    ],
+    "perks": ["Internet stipend", "Certification support", "Flexible work schedule"],
+    "requirements": "Foundational ICT skills and clear written and verbal communication."
+  },
+  {
+    "id": "job-003",
+    "title": "Electrical Installation Trainee",
+    "organization": "Brightline Electricals",
+    "location": "Buchanan, Liberia",
+    "type": "Apprenticeship",
+    "salary": "L$ 10,000 – L$ 13,000 / month",
+    "description": "Assist experienced electricians with supervised installation and maintenance work.",
+    "responsibilities": [
+      "Prepare tools, cables, and materials.",
+      "Assist with wiring and fittings under supervision.",
+      "Follow site safety rules and keep work areas tidy."
+    ],
+    "perks": ["Mentorship", "Tool allowance", "Overtime pay"],
+    "requirements": "Electrical installation training and commitment to safety."
+  },
+  {
+    "id": "job-004",
+    "title": "Welder/Fabricator",
+    "organization": "IronWorks Liberia",
+    "location": "Monrovia, Liberia",
+    "type": "Full time",
+    "salary": "L$ 16,000 – L$ 22,000 / month",
+    "description": "Carry out welding, cutting, and fabrication work for gates, doors, and metal structures.",
+    "responsibilities": [
+      "Read and interpret basic fabrication drawings.",
+      "Cut, bend, and weld metal components.",
+      "Inspect finished work for quality and safety."
+    ],
+    "perks": ["Safety gear provided", "Overtime pay", "Training opportunities"],
+    "requirements": "Welding and fabrication training with practical experience."
+  },
+  {
+    "id": "job-005",
+    "title": "Plumber",
+    "organization": "AquaFlow Services",
+    "location": "Paynesville, Liberia",
+    "type": "Full time",
+    "salary": "L$ 15,000 – L$ 20,000 / month",
+    "description": "Install and repair plumbing systems for residential and commercial clients.",
+    "responsibilities": [
+      "Install pipes, fixtures, and fittings.",
+      "Diagnose and repair leaks and blockages.",
+      "Ensure compliance with safety standards."
+    ],
+    "perks": ["Transport allowance", "Tool allowance", "Performance bonus"],
+    "requirements": "Plumbing training and knowledge of basic fittings."
+  },
+  {
+    "id": "job-006",
+    "title": "Caterer",
+    "organization": "Taste of Liberia Catering",
+    "location": "Monrovia, Liberia",
+    "type": "Full time",
+    "salary": "L$ 12,000 – L$ 16,000 / month",
+    "description": "Prepare and serve meals for events, offices, and catering contracts.",
+    "responsibilities": [
+      "Prepare meals following hygiene standards.",
+      "Manage ingredients and kitchen cleanliness.",
+      "Serve customers professionally."
+    ],
+    "perks": ["Meal allowance", "Flexible shifts", "Tips"],
+    "requirements": "Catering and hospitality training with attention to hygiene."
+  },
+  {
+    "id": "job-007",
+    "title": "Fashion Designer/Seamstress",
+    "organization": "Threads Liberia",
+    "location": "Monrovia, Liberia",
+    "type": "Full time",
+    "salary": "L$ 12,000 – L$ 18,000 / month",
+    "description": "Sew, alter, and design garments for retail and custom orders.",
+    "responsibilities": [
+      "Take measurements and create patterns.",
+      "Sew garments to specification.",
+      "Manage orders and customer fittings."
+    ],
+    "perks": ["Commission on sales", "Training opportunities", "Flexible schedule"],
+    "requirements": "Tailoring and fashion design training."
+  },
+  {
+    "id": "job-008",
+    "title": "Auto Mechanic",
+    "organization": "DriveRight Auto Services",
+    "location": "Paynesville, Liberia",
+    "type": "Full time",
+    "salary": "L$ 16,000 – L$ 22,000 / month",
+    "description": "Diagnose and repair vehicles including engines, brakes, and electrical systems.",
+    "responsibilities": [
+      "Perform vehicle inspections and diagnostics.",
+      "Repair and replace parts as needed.",
+      "Keep service records and work area clean."
+    ],
+    "perks": ["Tool allowance", "Training opportunities", "Overtime pay"],
+    "requirements": "Auto mechanics training with basic diagnostic skills."
+  },
+  {
+    "id": "job-009",
+    "title": "Data Entry Specialist",
+    "organization": "InfoLink Liberia",
+    "location": "Monrovia, Liberia",
+    "type": "Full time",
+    "salary": "L$ 13,000 – L$ 17,000 / month",
+    "description": "Enter, update, and maintain records in databases with accuracy.",
+    "responsibilities": [
+      "Enter data accurately and efficiently.",
+      "Verify and correct data entries.",
+      "Maintain confidentiality of records."
+    ],
+    "perks": ["Internet stipend", "Training opportunities", "Flexible schedule"],
+    "requirements": "Computer literacy and attention to detail."
+  },
+  {
+    "id": "job-010",
+    "title": "Office Administrator",
+    "organization": "GrowthLink Enterprises",
+    "location": "Monrovia, Liberia",
+    "type": "Full time",
+    "salary": "L$ 15,000 – L$ 19,000 / month",
+    "description": "Handle administrative tasks, scheduling, and customer communications.",
+    "responsibilities": [
+      "Manage schedules and appointments.",
+      "Handle correspondence and filing.",
+      "Support general office operations."
+    ],
+    "perks": ["Health allowance", "Training opportunities", "Paid leave"],
+    "requirements": "Good communication skills and basic computer proficiency."
+  },
+  {
+    "id": "job-011",
+    "title": "Solar Installation Assistant",
+    "organization": "SunGrid Liberia",
+    "location": "Buchanan, Liberia",
+    "type": "Apprenticeship",
+    "salary": "L$ 10,000 – L$ 14,000 / month",
+    "description": "Support senior technicians with solar installations and maintenance.",
+    "responsibilities": [
+      "Prepare materials and tools.",
+      "Assist with mounting and wiring.",
+      "Maintain clean work sites."
+    ],
+    "perks": ["Mentorship", "Safety training", "Tool allowance"],
+    "requirements": "Interest in solar energy and willingness to learn."
+  },
+  {
+    "id": "job-012",
+    "title": "ICT Assistant",
+    "organization": "TechBridge Liberia",
+    "location": "Paynesville, Liberia",
+    "type": "Entry level",
+    "salary": "L$ 12,000 – L$ 16,000 / month",
+    "description": "Assist with basic computer maintenance and user support.",
+    "responsibilities": [
+      "Troubleshoot basic hardware/software issues.",
+      "Set up equipment for users.",
+      "Maintain inventory of IT supplies."
+    ],
+    "perks": ["Internet stipend", "Certification support", "Training opportunities"],
+    "requirements": "Basic computer skills and eagerness to learn."
+  },
+  {
+    "id": "job-013",
+    "title": "Electrician",
+    "organization": "Brightline Electricals",
+    "location": "Monrovia, Liberia",
+    "type": "Full time",
+    "salary": "L$ 18,000 – L$ 25,000 / month",
+    "description": "Install and maintain electrical systems in residential and commercial buildings.",
+    "responsibilities": [
+      "Install wiring, outlets, and fixtures.",
+      "Test electrical systems for safety.",
+      "Read and follow electrical plans."
+    ],
+    "perks": ["Transport allowance", "Safety gear provided", "Overtime pay"],
+    "requirements": "Electrical installation certificate and practical experience."
+  },
+  {
+    "id": "job-014",
+    "title": "Fabricator Assistant",
+    "organization": "IronWorks Liberia",
+    "location": "Paynesville, Liberia",
+    "type": "Apprenticeship",
+    "salary": "L$ 9,000 – L$ 12,000 / month",
+    "description": "Assist with metal cutting, welding preparation, and finishing work.",
+    "responsibilities": [
+      "Prepare materials for fabrication.",
+      "Assist with cutting and grinding.",
+      "Maintain tools and equipment."
+    ],
+    "perks": ["Mentorship", "Safety training", "Tool allowance"],
+    "requirements": "Interest in metalwork and willingness to learn."
+  },
+  {
+    "id": "job-015",
+    "title": "Plumbing Assistant",
+    "organization": "AquaFlow Services",
+    "location": "Monrovia, Liberia",
+    "type": "Apprenticeship",
+    "salary": "L$ 9,000 – L$ 12,000 / month",
+    "description": "Support plumbers with installations and repairs.",
+    "responsibilities": [
+      "Prepare pipes and fittings.",
+      "Assist with installations under supervision.",
+      "Keep work areas clean and organized."
+    ],
+    "perks": ["Mentorship", "Tool allowance", "Training opportunities"],
+    "requirements": "Interest in plumbing and attention to detail."
+  },
+  {
+    "id": "job-016",
+    "title": "Kitchen Assistant",
+    "organization": "Taste of Liberia Catering",
+    "location": "Paynesville, Liberia",
+    "type": "Full time",
+    "salary": "L$ 10,000 – L$ 14,000 / month",
+    "description": "Assist with food preparation, cooking, and kitchen maintenance.",
+    "responsibilities": [
+      "Prepare ingredients and assist with cooking.",
+      "Maintain kitchen cleanliness and hygiene.",
+      "Wash dishes and equipment."
+    ],
+    "perks": ["Meal allowance", "Flexible shifts", "Training opportunities"],
+    "requirements": "Food hygiene awareness and willingness to work in a fast-paced kitchen."
+  },
+  {
+    "id": "job-017",
+    "title": "Tailoring Assistant",
+    "organization": "Threads Liberia",
+    "location": "Paynesville, Liberia",
+    "type": "Apprenticeship",
+    "salary": "L$ 8,000 – L$ 11,000 / month",
+    "description": "Assist with cutting, sewing, and finishing garments.",
+    "responsibilities": [
+      "Cut fabric according to patterns.",
+      "Assist with sewing and alterations.",
+      "Finish garments and maintain equipment."
+    ],
+    "perks": ["Mentorship", "Training opportunities", "Commission opportunities"],
+    "requirements": "Interest in fashion design and willingness to learn."
+  },
+  {
+    "id": "job-018",
+    "title": "Auto Mechanic Assistant",
+    "organization": "DriveRight Auto Services",
+    "location": "Monrovia, Liberia",
+    "type": "Apprenticeship",
+    "salary": "L$ 9,000 – L$ 13,000 / month",
+    "description": "Assist mechanics with vehicle repairs and maintenance.",
+    "responsibilities": [
+      "Prepare tools and parts.",
+      "Assist with inspections and repairs.",
+      "Clean and maintain workshop."
+    ],
+    "perks": ["Mentorship", "Tool allowance", "Training opportunities"],
+    "requirements": "Interest in auto mechanics and willingness to learn."
+  },
+  {
+    "id": "job-019",
+    "title": "Receptionist",
+    "organization": "GrowthLink Enterprises",
+    "location": "Monrovia, Liberia",
+    "type": "Full time",
+    "salary": "L$ 13,000 – L$ 17,000 / month",
+    "description": "Handle front desk operations, calls, and visitor management.",
+    "responsibilities": [
+      "Greet visitors and answer calls.",
+      "Manage appointments and correspondence.",
+      "Maintain reception area."
+    ],
+    "perks": ["Health allowance", "Training opportunities", "Paid leave"],
+    "requirements": "Good communication skills and professional appearance."
+  },
+  {
+    "id": "job-020",
+    "title": "Sales Assistant",
+    "organization": "SunGrid Liberia",
+    "location": "Monrovia, Liberia",
+    "type": "Full time",
+    "salary": "L$ 14,000 – L$ 18,000 / month",
+    "description": "Assist with sales of solar products and customer service.",
+    "responsibilities": [
+      "Assist customers with product selection.",
+      "Process sales and maintain records.",
+      "Follow up on leads."
+    ],
+    "perks": ["Commission", "Training opportunities", "Transport allowance"],
+    "requirements": "Customer service skills and interest in renewable energy."
+  },
+  {
+    "id": "job-021",
+    "title": "Computer Technician",
+    "organization": "TechBridge Liberia",
+    "location": "Buchanan, Liberia",
+    "type": "Full time",
+    "salary": "L$ 16,000 – L$ 21,000 / month",
+    "description": "Repair and maintain computers, laptops, and peripherals.",
+    "responsibilities": [
+      "Diagnose hardware and software issues.",
+      "Repair or replace components.",
+      "Install software and perform upgrades."
+    ],
+    "perks": ["Internet stipend", "Certification support", "Tool allowance"],
+    "requirements": "ICT training with hardware repair experience."
+  },
+  {
+    "id": "job-022",
+    "title": "Maintenance Electrician",
+    "organization": "Brightline Electricals",
+    "location": "Paynesville, Liberia",
+    "type": "Full time",
+    "salary": "L$ 17,000 – L$ 23,000 / month",
+    "description": "Perform electrical maintenance and repairs for buildings and equipment.",
+    "responsibilities": [
+      "Conduct routine electrical inspections.",
+      "Repair electrical faults.",
+      "Ensure compliance with safety codes."
+    ],
+    "perks": ["Transport allowance", "Safety gear provided", "Overtime pay"],
+    "requirements": "Electrical installation certificate and maintenance experience."
+  },
+  {
+    "id": "job-023",
+    "title": "Steel Fabricator",
+    "organization": "IronWorks Liberia",
+    "location": "Buchanan, Liberia",
+    "type": "Full time",
+    "salary": "L$ 18,000 – L$ 24,000 / month",
+    "description": "Fabricate steel structures and components to specifications.",
+    "responsibilities": [
+      "Read technical drawings.",
+      "Cut and weld steel components.",
+      "Ensure structural integrity and quality."
+    ],
+    "perks": ["Safety gear provided", "Overtime pay", "Training opportunities"],
+    "requirements": "Welding and fabrication certificate with experience."
+  },
+  {
+    "id": "job-024",
+    "title": "Pipe Fitter",
+    "organization": "AquaFlow Services",
+    "location": "Buchanan, Liberia",
+    "type": "Full time",
+    "salary": "L$ 17,000 – L$ 22,000 / month",
+    "description": "Install and repair piping systems for water and plumbing.",
+    "responsibilities": [
+      "Measure, cut, and thread pipes.",
+      "Install pipe systems and fittings.",
+      "Test systems for leaks."
+    ],
+    "perks": ["Transport allowance", "Tool allowance", "Overtime pay"],
+    "requirements": "Plumbing/piping training and practical experience."
+  },
+  {
+    "id": "job-025",
+    "title": "Event Caterer",
+    "organization": "Taste of Liberia Catering",
+    "location": "Monrovia, Liberia",
+    "type": "Contract",
+    "salary": "L$ 15,000 – L$ 20,000 / month",
+    "description": "Prepare and serve food for events and special occasions.",
+    "responsibilities": [
+      "Plan menus and prepare food for events.",
+      "Set up and serve at event locations.",
+      "Maintain food safety standards."
+    ],
+    "perks": ["Meal allowance", "Tips", "Flexible schedule"],
+    "requirements": "Catering experience and food safety knowledge."
+  },
+  {
+    "id": "job-026",
+    "title": "Dressmaker",
+    "organization": "Threads Liberia",
+    "location": "Monrovia, Liberia",
+    "type": "Full time",
+    "salary": "L$ 14,000 – L$ 19,000 / month",
+    "description": "Create custom garments and perform alterations.",
+    "responsibilities": [
+      "Consult with clients on designs.",
+      "Sew custom garments.",
+      "Perform alterations and repairs."
+    ],
+    "perks": ["Commission on sales", "Training opportunities", "Flexible schedule"],
+    "requirements": "Tailoring certificate and customer service skills."
+  },
+  {
+    "id": "job-027",
+    "title": "Diesel Mechanic",
+    "organization": "DriveRight Auto Services",
+    "location": "Buchanan, Liberia",
+    "type": "Full time",
+    "salary": "L$ 19,000 – L$ 26,000 / month",
+    "description": "Repair and maintain diesel engines and heavy equipment.",
+    "responsibilities": [
+      "Diagnose diesel engine problems.",
+      "Repair engines and transmission systems.",
+      "Perform routine maintenance."
+    ],
+    "perks": ["Tool allowance", "Training opportunities", "Overtime pay"],
+    "requirements": "Auto/diesel mechanics training and experience."
+  },
+  {
+    "id": "job-028",
+    "title": "Accounts Assistant",
+    "organization": "GrowthLink Enterprises",
+    "location": "Monrovia, Liberia",
+    "type": "Full time",
+    "salary": "L$ 16,000 – L$ 20,000 / month",
+    "description": "Assist with bookkeeping, invoicing, and financial records.",
+    "responsibilities": [
+      "Process invoices and payments.",
+      "Maintain financial records.",
+      "Assist with basic reports."
+    ],
+    "perks": ["Health allowance", "Training opportunities", "Paid leave"],
+    "requirements": "Basic accounting knowledge and computer proficiency."
+  },
+  {
+    "id": "job-029",
+    "title": "Solar Sales Representative",
+    "organization": "SunGrid Liberia",
+    "location": "Kakata, Liberia",
+    "type": "Full time",
+    "salary": "L$ 15,000 – L$ 22,000 / month",
+    "description": "Promote and sell solar products to residential and commercial customers.",
+    "responsibilities": [
+      "Generate leads and make sales calls.",
+      "Present solar solutions to customers.",
+      "Meet sales targets."
+    ],
+    "perks": ["Commission", "Transport allowance", "Training opportunities"],
+    "requirements": "Sales skills and knowledge of solar products."
+  },
+  {
+    "id": "job-030",
+    "title": "IT Support Specialist",
+    "organization": "TechBridge Liberia",
+    "location": "Monrovia, Liberia",
+    "type": "Full time",
+    "salary": "L$ 19,000 – L$ 25,000 / month",
+    "description": "Provide advanced IT support and maintain network infrastructure.",
+    "responsibilities": [
+      "Manage network and server issues.",
+      "Provide technical support to users.",
+      "Implement IT security measures."
+    ],
+    "perks": ["Internet stipend", "Certification support", "Health allowance"],
+    "requirements": "ICT certificate/diploma with network support experience."
+  }
+]

@@ -1,0 +1,47 @@
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.iconButton :global(.material-symbols-outlined) {
+  font-size: 1.25rem;
+}
+
+.sm {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.md {
+  min-height: 2.6rem;
+  padding: 0 0.8rem;
+}
+
+.lg {
+  min-height: 3rem;
+  padding: 0 1rem;
+}
+
+.neutral {
+  color: #fff;
+  background: rgba(13, 4, 96, 0.8);
+  border-radius: 999px;
+}
+
+.subtle {
+  color: var(--navy-deep);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+}
+
+.label {
+  font-size: 0.9rem;
+}

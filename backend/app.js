@@ -9,6 +9,7 @@ const cors = require('#middleware/cors.js');
 
 var indexRouter = require('#routes/index');
 var usersRouter = require('#routes/users.routes');
+var alumniRouter = require('#routes/alumni.routes');
 
 var app = express();
 app.set('trust proxy', 1);
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(API_VERSION, indexRouter);
 app.use(API_VERSION + '/users', usersRouter);
+app.use(API_VERSION + '/alumni', alumniRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

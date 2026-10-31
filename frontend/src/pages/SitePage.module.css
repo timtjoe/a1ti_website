@@ -848,90 +848,175 @@
 
 .campusList {
   display: grid;
-  width: min(1200px, 100%);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-  align-items: stretch;
-  gap: 1.5rem;
+  width: min(1100px, 100%);
+  grid-template-columns: 1fr;
+  gap: 1rem;
   margin: 0 auto;
-  padding: 1.8rem 1.5rem 3rem;
+  padding: 1.5rem 1.5rem 3rem;
 }
 
-.campusRow {
+.campusCard {
+  display: grid;
+  grid-template-columns: minmax(260px, 38%) minmax(0, 1fr);
+  align-items: stretch;
   overflow: hidden;
-  min-width: 0;
+  text-align: left;
   border: 1px solid var(--border-color);
-  border-radius: 16px;
+  border-radius: 12px;
   background: #fff;
   box-shadow: 0 4px 16px rgba(13, 4, 96, 0.05);
-  transition: box-shadow 180ms ease, transform 180ms ease;
+  cursor: pointer;
 }
 
-.campusRow:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 32px rgba(13, 4, 96, 0.12);
-}
-
-.campusPhoto {
-  position: relative;
-  height: 210px;
+.campusCardPhoto {
+  min-height: 220px;
   overflow: hidden;
-  background: #eeecff;
 }
 
-.campusPhoto img {
+.campusCardPhoto img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 45%;
 }
 
-.campusPhoto span {
-  position: absolute;
-  right: 0.75rem;
-  bottom: 0.75rem;
-  padding: 0.35rem 0.65rem;
-  border-radius: 999px;
-  color: #fff;
-  background: rgb(13 4 96 / 84%);
-  font-size: 0.72rem;
-  font-weight: 900;
+.campusCardBody {
+  display: grid;
+  gap: 0.4rem;
+  align-content: center;
+  padding: 1.2rem 1.4rem;
 }
 
-.campusDetails {
-  padding: 1.25rem 1.25rem 0.5rem;
-}
-
-.campusDetails h2 {
+.campusCardBody h2 {
   color: var(--navy-deep);
   font-family: var(--font-open-sans);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 
-.campusDetails dl {
-  margin-top: 1rem;
+.campusCardAddress {
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
-.campusDetails dd {
-  font-size: 0.96rem;
+.campusCardLink {
+  margin-top: 0.4rem;
+  color: var(--navy-deep);
+  font-weight: 800;
 }
 
-.campusDetails > a {
-  padding-bottom: 0.25rem;
-  border-bottom: 1px solid currentColor;
-}
-
-.campusRow .campusMap {
-  min-height: 210px;
-  margin-top: 1.1rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.campusMap,
-.contactMap {
+.campusDetailPage {
   width: 100%;
-  min-height: 300px;
+  display: grid;
+  gap: 1rem;
+}
+
+.campusDetailHeader {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 0.4rem;
+  padding: 1rem 1.5rem 0;
+}
+
+.campusBack {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  width: fit-content;
   border: 0;
-  background: #eef0f6;
+  background: transparent;
+  color: var(--navy-deep);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.campusDetailHeader h1 {
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.campusDetailMapFull {
+  width: 100%;
+}
+
+.campusDetailMapFull iframe {
+  width: 100%;
+  height: min(460px, 60vw);
+  border: 0;
+}
+
+.campusDetailContent {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  padding: 0 1.5rem;
+}
+
+.campusDetailInfo {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem 0;
+}
+
+.campusDetailInfo h2 {
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+}
+
+.campusDetailInfo dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
+}
+
+.campusDetailInfo dt {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.campusDetailInfo dd {
+  margin-top: 0.2rem;
+}
+
+.campusDirections {
+  width: fit-content;
+  color: var(--navy-deep);
+  font-weight: 800;
+}
+
+.campusGallery {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  display: grid;
+  gap: 0.8rem;
+  padding: 0 1.5rem 3rem;
+}
+
+.campusGallery h2 {
+  color: var(--navy-deep);
+  font-family: var(--font-open-sans);
+}
+
+.campusGalleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.8rem;
+}
+
+.campusGalleryGrid button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.campusGalleryGrid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
 }
 
 .alumniContent {

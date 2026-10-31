@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import styles from './StaffCard.module.css';
 
-export function StaffCard({ name, position, qualification, image, imageAlt, index = 0, reduceMotion = false }) {
+export function StaffCard({ name, position, qualification, image, imageAlt, index = 0, reduceMotion = false, action }) {
   return (
     <motion.article
       className={styles.card}
@@ -27,6 +27,7 @@ export function StaffCard({ name, position, qualification, image, imageAlt, inde
           <span className={`material-symbols-outlined ${styles.qualificationIcon}`} aria-hidden="true">school</span>
           <span>Education: {qualification}</span>
         </div>
+        {action && <div className={styles.action}>{action}</div>}
       </div>
     </motion.article>
   );

@@ -177,49 +177,183 @@ function HistoryPage({ page }) {
 function CampusPage({ campuses }) {
   const reduceMotion = useReducedMotion();
   const campusImages = [campusImage01, campusImage02, campusImage03];
+  const [activeCampus, setActiveCampus] = useState(null);
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [lightbox, setLightbox] = useState(null);
+
+  const campusList = campuses || [];
+  const selected = activeCampus !== null ? campusList[activeCampus] : null;
+  const images = selected
+    ? [
+        selected.image || campusImages[activeCampus % campusImages.length],
+        campusImages[(activeCampus + 1) % campusImages.length],
+        campusImages[(activeCampus + 2) % campusImages.length],
+      ]
+    : [];
+
+  useEffect(() => {
+    if (activeCampus === null) return undefined;
+    setSlideIndex(0);
+    setLightbox(null);
+  }, [activeCampus]);
+
+  const moveSlide = (dir) => {
+    setSlideIndex((i) => (i + dir + images.length) % images.length);
+  };
+
+  if (selected) {
+    const mapQuery = selected.mapQuery || selected.address;
+    const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
+    const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
+    const gallery = [
+      selected.image || campusImages[activeCampus % campusImages.length],
+      campusImages[(activeCampus + 1) % campusImages.length],
+      campusImages[(activeCampus + 2) % campusImages.length],
+    ];
+    return (
+      <div className={styles.campusDetailPage}>
+        <div className={styles.campusDetailHeader}>
+          <button type="button" className={styles.campusBack} onClick={() => setActiveCampus(null)}>
+            <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+            Back to campuses
+          </button>
+          <div>
+            <p className={styles.reportPeriod}>{selected.isDemo ? 'Campus' : 'Campus'}</p>
+            <h1>{selected.name}</h1>
+          </div>
+        </div>
+
+        <div className={styles.campusDetailMapFull}>
+          <iframe
+            src={mapUrl}
+            title={`Map directions to ${selected.name}`}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+
+        <div className={styles.campusDetailContent}>
+          <section className={styles.campusDetailInfo}>
+            <h2>Important information</h2>
+            <dl>
+              <div><dt>Location</dt><dd>{selected.address}</dd></div>
+              <div><dt>Contact</dt><dd>{selected.phone}</dd></div>
+              <div><dt>Office hours</dt><dd>{selected.hours}</dd></div>
+            </dl>
+            <a className={styles.campusDirections} href={directionsUrl} target="_blank" rel="noreferrer">
+              Get directions
+            </a>
+          </section>
+        </div>
+
+        <section className={styles.campusGallery}>
+          <h2>Photo gallery</h2>
+          <div className={styles.campusGalleryGrid}>
+            {gallery.map((img, idx) => (
+              <button
+                type="button"
+                key={idx}
+                onClick={() => setLightbox(img)}
+                aria-label={`Open image ${idx + 1} in lightbox`}
+              >
+                <img src={img} alt={`${selected.name} photo ${idx + 1}`} loading="lazy" />
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <AnimatePresence>
+          {lightbox && (
+            <motion.div
+              className={styles.lightboxBackdrop}
+              role="presentation"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setLightbox(null)}
+            >
+              <motion.div
+                className={styles.lightbox}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Campus image"
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                onClick={(event) => event.stopPropagation()}
+              >
+                <button type="button" className={styles.lightboxClose} onClick={() => setLightbox(null)} aria-label="Close">
+                  <span className="material-symbols-outlined" aria-hidden="true">close</span>
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.lightboxArrow} ${styles.lightboxPrevious}`}
+                  onClick={() => {
+                    const idx = gallery.indexOf(lightbox);
+                    setLightbox(gallery[(idx - 1 + gallery.length) % gallery.length]);
+                  }}
+                  aria-label="Previous image"
+                >
+                  <span className="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                </button>
+                <figure>
+                  <img src={lightbox} alt={`${selected.name}`} />
+                </figure>
+                <button
+                  type="button"
+                  className={`${styles.lightboxArrow} ${styles.lightboxNext}`}
+                  onClick={() => {
+                    const idx = gallery.indexOf(lightbox);
+                    setLightbox(gallery[(idx + 1) % gallery.length]);
+                  }}
+                  aria-label="Next image"
+                >
+                  <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                </button>
+                <a className={styles.lightboxDownload} href={lightbox} download aria-label="Download image">
+                  <span className="material-symbols-outlined" aria-hidden="true">download</span>
+                </a>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <p className={styles.wikiNotice}>
+          Demo locations and photos are illustrative only.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.campusList}>
-      {campuses.map((campus, index) => {
+      {campusList.map((campus, index) => {
         const mapQuery = campus.mapQuery || campus.address;
-        const mapUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`;
         return (
-          <motion.section
-            className={styles.campusRow}
+          <motion.button
+            type="button"
+            className={styles.campusCard}
             key={campus.name}
-            initial={reduceMotion ? false : { opacity: 0, y: 36 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
-            transition={reduceMotion ? { duration: 0.01 } : { ...entrySpring, delay: index * 0.08 }}
+            transition={reduceMotion ? { duration: 0.01 } : { ...entrySpring, delay: index * 0.06 }}
+            onClick={() => setActiveCampus(index)}
           >
-            <div className={styles.campusPhoto}>
+            <div className={styles.campusCardPhoto}>
               <img src={campus.image || campusImages[index % campusImages.length]} alt="" loading="lazy" />
-              {campus.isDemo && <span>Illustrative demo location</span>}
             </div>
-            <div className={styles.campusDetails}>
-              <p className={styles.reportPeriod}>{campus.isDemo ? 'Demo campus' : `Campus ${index + 1}`}</p>
+            <div className={styles.campusCardBody}>
+              <p className={styles.reportPeriod}>{campus.isDemo ? 'Campus' : `Campus ${index + 1}`}</p>
               <h2>{campus.name}</h2>
-              <dl>
-                <div><dt>Location</dt><dd>{campus.address}</dd></div>
-                <div><dt>Contact</dt><dd>{campus.phone}</dd></div>
-                <div><dt>Office hours</dt><dd>{campus.hours}</dd></div>
-              </dl>
-              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`} target="_blank" rel="noreferrer">
-                Get directions
-              </a>
+              <p className={styles.campusCardAddress}>{campus.address}</p>
+              <span className={styles.campusCardLink}>View campus <span aria-hidden="true">→</span></span>
             </div>
-            <iframe
-              className={styles.campusMap}
-              src={mapUrl}
-              title={`Map directions to ${campus.name}`}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </motion.section>
+          </motion.button>
         );
       })}
       <p className={styles.wikiNotice}>
-        Demo locations and photos are illustrative only; they do not confirm A-1 campus sites, contact numbers, or office hours.
+        Demo locations and photos are illustrative only.
       </p>
     </div>
   );
@@ -1246,11 +1380,26 @@ function GalleryPage({ photos }) {
               </figure>
               <button
                 type="button"
-                className={`${styles.lightboxArrow} ${styles.lightboxNext}`}
-                aria-label="Next photo"
-                onClick={() => moveLightbox(1)}
+                className={styles.lightboxDownload}
+                onClick={async () => {
+                  try {
+                    const response = await fetch(activePhoto.src);
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = activePhoto.title.replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '.jpg';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(url);
+                  } catch (error) {
+                    window.open(activePhoto.src, '_blank');
+                  }
+                }}
+                aria-label="Download image"
               >
-                <span className="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                <span className="material-symbols-outlined" aria-hidden="true">download</span>
               </button>
             </motion.div>
           </motion.div>
